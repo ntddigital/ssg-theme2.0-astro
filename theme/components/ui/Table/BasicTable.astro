@@ -1,0 +1,88 @@
+---
+import { cn } from "@/utils/cn";
+
+interface TableClasses {
+  container?: string;
+  table?: string;
+  headerRow?: string;
+  firstColumnCell?: string;
+  body?: string;
+  row?: string;
+  cell?: string;
+}
+
+interface TableProps {
+  data?: Array<Record<string, any>>;
+  classes?: TableClasses;
+}
+
+const { data = [], classes = {} }: TableProps = Astro.props;
+
+const headers = data[0] ? Object.keys(data[0] as Record<string, any>) : [];
+
+const {
+  container: containerClass = "",
+  table: tableClass = "min-w-full",
+  headerRow: headerRowClass = "bg-white",
+
+  firstColumnCell: firstColumnCellClass = "font-bold",
+  // body: bodyClass = "",
+  // row: rowClass = "border-t",
+  // cell: cellClass = "whitespace-nowrap px-3 py-4 text-sm text-gray-500",
+} = classes;
+---
+
+<div class={cn("px-4 sm:px-6 lg:px-8", containerClass)}>
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <table class={cn("min-w-full", tableClass)}>
+          <!-- header -->
+          <thead>
+            <tr class={cn("bg-white", headerRowClass)}>
+              {
+                headers.map((header, index) => (
+                  <Fragment key={header}>
+                    <th
+                      class={cn(
+                        "px-3 py-3.5 text-left text-sm font-semibold",
+                        index === 0 ? firstColumnCellClass : ""
+                      )}
+                    >
+                      {header.charAt(0).toUpperCase() + header.slice(1)}
+                    </th>
+                  </Fragment>
+                ))
+              }
+            </tr>
+          </thead>
+          <!-- body -->
+          <tbody class="bg-white">
+            {
+              data.map((row, index) => (
+                <Fragment key={index}>
+                  <tr
+                    class={`border-t ${index % 2 === 0 ? "bg-gray-50" : "bg-white"}`}
+                  >
+                    {headers.map((header, index) => (
+                      <Fragment key={header}>
+                        <td
+                          class={cn(
+                            "whitespace-wrap px-3 py-4 text-sm text-gray-500",
+                            index === 0 ? firstColumnCellClass : ""
+                          )}
+                        >
+                          {row[header]}
+                        </td>
+                      </Fragment>
+                    ))}
+                  </tr>
+                </Fragment>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

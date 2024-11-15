@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/widgets/header/Header.astro";
+import Footer from "@/components/widgets/footer/Footer.astro";
+
+import { headerData, footerData } from "~/config/navigation";
+
+import type { Metadata } from "@/types";
+
+export interface Props {
+  metadata?: Metadata;
+}
+
+const { metadata } = Astro.props;
+---
+
+<BaseLayout metadata={metadata}>
+  <slot name="header">
+    <Header {...headerData} isSticky showRssFeed showToggleTheme />
+  </slot>
+  <main>
+    <slot />
+  </main>
+  <slot name="footer">
+    <Footer {...footerData} />
+  </slot>
+</BaseLayout>

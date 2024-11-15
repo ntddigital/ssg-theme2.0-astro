@@ -1,0 +1,137 @@
+---
+import { cn } from "@/utils/cn";
+import Button from "../Button/Button.astro";
+import { Icon } from "astro-icon/components";
+
+interface ItemProps {
+  title?: string;
+  description?: string;
+  icon?: string;
+  callToAction?: Record<string, any>;
+  classes?: {
+    panel?: string;
+    icon?: string;
+    title?: string;
+    description?: string;
+    actionClass?: string;
+  };
+}
+
+interface ComponentProps {
+  items?: ItemProps[];
+  columns?: 2 | 3 | 4;
+  defaultIcon?: string;
+  classes?: {
+    container?: string;
+    panel?: string;
+    title?: string;
+    description?: string;
+    icon?: string;
+    action?: string;
+  };
+}
+
+const {
+  items = [],
+  columns = 2,
+  defaultIcon = "",
+  classes = {},
+}: ComponentProps = Astro.props;
+
+// 從 classes 中解構出各個樣式
+const {
+  container: containerClass = "",
+  panel: panelClass = "",
+  title: titleClass = "",
+  description: descriptionClass = "",
+  icon: defaultIconClass = "text-primary",
+  action: actionClass = "",
+} = classes;
+---
+
+{
+  items && (
+    <div
+      class={cn(
+        // "justify-items-center align-items-center",
+        `grid gap-8 ${
+          columns === 4
+            ? "lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+            : columns === 3
+              ? "lg:grid-cols-3 sm:grid-cols-2"
+              : columns === 2
+                ? "sm:grid-cols-2 "
+                : ""
+        }`,
+        containerClass
+      )}
+    >
+      {items.map(
+        ({
+          title,
+          description,
+          icon,
+          callToAction,
+          classes: itemClasses = {},
+        }) => (
+          <div class="intersect-once motion-safe:xl:intersect:animate-fade">
+            <div
+              class={cn(
+                "flex flex-row max-w-md",
+                panelClass,
+                itemClasses?.panel
+              )}
+            >
+              <div class="flex justify-center">
+                {(icon || defaultIcon) && (
+                  <Icon
+                    name={icon || defaultIcon}
+                    class={cn(
+                      "w-7 h-7 mr-2 rtl:mr-0 rtl:ml-2",
+                      defaultIconClass,
+                      itemClasses?.icon
+                    )}
+                  />
+                )}
+              </div>
+              <div class="mt-0.5">
+                {title && (
+                  <h3
+                    class={cn(
+                      "text-xl font-bold",
+                      titleClass,
+                      itemClasses?.title
+                    )}
+                  >
+                    {title}
+                  </h3>
+                )}
+                {description && (
+                  <p
+                    class={cn(
+                      `${title ? "mt-3" : ""} text-muted`,
+                      descriptionClass,
+                      itemClasses?.description
+                    )}
+                    set:html={description}
+                  />
+                )}
+                {callToAction && (
+                  <div
+                    class={cn(
+                      `${title || description ? "mt-3" : ""}`,
+                      actionClass,
+                      itemClasses?.actionClass
+                    )}
+                  >
+                    <Button variant="link" {...callToAction} />
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )
+      )}
+    </div>
+  )
+}

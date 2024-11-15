@@ -1,0 +1,13 @@
+---
+// google search console
+import { SITE } from "~/config/siteConfig";
+const googleSiteVerificationId = SITE?.googleSiteVerificationId;
+---
+
+{googleSiteVerificationId && "<!-- Google Site Verification -->"}
+{
+  googleSiteVerificationId && (
+    <meta name="google-site-verification" content={googleSiteVerificationId} />
+  )
+}
+{googleSiteVerificationId && "<!-- End Google Site Verification -->"}

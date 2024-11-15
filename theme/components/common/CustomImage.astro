@@ -1,0 +1,56 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  class?: string;
+}
+
+const props = Astro.props;
+
+if (typeof props.width === "string") {
+  props.width = parseInt(props.width);
+}
+
+let remoteImage;
+let LocalImage;
+
+if (
+  typeof props?.src === "string" &&
+  (props?.src.startsWith("http://") || props?.src.startsWith("https://"))
+) {
+  remoteImage = props?.src;
+} else {
+  LocalImage = import.meta.glob<{ default: ImageMetadata }>(
+    "/website/**/*.{jpeg,jpg,png,gif,svg,webp}"
+  );
+
+  if (!LocalImage[props?.src]) {
+    // console.log("LocalImage", LocalImage);
+    // console.log("props?.src", props?.src);
+    // throw new Error(
+    //   `"${props?.src}" does not exist in glob: "website/assets/*.{jpeg,jpg,png,gif}"`
+    // );
+    return;
+  }
+}
+---
+
+{
+  LocalImage && (
+    <Image
+      src={LocalImage[props?.src]()}
+      alt={props?.alt}
+      width={props?.width}
+      widths={[400, 768, 1024, 2040]}
+      sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+      class={props?.class}
+      loading="lazy"
+      decoding="async"
+    />
+  )
+}
+{remoteImage && <img src={remoteImage} />}

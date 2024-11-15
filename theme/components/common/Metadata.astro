@@ -1,0 +1,97 @@
+---
+import { SITE } from "~/config/siteConfig";
+
+interface OpenGraph {
+  url?: string;
+  title?: string;
+  language?: string;
+  description?: string;
+  type?: string;
+  images?: string[];
+  locale?: string;
+}
+
+interface Props {
+  title?: string;
+  language?: string;
+  canonical?: string;
+  robots?: { index?: boolean; follow?: boolean };
+  description?: string;
+  openGraph?: OpenGraph;
+  twitter?: {
+    cardType?: string;
+    title?: string;
+    description?: string;
+    image?: string;
+  };
+}
+
+const {
+  title,
+  language,
+  canonical,
+  robots = {},
+  description,
+  openGraph = {},
+  twitter = {},
+} = Astro.props;
+---
+
+<title>
+  {title || SITE?.name}
+</title>
+
+<!-- Meta Tags -->
+<meta name="description" content={description || SITE?.description} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonical} />
+
+<!-- Robots Meta Tag -->
+{robots.index !== false && <meta name="robots" content="index, follow" />}
+{robots.index === false && <meta name="robots" content="noindex, follow" />}
+{robots.follow === false && <meta name="robots" content="index, nofollow" />}
+
+<!-- Open Graph Meta Tags -->
+{
+  openGraph?.url && (
+    <meta property="og:url" content={openGraph.url || canonical} />
+  )
+}
+{
+  openGraph?.title && (
+    <meta property="og:title" content={openGraph.title || title} />
+  )
+}
+{
+  openGraph?.description && (
+    <meta
+      property="og:description"
+      content={openGraph.description || description}
+    />
+  )
+}
+{
+  openGraph?.images &&
+    openGraph?.images?.length > 0 &&
+    openGraph.images.map((image, index) => (
+      <Fragment key={index}>
+        <meta property="og:image" content={image} />
+      </Fragment>
+    ))
+}
+{
+  openGraph?.language && (
+    <meta property="og:locale" content={openGraph.locale} />
+  )
+}
+
+<!-- Twitter Meta Tags -->
+{twitter?.cardType && <meta name="twitter:card" content={twitter.cardType} />}
+{twitter?.title && <meta name="twitter:title" content={twitter.title} />}
+{
+  twitter?.description && (
+    <meta name="twitter:description" content={twitter.description} />
+  )
+}
+{twitter?.image && <meta name="twitter:image" content={twitter.image} />}

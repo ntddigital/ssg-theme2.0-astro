@@ -1,0 +1,100 @@
+---
+// ** Style
+import "@/style/global.css";
+import "@/style/tailwind.css";
+
+// ** Layout
+import PageLayout from "./PageLayout.astro";
+import Brands1 from "@/components/widgets/brands/Brands1.astro";
+
+// ** Components
+import GotoTopButton from "@/components/ui/Button/GotoTopButton.astro";
+import StepProgressBar from "@/components/ui/ProgressBars/StepProgressBar.jsx";
+import Headline from "@/components/ui/Headline.astro";
+import ItemGrid from "@/components/ui/ItemGrid/ItemGrid.astro";
+import TextAboveImageHero from "@/components/widgets/hero/TextAboveImageHero.astro";
+import SplitWithImgHero from "@/components/widgets/hero/SplitWithImgHero.astro";
+import SimpleCenteredHero from "@/components/widgets/hero/SimpleCenteredHero.astro";
+import Features from "@/components/widgets/features/Features.astro";
+import Features2 from "@/components/widgets/features/Features2.astro";
+import Features3 from "@/components/widgets/features/Features3.astro";
+import VerticalSteps from "@/components/widgets/steps/VerticalSteps.astro";
+import HorizontalSteps from "@/components/widgets/steps/HorizontalSteps.astro";
+
+import FeaturesTable from "@/components/widgets/features/FeaturesTable.astro";
+import PricingBasic from "@/components/widgets/pricing/pricingBasic.astro";
+import FAQs from "@/components/widgets/faq/FAQs.astro";
+import Content1 from "@/components/widgets/content/Content1.astro";
+
+// ** Utils
+import { cn } from "@/utils/cn";
+
+// ** Props
+const { metadata = {}, content } = Astro.props;
+---
+
+<PageLayout metadata={metadata}>
+  {
+    content?.sections?.map((section: { [x: string]: string; type: string }) => {
+      if (section?.type === "textAboveImageHero") {
+        return <TextAboveImageHero {...section} />;
+      } else if (section?.type === "splitWithImgHero") {
+        return <SplitWithImgHero {...section} />;
+      } else if (section?.type === "simpleCenteredHero") {
+        return <SimpleCenteredHero {...section} />;
+      } else if (section?.type === "features") {
+        return <Features content={content} section={section} />;
+      } else if (section?.type === "features2") {
+        return <Features2 content={content} section={section} />;
+      } else if (section?.type === "features3") {
+        return <Features3 content={content} section={section} />;
+      } else if (section?.type === "featuresTable") {
+        return <FeaturesTable {...section} />;
+      } else if (section?.type === "verticalSteps") {
+        return <VerticalSteps {...section} />;
+      } else if (section?.type === "horizontalSteps") {
+        return <HorizontalSteps {...section} />;
+      } else if (section?.type === "brands") {
+        return <Brands1 {...section} />;
+      } else if (section?.type === "content1") {
+        return <Content1 {...section} />;
+      } else if (section?.type === "pricingBasic") {
+        return <PricingBasic {...section} />;
+      } else if (section?.type === "faqs") {
+        return <FAQs {...section} />;
+      } else if (section?.type === "customSection") {
+        return (
+          <div
+            class={cn(
+              "mt-8 sm:mt-16 lg:mt-24 mx-auto",
+              section.sectionWidth === "boxed" ? "max-w-7xl " : ""
+            )}
+          >
+            {section?.title && <Headline title={section.title} />}
+            {Array.isArray(section?.rows) &&
+              section?.rows.map(
+                (row: { componentType: string; title: string[] }) => {
+                  return (
+                    <Fragment key={row.componentType}>
+                      {row?.componentType === "stepProgressBar" && (
+                        <StepProgressBar
+                          componentConfig={row}
+                          content={content}
+                        />
+                      )}
+                      {row?.componentType === "itemGrid" && (
+                        <ItemGrid {...row} content={content} />
+                      )}
+                    </Fragment>
+                  );
+                }
+              )}
+          </div>
+        );
+      }
+    })
+  }
+
+  <GotoTopButton content={content} />
+  <slot />
+</PageLayout>

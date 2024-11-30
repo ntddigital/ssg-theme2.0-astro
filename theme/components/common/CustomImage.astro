@@ -12,6 +12,7 @@ interface Props {
 }
 
 const props = Astro.props;
+console.log("test", props.loading);
 
 if (typeof props?.width === "string") {
   props.width = parseInt(props.width);

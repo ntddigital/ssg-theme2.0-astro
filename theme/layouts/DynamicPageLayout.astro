@@ -30,12 +30,13 @@ import SimpleCenterFooter from "@/components/widgets/footer/simpleCenterFooter.a
 
 // ** Utils
 import { cn } from "@/utils/cn";
+import { constants } from "buffer";
 
 // ** Props
 const { metadata = {}, content } = Astro.props;
 ---
 
-<PageLayout metadata={metadata}>
+<PageLayout metadata={metadata} language={content?.language}>
   {
     content?.sections?.map((section: { [x: string]: string; type: string }) => {
       if (section?.type === "textAboveImageHero") {

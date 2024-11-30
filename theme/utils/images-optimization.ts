@@ -227,14 +227,14 @@ export const astroAsseetsOptimizer: ImagesOptimizer = async (
       const result = await getImage({ 
         src: image, 
         width: _width,  
-       height: _height,
+        height: _height,
         inferSize: true, 
         ...(format ? { format: format } : {}) });
 
       return {
         src: result?.src,
         width: result?.attributes?.width ?? w,
-        height: result?.attributes?.height,
+        height: result?.attributes?.height??h,
       };
     })
   );

@@ -20,11 +20,13 @@ import Features2 from "@/components/widgets/features/Features2.astro";
 import Features3 from "@/components/widgets/features/Features3.astro";
 import VerticalSteps from "@/components/widgets/steps/VerticalSteps.astro";
 import HorizontalSteps from "@/components/widgets/steps/HorizontalSteps.astro";
-
+import Contact from "@/components/widgets/contact/Contact.astro";
 import FeaturesTable from "@/components/widgets/features/FeaturesTable.astro";
 import PricingBasic from "@/components/widgets/pricing/pricingBasic.astro";
 import FAQs from "@/components/widgets/faq/FAQs.astro";
 import Content1 from "@/components/widgets/content/Content1.astro";
+import ColumnsSimpleFooter from "@/components/widgets/footer/ColumnsSimpleFooter.astro";
+import SimpleCenterFooter from "@/components/widgets/footer/simpleCenterFooter.astro";
 
 // ** Utils
 import { cn } from "@/utils/cn";
@@ -62,6 +64,12 @@ const { metadata = {}, content } = Astro.props;
         return <PricingBasic {...section} />;
       } else if (section?.type === "faqs") {
         return <FAQs {...section} />;
+      } else if (section?.type === "contact") {
+        return <Contact {...section} />;
+      } else if (section?.type === "columnsSimpleFooter") {
+        return <ColumnsSimpleFooter />;
+      } else if (section?.type === "simpleCenterFooter") {
+        return <SimpleCenterFooter />;
       } else if (section?.type === "customSection") {
         return (
           <div

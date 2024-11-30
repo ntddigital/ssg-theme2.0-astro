@@ -38,7 +38,6 @@ const {
   classes = {},
 }: ComponentProps = Astro.props;
 
-// 從 classes 中解構出各個樣式
 const {
   container: containerClass = "",
   panel: panelClass = "",
@@ -74,7 +73,7 @@ const {
           callToAction,
           classes: itemClasses = {},
         }) => (
-          <div class="intersect-once motion-safe:xl:intersect:animate-fade">
+          <div class="intersect-once motion-safe:xl:intersect:animate-fade dark:text-white">
             <div
               class={cn(
                 "flex flex-row max-w-md",
@@ -109,7 +108,7 @@ const {
                 {description && (
                   <p
                     class={cn(
-                      `${title ? "mt-3" : ""} text-muted`,
+                      `${title ? "mt-3" : ""} text-muted dark:text-white`,
                       descriptionClass,
                       itemClasses?.description
                     )}

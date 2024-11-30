@@ -1,7 +1,7 @@
 import { cn } from "@/utils/cn";
 
 export default function StepProgressBar(props) {
-  const { content, componentConfig } = props;
+  const { componentConfig } = props;
   return (
     <nav aria-label="Steps" className="flex items-center justify-center w-full">
       <ol role="list" className="flex items-center justify-center">

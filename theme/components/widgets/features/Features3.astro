@@ -4,6 +4,8 @@ import ItemGrid from "@/components/ui/ItemGrid/ItemGrid.astro";
 import WidgetWrapper from "@/components/ui/WidgetWrapper.astro";
 // import Image from "@/components/common/Image.astro";
 // import type { Features as Props } from '@/types';
+import CustomImage from "@/components/common/CustomImage.astro";
+import { cn } from "@/utils/cn";
 
 const {
   title = await Astro.slots.render("title"),
@@ -41,13 +43,13 @@ const {
   />
 
   <div aria-hidden="true" class="aspect-w-16 aspect-h-7">
-    {
+    <!-- {
       image && (
         <div class="w-full h-80 object-cover rounded-xl mx-auto bg-gray-500 shadow-lg">
           {typeof image === "string" ? (
             <Fragment set:html={image} />
           ) : (
-            <img
+            <CustomImage
               class="w-full h-80 object-cover rounded-xl mx-auto bg-gray-500 shadow-lg"
               width={image.width || 800}
               height={image.height || 600}
@@ -58,20 +60,31 @@ const {
           )}
         </div>
       )
+    } -->
+    {
+      image && (
+        <div class="w-full object-cover rounded-xl mx-auto shadow-lg">
+          <CustomImage
+            class={cn("w-full object-cover rounded-xl mx-auto", image)}
+            width={image.width}
+            {...image}
+          />
+        </div>
+      )
     }
-  </div>
 
-  <ItemGrid
-    items={items}
-    columns={columns}
-    defaultIcon={defaultIcon}
-    classes={{
-      container: "mt-12",
-      panel: "max-w-full sm:max-w-md",
-      title: "text-lg font-semibold",
-      description: "mt-0.5",
-      icon: "flex-shrink-0 mt-1 text-primary w-6 h-6",
-      ...((classes?.items as object) ?? {}),
-    }}
-  />
+    <ItemGrid
+      items={items}
+      columns={columns}
+      defaultIcon={defaultIcon}
+      classes={{
+        container: "mt-12",
+        panel: "max-w-full sm:max-w-md dark:text-white",
+        title: "text-lg font-semibold",
+        description: "mt-0.5",
+        icon: "flex-shrink-0 mt-1 text-primary w-6 h-6",
+        ...((classes?.items as object) ?? {}),
+      }}
+    />
+  </div>
 </WidgetWrapper>

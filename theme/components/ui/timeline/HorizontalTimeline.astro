@@ -4,91 +4,85 @@ import { cn } from "@/utils/cn";
 
 import type { Item } from "@/types";
 export interface Props {
-  items?: Array<Item>;
+  steps?: Array<Item>;
   defaultIcon?: string;
   classes?: Record<string, string>;
 }
 
-const { items = [], classes = {}, defaultIcon } = Astro.props as Props;
-
-const {
-  container: containerClass = "",
-  panel: panelClass = "",
-  title: titleClass = "",
-  description: descriptionClass = "",
-  icon: defaultIconClass = "text-primary dark:text-slate-200 border-primary dark:border-blue-700",
-} = classes;
+const { steps = [], defaultIcon } = Astro.props as Props;
 ---
 
-<nav aria-label="Steps" class="flex items-center justify-center w-full">
+<nav
+  aria-label="Steps"
+  class="flex items-center justify-center w-full dark:text-white"
+>
   <ol role="list" class="flex items-center justify-center">
     {
-      items.map(
-        ({ title, description, icon, classes: itemClasses = {} }, stepIdx) => (
-          <Fragment key={stepIdx}>
-            <li
-              class={cn(
-                stepIdx !== items?.length - 1 ? "pr-12 sm:pr-24 lg:pr-48" : "",
-                "relative flex flex-col items-center"
-              )}
-            >
-              {/* line */}
-              {stepIdx !== items?.length && (
-                <>
-                  <div
-                    aria-hidden="true"
-                    class="absolute inset-y-1/2 left-1/2 -translate-x-1/2 mt-4 w-full flex items-center justify-center"
-                  >
-                    <div class="h-0.5 w-full bg-gray-200" />
-                  </div>
-                </>
-              )}
-              {/* circle */}
-              <span
-                class={cn(
-                  "absolute inset-y-1/2 mt-3 h-2.5 w-2.5 rounded-full bg-indigo-600"
-                )}
-              />
-
-              {/* step Icon */}
-              {/* <span
-                class={cn(
-                  "relative flex h-11 w-11 items-center justify-center rounded-full border-2 border-indigo-600 bg-white mt-6",
-                  defaultIconClass,
-                  itemClasses?.icon
-                )}
-                aria-hidden="true"
-              >
-                {stepIdx + 1}
-              </span> */}
-              <div>
-                <div class="flex items-center justify-center mt-12">
-                  {(icon || defaultIcon) && (
-                    <Icon
-                      name={icon || defaultIcon}
-                      class={cn(
-                        "w-10 h-10 p-2 rounded-full border-2",
-                        defaultIconClass,
-                        itemClasses?.icon
-                      )}
-                    />
-                  )}
+      steps.map(({ title, description, icon, classes = {} }, stepIdx) => (
+        <Fragment key={stepIdx}>
+          <li
+            class={cn(
+              stepIdx !== steps?.length - 1 ? "pr-12 sm:pr-24 lg:pr-48" : "",
+              "relative flex flex-col items-center"
+            )}
+          >
+            {/* line */}
+            {stepIdx !== steps?.length && (
+              <>
+                <div
+                  aria-hidden="true"
+                  class="absolute inset-y-1/2 left-1/2 -translate-x-1/2 mt-4 w-full flex items-center justify-center"
+                >
+                  <div class="h-0.5 w-full bg-gray-200" />
                 </div>
-              </div>
-              <span class="sr-only">{title}</span>
+              </>
+            )}
+            {/* circle */}
+            <span
+              class={cn(
+                "absolute inset-y-1/2 mt-3 h-2.5 w-2.5 rounded-full bg-primary dark:bg-white",
+                classes.circle
+              )}
+            />
 
-              <span class="mt-8 text-sm text-gray-500 sm:text-xl font-bold text-center">
-                {title && (
-                  <p
-                    class={cn(titleClass, itemClasses?.title)}
-                    set:html={title}
+            <div>
+              <div class="flex items-center justify-center mt-12">
+                {(icon || defaultIcon) && (
+                  <Icon
+                    name={icon || defaultIcon}
+                    class={cn(
+                      "w-10 h-10 p-2 rounded-full border-2 dark:text-white dark:border-white",
+                      classes?.icon
+                    )}
                   />
                 )}
-              </span>
-            </li>
-          </Fragment>
-        )
-      )
+              </div>
+            </div>
+            <span class="sr-only">{title}</span>
+
+            <span
+              class={cn(
+                "mt-8 text-sm  sm:text-xl text-center dark:text-white",
+                classes.title
+              )}
+            >
+              {title && <p class={cn(classes?.title)} set:html={title} />}
+            </span>
+            <span class="sr-only">{title}</span>
+
+            <span
+              class={cn(
+                "mt-8 text-sm sm:text-lg text-center dark:text-white",
+                classes?.description
+              )}
+            >
+              {description && (
+                <p class={cn(classes?.description)} set:html={description} />
+              )}
+            </span>
+          </li>
+        </Fragment>
+      ))
     }
   </ol>
 </nav>

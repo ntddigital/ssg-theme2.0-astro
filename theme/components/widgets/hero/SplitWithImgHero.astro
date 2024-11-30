@@ -1,8 +1,7 @@
 ---
 import CustomImage from "@/components/common/CustomImage.astro";
 import Button from "@/components/ui/Button/Button.astro";
-
-// import type { Hero as Props } from "@/types";
+import { cn } from "@/utils/cn";
 
 const {
   title = await Astro.slots.render("title"),
@@ -12,20 +11,29 @@ const {
   content = await Astro.slots.render("content"),
   actions = await Astro.slots.render("actions"),
   image = await Astro.slots.render("image"),
+  classes = {},
 
   id,
   bg = await Astro.slots.render("bg"),
+  isDark = await Astro.slots.render("isDark"),
+  contentBelowActions = await Astro.slots.render("contentBelowactions"),
 } = Astro.props;
 ---
 
-<section class="relative md:-mt-[76px] not-prose" {...id ? { id } : {}}>
+<section
+  class={cn(
+    "relative md:-mt-[76px] not-prose",
+    isDark && "bg-dark dark:bg-transparent dark"
+  )}
+  {...id ? { id } : {}}
+>
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
     <slot name="bg">
       <!-- {bg ? <Fragment set:html={bg} /> : null} -->
       <CustomImage
         src={bg?.src}
         alt={bg?.alt}
-        class="h-full object-cover object-center"
+        class={cn("absolute h-screen object-cover object-center")}
       />
     </slot>
   </div>
@@ -38,7 +46,7 @@ const {
         {
           tagline && (
             <p
-              class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase intersect-once motion-safe:md:intersect:animate-fade intersect-quarter"
+              class="text-base text-primary  font-bold tracking-wide uppercase intersect-once motion-safe:md:intersect:animate-fade intersect-quarter"
               set:html={tagline}
             />
           )
@@ -46,7 +54,7 @@ const {
         {
           title && (
             <h1
-              class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once motion-safe:md:intersect:animate-fade intersect-quarter"
+              class="text-5xl md:text-7xl font-bold leading-tighter  mb-4 font-heading dark:text-white intersect-once motion-safe:md:intersect:animate-fade intersect-quarter"
               set:html={title}
             />
           )
@@ -55,7 +63,7 @@ const {
           {
             subtitle && (
               <p
-                class="text-xl text-muted mb-6 dark:text-slate-300 intersect-once motion-safe:md:intersect:animate-fade intersect-quarter"
+                class="text-xl text-muted mb-6 dark:text-white intersect-once motion-safe:md:intersect:animate-fade intersect-quarter"
                 set:html={subtitle}
               />
             )
@@ -64,7 +72,7 @@ const {
         {
           content && (
             <div
-              class="text-lg text-muted mb-6 dark:text-slate-300 intersect-once motion-safe:md:intersect:animate-fade intersect-quarter"
+              class="text-xl text-muted mb-6 dark:text-white intersect-once motion-safe:md:intersect:animate-fade intersect-quarter"
               set:html={content}
             />
           )
@@ -84,21 +92,19 @@ const {
             </div>
           )
         }
+
+        <slot set:html={contentBelowActions} />
       </div>
-      <div class="basis-1/2">
+      <div class="basis-2/3">
         {
           image && (
             <div class="relative m-auto max-w-5xl intersect-once intercept-no-queue motion-safe:md:intersect:animate-fade intersect-quarter">
-              {typeof image === "string" ? (
-                <Fragment set:html={image} />
-              ) : (
-                <CustomImage
-                  class="mx-auto rounded-md w-full"
-                  width={600}
-                  src={image?.src}
-                  alt={image?.alt}
-                />
-              )}
+              <CustomImage
+                class="mx-auto w-full"
+                width={1000}
+                src={image?.src}
+                alt={image?.alt}
+              />
             </div>
           )
         }

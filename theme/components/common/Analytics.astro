@@ -5,7 +5,7 @@ const googleAnalyticsId = SITE?.googleAnalyticsId
 
 {googleAnalyticsId && "<!-- Google tag (gtag.js) -->"} 
 {googleAnalyticsId && 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TH40231KSP">
+<script is:inline src={`https://www.googletagmanager.com/gtag/js?id=G-${googleAnalyticsId}`}>
 </script>} 
 {googleAnalyticsId &&
  <script is:inline define:vars={{ googleAnalyticsId }}>

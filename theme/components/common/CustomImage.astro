@@ -7,11 +7,12 @@ interface Props {
   alt: string;
   width?: number;
   class?: string;
+  textAbove?: string;
 }
 
 const props = Astro.props;
 
-if (typeof props.width === "string") {
+if (typeof props?.width === "string") {
   props.width = parseInt(props.width);
 }
 
@@ -29,8 +30,6 @@ if (
   );
 
   if (!LocalImage[props?.src]) {
-    // console.log("LocalImage", LocalImage);
-    // console.log("props?.src", props?.src);
     // throw new Error(
     //   `"${props?.src}" does not exist in glob: "website/assets/*.{jpeg,jpg,png,gif}"`
     // );
@@ -39,18 +38,27 @@ if (
 }
 ---
 
-{
-  LocalImage && (
-    <Image
-      src={LocalImage[props?.src]()}
-      alt={props?.alt}
-      width={props?.width}
-      widths={[400, 768, 1024, 2040]}
-      sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
-      class={props?.class}
-      loading="lazy"
-      decoding="async"
-    />
-  )
-}
-{remoteImage && <img src={remoteImage} />}
+<div class="flex flex-col">
+  {
+    props?.textAbove ? (
+      <span class="text-xl font-semibold mx-auto text-center mb-3 dark:text-white">
+        {props?.textAbove}
+      </span>
+    ) : null
+  }
+  {
+    LocalImage && (
+      <Image
+        src={LocalImage[props?.src]()}
+        alt={props?.alt}
+        width={props?.width}
+        widths={[400, 768, 1024, 2048]}
+        sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+        class={props?.class}
+        loading="lazy"
+        decoding="async"
+      />
+    )
+  }
+  {remoteImage && <img src={remoteImage} />}
+</div>

@@ -9,6 +9,7 @@ interface TableClasses {
   body?: string;
   row?: string;
   cell?: string;
+  class?: string;
 }
 
 interface TableProps {
@@ -28,7 +29,7 @@ const {
   firstColumnCell: firstColumnCellClass = "font-bold",
   // body: bodyClass = "",
   // row: rowClass = "border-t",
-  // cell: cellClass = "whitespace-nowrap px-3 py-4 text-sm text-gray-500",
+  // cell: cellClass = "whitespace-nowrap px-3 py-4 text-lg text-gray-500",
 } = classes;
 ---
 
@@ -45,7 +46,7 @@ const {
                   <Fragment key={header}>
                     <th
                       class={cn(
-                        "px-3 py-3.5 text-left text-sm font-semibold",
+                        "px-3 py-3.5 text-left text-lg font-semibold",
                         index === 0 ? firstColumnCellClass : ""
                       )}
                     >
@@ -62,13 +63,13 @@ const {
               data.map((row, index) => (
                 <Fragment key={index}>
                   <tr
-                    class={`border-t ${index % 2 === 0 ? "bg-gray-50" : "bg-white"}`}
+                    class={`border-t hover:bg-gray-200 ${index % 2 === 0 ? "bg-gray-50" : "bg-white"}`}
                   >
                     {headers.map((header, index) => (
                       <Fragment key={header}>
                         <td
                           class={cn(
-                            "whitespace-wrap px-3 py-4 text-sm text-gray-500",
+                            "whitespace-wrap px-3 py-4 text-lg text-gray-500",
                             index === 0 ? firstColumnCellClass : ""
                           )}
                         >

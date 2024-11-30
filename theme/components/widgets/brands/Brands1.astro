@@ -6,6 +6,7 @@ import CustomImage from "@/components/common/CustomImage.astro";
 import Headline from "@/components/ui/Headline.astro";
 import WidgetWrapper from "@/components/ui/WidgetWrapper.astro";
 import ItemGrid2 from "@/components/ui/ItemGrid/ItemGrid2.astro";
+import { cn } from "@/utils/cn";
 
 const {
   title = "",
@@ -14,6 +15,7 @@ const {
   tagline = "",
   icons = [],
   images = [],
+  images2 = [],
 
   items = [],
   columns = 2,
@@ -23,13 +25,14 @@ const {
   isDark = false,
   classes = {},
   bg = await Astro.slots.render("bg"),
+  isAfterContent = await Astro.slots.render("isAfterContent"),
 } = Astro.props;
 ---
 
 <WidgetWrapper
   id={id}
   isDark={isDark}
-  containerClass={`mx-auto ${classes?.container ?? ""}`}
+  containerClass={`mx-auto ${isAfterContent ? "pt-0 md:pt-0 lg:pt-0" : ""} ${classes?.container ?? ""}`}
   bg={bg}
 >
   <Headline
@@ -54,30 +57,57 @@ const {
         images.map(
           (image) =>
             image.src && (
-              <div class="flex justify-center col-span-1 my-2 lg:my-4 py-1 px-3 rounded-md dark:bg-gray-200">
+              <div class="flex justify-center col-span-1 my-2 lg:my-4 py-1 px-3 rounded-md">
                 <CustomImage
                   src={image?.src}
                   alt={image?.alt || ""}
                   width={image?.width}
+                  textAbove={image?.textAbove}
                 />
               </div>
             )
         )
     }
-    <ItemGrid2
-      items={items}
-      columns={columns}
-      defaultIcon={defaultIcon}
-      classes={{
-        container: "gap-4 md:gap-6",
-        panel:
-          //　dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)]　 dark:bg-slate-900
-          "rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)]  backdrop-blur border border-[#ffffff29] bg-white p-6",
-        // panel:
-        //   "text-center bg-page items-center md:text-left rtl:md:text-right md:items-start p-6 p-6 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-800",
-        icon: "w-12 h-12 mb-6 text-primary",
-        ...((classes?.items as Record<string, never>) ?? {}),
-      }}
-    />
+    <div style="width:100%"></div>
+    {
+      images2 &&
+        images2.map(
+          (image) =>
+            image.src && (
+              <div
+                class={cn(
+                  "flex justify-center items-center col-span-1 lg:mt-6 py-1 px-3 rounded-md",
+                  classes?.images2
+                )}
+              >
+                <CustomImage
+                  src={image?.src}
+                  alt={image?.alt || ""}
+                  width={image?.width}
+                  textAbove={image?.textAbove}
+                />
+              </div>
+            )
+        )
+    }
+    {
+      columns && (
+        <ItemGrid2
+          items={items}
+          columns={columns}
+          defaultIcon={defaultIcon}
+          classes={{
+            container: "gap-4 md:gap-6",
+            panel:
+              //　dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)]　 dark:bg-slate-900
+              "rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)]  backdrop-blur border border-[#ffffff29] bg-white p-6",
+            // panel:
+            //   "text-center bg-page items-center md:text-left rtl:md:text-right md:items-start p-6 p-6 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-800",
+            icon: "w-12 h-12 mb-6 text-primary",
+            ...((classes?.items as Record<string, never>) ?? {}),
+          }}
+        />
+      )
+    }
   </div>
 </WidgetWrapper>

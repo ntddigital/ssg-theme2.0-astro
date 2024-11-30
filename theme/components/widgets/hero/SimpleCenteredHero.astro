@@ -9,7 +9,7 @@ const {
   image = await Astro.slots.render("image"),
 
   id,
-  bg = await Astro.slots.render("bg"),
+  // bg = await Astro.slots.render("bg"),
 } = Astro.props;
 ---
 
@@ -40,7 +40,7 @@ const {
       </div>
       <div class="text-center">
         <h1
-          class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once motion-safe:md:intersect:animate-fade intersect-quarter"
+          class="text-5xl md:text-6xl font-bold leading-tighter mb-4 font-heading dark:text-white intersect-once motion-safe:md:intersect:animate-fade intersect-quarter"
         >
           {title ? title : ""}
         </h1>

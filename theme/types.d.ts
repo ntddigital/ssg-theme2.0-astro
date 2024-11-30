@@ -86,6 +86,8 @@ export interface Image {
   height: number;
 }
 
+
+
 export interface Video {
   src: string;
   type?: string;
@@ -235,9 +237,11 @@ export interface Testimonials extends Omit<Headline, 'classes'>, Widget {
 export interface Brands extends Omit<Headline, 'classes'>, Widget {
   icons?: Array<string>;
   images?: Array<CustomImage>;
+  images2?: Array<CustomImage>;
   items?:  Array<Item>;
   columns?:number
   defaultIcon?:string
+  isAfterContent?: boolean;
 }
 
 export interface Features extends Omit<Headline, 'classes'>, Widget {

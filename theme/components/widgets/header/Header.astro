@@ -7,8 +7,9 @@ import ToggleMenu from "@/components/common/ToggleMenu.astro";
 import Button from "@/components/ui/Button/Button.astro";
 
 import { getHomePermalink } from "@/utils/permalinks";
-import { trimSlash, getAsset } from "@/utils/permalinks";
+import { trimSlash } from "@/utils/permalinks";
 import type { CallToAction } from "@/types";
+import { headerData } from "~/config/navigation";
 
 interface Link {
   text?: string;
@@ -38,10 +39,10 @@ const {
   links = [],
   actions = [],
   isSticky = false,
-  isDark = false,
+  isDark = headerData.isDark,
   isFullWidth = false,
   showToggleTheme = false,
-  showRssFeed = false,
+  // showRssFeed = false,
   position = "center",
 } = Astro.props;
 
@@ -50,7 +51,11 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 
 <header
   class:list={[
-    { sticky: isSticky, relative: !isSticky, dark: isDark },
+    {
+      sticky: isSticky,
+      relative: !isSticky,
+      "bg-dark dark:bg-transparent dark": isDark,
+    },
     "top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out",
   ]}
   {...isSticky ? { "data-aw-sticky-header": true } : {}}
@@ -59,7 +64,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
   <div class="absolute inset-0"></div>
   <div
     class:list={[
-      "relative text-default py-3 px-3 md:px-6 mx-auto w-full",
+      "relative text-default px-3 md:px-6 mx-auto w-full",
       {
         "md:flex md:justify-between": position !== "center",
       },
@@ -85,11 +90,11 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       </div>
     </div>
     <nav
-      class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-default overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:justify-self-center"
+      class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-default dark:text-white overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:justify-self-center"
       aria-label="Main navigation"
     >
       <ul
-        class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center"
+        class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-lg tracking-[0.01rem] font-bold md:justify-center md:py-2"
       >
         {
           links.map(({ text, href, links }) => (
@@ -154,7 +159,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
           <!-- {
             showRssFeed && (
               <a
-                class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+                class="text-muted dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
                 aria-label="RSS Feed"
                 href={getAsset("/rss.xml")}
               >

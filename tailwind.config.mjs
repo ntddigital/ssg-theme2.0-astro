@@ -15,10 +15,10 @@ export default {
     extend: {
       colors: {
         primary: UI.primaryColor,
-        secondary: 'var(--aw-color-secondary)',
-        accent: 'var(--aw-color-accent)',
-        default: 'var(--aw-color-text-default)',
-        muted: 'var(--aw-color-text-muted)',
+        secondary: UI.secondaryColor,
+        accent: UI.accentColor,
+        default: UI.textDefaultColor,
+        muted: UI.textMutedColor,
   
       },
       fontFamily: {

@@ -5,6 +5,7 @@ import WidgetWrapper from "@/components/ui/WidgetWrapper.astro";
 import CustomImage from "@/components/common/CustomImage.astro";
 import Button from "@/components/ui/Button/Button.astro";
 import ItemGrid from "@/components/ui/ItemGrid/ItemGrid.astro";
+import { cn } from "@/utils/cn";
 
 const {
   title = await Astro.slots.render("title"),
@@ -43,7 +44,10 @@ const {
       <div class="md:basis-1/2 self-center">
         {
           content && (
-            <div class="mb-12 text-lg dark:text-gray-200" set:html={content} />
+            <div
+              class={cn("mb-12 text-lg dark:text-white", classes?.content)}
+              set:html={content}
+            />
           )
         }
 
@@ -64,8 +68,8 @@ const {
             panel: "max-w-none",
             title:
               "text-lg font-medium leading-6 dark:text-white ml-2 rtl:ml-0 rtl:mr-2",
-            description: "text-muted dark:text-gray-200 ml-2 rtl:ml-0 rtl:mr-2",
-            icon: "flex h-7 w-7 items-center justify-center rounded-full bg-green-600 dark:bg-green-700 text-gray-50 p-1",
+            description: "text-muted dark:text-white ml-2 rtl:ml-0 rtl:mr-2",
+            icon: "flex h-7 w-7 items-center justify-center rounded-full text-gray-50 p-1",
             action:
               "text-lg font-medium leading-6 dark:text-white ml-2 rtl:ml-0 rtl:mr-2",
           }}
@@ -79,7 +83,7 @@ const {
                 <Fragment set:html={image} />
               ) : (
                 <CustomImage
-                  class="mx-auto w-full rounded-lg bg-gray-500 shadow-lg"
+                  class="mx-auto w-full rounded-lg bg-white shadow-lg"
                   width={500}
                   src={image?.src}
                   alt={image.alt}

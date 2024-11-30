@@ -8,6 +8,7 @@ interface Props {
   width?: number;
   class?: string;
   textAbove?: string;
+  loading?: "eager" | "lazy" | null | undefined;
 }
 
 const props = Astro.props;
@@ -53,9 +54,12 @@ if (
         alt={props?.alt}
         width={props?.width}
         widths={[400, 768, 1024, 2048]}
-        sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+        sizes="(max-width: 480px) 400px, 
+       (max-width: 1023px) 768px, 
+       (max-width: 1440px) 1024px, 
+       2048px"
         class={props?.class}
-        loading="lazy"
+        loading={props?.loading || "lazy"}
         decoding="async"
       />
     )

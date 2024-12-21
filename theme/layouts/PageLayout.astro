@@ -1,9 +1,5 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Header from "@/components/widgets/header/Header.astro";
-
-import { headerData } from "~/config/navigation";
-
 import type { Metadata } from "@/types";
 
 export interface Props {
@@ -11,13 +7,10 @@ export interface Props {
   language?: string;
 }
 
-const { metadata, language } = Astro.props;
+const { metadata = {}, language = "en" } = Astro.props;
 ---
 
 <BaseLayout metadata={metadata} language={language}>
-  <slot name="header">
-    <Header {...headerData} isSticky showRssFeed showToggleTheme />
-  </slot>
   <main>
     <slot />
   </main>

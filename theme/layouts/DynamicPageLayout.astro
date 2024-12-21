@@ -8,6 +8,7 @@ import PageLayout from "./PageLayout.astro";
 import Brands1 from "@/components/widgets/brands/Brands1.astro";
 
 // ** Components
+import FullWidthHeader from "@/components/widgets/header/FullWidthHeader.astro";
 import GotoTopButton from "@/components/ui/Button/GotoTopButton.astro";
 import StepProgressBar from "@/components/ui/ProgressBars/StepProgressBar.jsx";
 import Headline from "@/components/ui/Headline.astro";
@@ -30,16 +31,22 @@ import SimpleCenterFooter from "@/components/widgets/footer/simpleCenterFooter.a
 
 // ** Utils
 import { cn } from "@/utils/cn";
-import { constants } from "buffer";
+import { headerData } from "~/config/navigation";
 
 // ** Props
-const { metadata = {}, content } = Astro.props;
+const { content } = Astro.props;
 ---
 
-<PageLayout metadata={metadata} language={content?.language}>
+<PageLayout metadata={content?.metadata || {}} language={content?.language}>
   {
     content?.sections?.map((section: { [x: string]: string; type: string }) => {
-      if (section?.type === "textAboveImageHero") {
+      if (section?.type === "fullWidthHeader") {
+        return (
+          <slot name="header">
+            <FullWidthHeader {...headerData} {...section} />
+          </slot>
+        );
+      } else if (section?.type === "textAboveImageHero") {
         return <TextAboveImageHero {...section} />;
       } else if (section?.type === "splitWithImgHero") {
         return <SplitWithImgHero {...section} />;

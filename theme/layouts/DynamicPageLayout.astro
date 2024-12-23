@@ -26,8 +26,9 @@ import FeaturesTable from "@/components/widgets/features/FeaturesTable.astro";
 import PricingBasic from "@/components/widgets/pricing/pricingBasic.astro";
 import FAQs from "@/components/widgets/faq/FAQs.astro";
 import Content1 from "@/components/widgets/content/Content1.astro";
-import ColumnsSimpleFooter from "@/components/widgets/footer/ColumnsSimpleFooter.astro";
-import SimpleCenterFooter from "@/components/widgets/footer/simpleCenterFooter.astro";
+import Privacy from "@/components/widgets/legal/Privacy.astro";
+import Terms from "@/components/widgets/legal/Terms.astro";
+import Accessibility from "@/components/widgets/legal/Accessibility.astro";
 
 // ** Utils
 import { cn } from "@/utils/cn";
@@ -37,16 +38,14 @@ import { headerData } from "~/config/navigation";
 const { content } = Astro.props;
 ---
 
-<PageLayout metadata={content?.metadata || {}} language={content?.language}>
+<PageLayout
+  metadata={content?.metadata || {}}
+  language={content?.language}
+  content={content}
+>
   {
     content?.sections?.map((section: { [x: string]: string; type: string }) => {
-      if (section?.type === "fullWidthHeader") {
-        return (
-          <slot name="header">
-            <FullWidthHeader {...headerData} {...section} />
-          </slot>
-        );
-      } else if (section?.type === "textAboveImageHero") {
+      if (section?.type === "textAboveImageHero") {
         return <TextAboveImageHero {...section} />;
       } else if (section?.type === "splitWithImgHero") {
         return <SplitWithImgHero {...section} />;
@@ -74,10 +73,12 @@ const { content } = Astro.props;
         return <FAQs {...section} />;
       } else if (section?.type === "contact") {
         return <Contact {...section} />;
-      } else if (section?.type === "columnsSimpleFooter") {
-        return <ColumnsSimpleFooter />;
-      } else if (section?.type === "simpleCenterFooter") {
-        return <SimpleCenterFooter />;
+      } else if (section?.type === "privacy") {
+        return <Privacy section={section} content={content} />;
+      } else if (section?.type === "terms") {
+        return <Terms section={section} content={content} />;
+      } else if (section?.type === "accessibility") {
+        return <Accessibility section={section} content={content} />;
       } else if (section?.type === "customSection") {
         return (
           <div

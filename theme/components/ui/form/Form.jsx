@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { sendEmail } from '@/utils/sendEmail'; 
-// import Button from '../Button/Button.astro';
 
 const ContactForm = ({ inputs, textarea, disclaimer, button = "Contact us", description = "" }) => {
   const [formStatus, setFormStatus] = useState({ success: false, error: "" });
-
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
@@ -74,29 +72,28 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = "Contact us", desc
       )}
 
       {disclaimer && (
-        <div className="mt-3 flex items-start">
+        <div className="mt-3 flex items-center">
           <div className="flex mt-0.5">
             <input
               id="disclaimer"
               name="disclaimer"
               type="checkbox"
-              className="cursor-pointer mt-1 py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+              className="h-6 w-6 cursor-pointer mt-1 block text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
             />
           </div>
-          <div className="ml-3">
-            <label
-              htmlFor="disclaimer"
-              className="cursor-pointer select-none text-sm text-gray-600 dark:text-white"
-            >
-              {disclaimer.label}
-            </label>
+          <div className="">
+          <label
+            htmlFor="disclaimer"
+            className="cursor-pointer select-none text-sm text-gray-600 dark:text-white"
+            dangerouslySetInnerHTML={{ __html: disclaimer?.content }}
+          />
           </div>
         </div>
       )}
 
       {button && (
         <div className="mt-10 grid">
-          <button variant="primary" type="submit">
+          <button class="btn-primary" type="submit">
             {button}
           </button>
         </div>

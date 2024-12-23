@@ -8,7 +8,6 @@ export interface SendEmailParams {
 }
 
 export async function sendEmail({ email, fullname, phone, message }: SendEmailParams): Promise<any> {
-    console.log("send email")
   try {
     const response = await fetch("https://wy3lyuf7d3.execute-api.us-west-2.amazonaws.com/test", {
       method: "POST",

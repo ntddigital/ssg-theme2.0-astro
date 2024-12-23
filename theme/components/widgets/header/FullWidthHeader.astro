@@ -32,20 +32,20 @@ export interface Props {
   isShowToggleTheme?: boolean;
   isShowRssFeed?: boolean;
   position?: string;
+  content: any;
 }
 
 const {
   id = "header",
   links = [],
   actions = [],
-  isSticky = false,
+  isSticky = true,
   isDark = false,
   isFullWidth = false,
   isShowToggleTheme = false,
   isShowRssFeed = false,
   position = "center",
 } = Astro.props;
-
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 ---
 

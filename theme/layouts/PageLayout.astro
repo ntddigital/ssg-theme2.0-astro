@@ -1,17 +1,33 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import type { Metadata } from "@/types";
-
+import FullWidthHeader from "@/components/widgets/header/FullWidthHeader.astro";
+import { headerData } from "~/config/navigation";
+import ColumnsSimpleFooter from "@/components/widgets/footer/ColumnsSimpleFooter.astro";
+import SimpleCenterFooter from "@/components/widgets/footer/SimpleCenterFooter.tsx";
 export interface Props {
   metadata?: Metadata;
   language?: string;
+  content?: any;
 }
 
-const { metadata = {}, language = "en" } = Astro.props;
+const { metadata = {}, language = "en", content } = Astro.props;
 ---
 
 <BaseLayout metadata={metadata} language={language}>
+  {
+    content?.header?.type === "fullWidthHeader" && (
+      <FullWidthHeader {...headerData} {...content?.header} />
+    )
+  }
+
   <main>
     <slot />
   </main>
+  {content?.footer?.type === "columnsSimpleFooter" && <ColumnsSimpleFooter />}
+  {
+    content?.footer?.type === "simpleCenterFooter" && (
+      <SimpleCenterFooter client:load section={content.footer} />
+    )
+  }
 </BaseLayout>

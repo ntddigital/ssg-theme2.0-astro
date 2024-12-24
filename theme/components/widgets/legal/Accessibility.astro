@@ -36,8 +36,8 @@ const { content } = Astro.props;
 
         <div class="mt-6">
           <p>{SITE?.name}</p>
-
-          <p>{content?.tel ? "Tel: +1-" + content?.tel : ""}</p>
+          <p>{SITE?.legalContactEmail || ""}</p>
+          <p>{SITE?.legalContactNumber || ""}</p>
         </div>
       </div>
     </div>

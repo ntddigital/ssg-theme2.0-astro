@@ -491,7 +491,8 @@ const { content } = Astro.props;
         </p>
         <div class="mt-6">
           <p>{SITE?.name}</p>
-          <p>{content?.tel ? "Tel: +1-" + content?.tel : ""}</p>
+          {SITE?.legalContactEmail && <p>{SITE?.legalContactEmail}</p>}
+          {SITE?.legalContactNumber && <p>{SITE?.legalContactNumber}</p>}
           <br />
           <!-- <p>
             Alternatively, you can contact us through the feedback form

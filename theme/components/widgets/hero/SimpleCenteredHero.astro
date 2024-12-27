@@ -1,6 +1,7 @@
 ---
 import Button from "@/components/ui/Button/Button.astro";
 import { cn } from "@/utils/cn";
+import CustomImage from "@/components/common/CustomImage.astro";
 const {
   title = await Astro.slots.render("title"),
   subtitle = await Astro.slots.render("subtitle"),
@@ -23,7 +24,7 @@ const {
   )}
   {...id ? { id } : {}}
 >
-  <img
+  <CustomImage
     src={image?.src}
     alt={image?.alt}
     class="absolute inset-0 -z-10 h-full w-full object-cover"

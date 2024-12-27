@@ -1,0 +1,37 @@
+---
+import WidgetWrapper from "@/components/ui/WidgetWrapper.astro";
+import Headline from "@/components/ui/Headline.astro";
+import OffWhiteGridCard from "@/components/ui/ card/OffWhiteGridCard.astro";
+// import type { Features as Props } from "@/types";
+
+const {
+  title = await Astro.slots.render("title"),
+  subtitle = await Astro.slots.render("subtitle"),
+  description = await Astro.slots.render("description"),
+  tagline = await Astro.slots.render("tagline"),
+  items = [],
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render("bg"),
+} = Astro.props;
+console.log("subtitle", title);
+---
+
+<WidgetWrapper
+  id={id}
+  isDark={isDark}
+  containerClass={`${classes?.container ?? ""}`}
+  bg={bg}
+>
+  <Headline
+    title={title}
+    subtitle={subtitle}
+    tagline={tagline}
+    description={description}
+    classes={classes?.headline as Record<string, string>}
+  />
+
+  <OffWhiteGridCard items={items} />
+</WidgetWrapper>

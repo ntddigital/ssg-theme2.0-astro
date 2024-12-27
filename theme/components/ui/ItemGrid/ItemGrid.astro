@@ -101,9 +101,8 @@ const {
                       titleClass,
                       itemClasses?.title
                     )}
-                  >
-                    {title}
-                  </h3>
+                    set:html={title}
+                  />
                 )}
                 {description && (
                   <p

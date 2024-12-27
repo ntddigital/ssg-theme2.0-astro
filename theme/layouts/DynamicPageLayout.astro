@@ -8,11 +8,10 @@ import PageLayout from "./PageLayout.astro";
 import Brands1 from "@/components/widgets/brands/Brands1.astro";
 
 // ** Components
-import FullWidthHeader from "@/components/widgets/header/FullWidthHeader.astro";
-import GotoTopButton from "@/components/ui/Button/GotoTopButton.astro";
-import StepProgressBar from "@/components/ui/ProgressBars/StepProgressBar.jsx";
+import GotoTopButton from "@/components/ui/button/GotoTopButton.astro";
+import StepProgressBar from "@/components/ui/progressBars/StepProgressBar.jsx";
 import Headline from "@/components/ui/Headline.astro";
-import ItemGrid from "@/components/ui/ItemGrid/ItemGrid.astro";
+import ItemGrid from "@/components/ui/itemGrid/ItemGrid.astro";
 import TextAboveImageHero from "@/components/widgets/hero/TextAboveImageHero.astro";
 import SplitWithImgHero from "@/components/widgets/hero/SplitWithImgHero.astro";
 import SimpleCenteredHero from "@/components/widgets/hero/SimpleCenteredHero.astro";
@@ -29,10 +28,10 @@ import Content1 from "@/components/widgets/content/Content1.astro";
 import Privacy from "@/components/widgets/legal/Privacy.astro";
 import Terms from "@/components/widgets/legal/Terms.astro";
 import Accessibility from "@/components/widgets/legal/Accessibility.astro";
-
+import OffWhiteGridTestimonial from "@/components/widgets/testimonials/OffWhiteGridTestimonial.astro";
+import Gallery1 from "@/components/widgets/gallery/Gallery1.astro";
 // ** Utils
 import { cn } from "@/utils/cn";
-import { headerData } from "~/config/navigation";
 
 // ** Props
 const { content } = Astro.props;
@@ -79,6 +78,10 @@ const { content } = Astro.props;
         return <Terms section={section} content={content} />;
       } else if (section?.type === "accessibility") {
         return <Accessibility section={section} content={content} />;
+      } else if (section?.type === "offWhiteGridTestimonial") {
+        return <OffWhiteGridTestimonial {...section} />;
+      } else if (section?.type === "gallery1") {
+        return <Gallery1 {...section} />;
       } else if (section?.type === "customSection") {
         return (
           <div

@@ -1,19 +1,28 @@
 ---
 import Button from "@/components/ui/Button/Button.astro";
+import { cn } from "@/utils/cn";
 const {
   title = await Astro.slots.render("title"),
   subtitle = await Astro.slots.render("subtitle"),
+  description = await Astro.slots.render("subtitle"),
   tagline,
 
   actions = await Astro.slots.render("actions"),
   image = await Astro.slots.render("image"),
 
   id,
+  classes = {},
   // bg = await Astro.slots.render("bg"),
 } = Astro.props;
 ---
 
-<div class="relative isolate overflow-hidden pt-14" {...id ? { id } : {}}>
+<section
+  class={cn(
+    "relative isolate overflow-hidden pt-14 flex items-center justify-center",
+    classes?.container
+  )}
+  {...id ? { id } : {}}
+>
   <img
     src={image?.src}
     alt={image?.alt}
@@ -33,25 +42,39 @@ const {
     <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
       <div class="hidden sm:mb-8 sm:flex sm:justify-center">
         <div
-          class="relative rounded-full px-3 py-1 text-sm/6 text-gray-400 font-bold"
+          class={cn(
+            "relative rounded-full px-3 py-1 text-sm/6 text-gray-400 font-bold",
+            classes?.tagling
+          )}
         >
           {tagline ? tagline : ""}
         </div>
       </div>
       <div class="text-center">
         <h1
-          class="text-5xl md:text-6xl font-bold leading-tighter mb-4 font-heading dark:text-white intersect-once motion-safe:md:intersect:animate-fade intersect-quarter"
-        >
-          {title ? title : ""}
-        </h1>
+          class={cn(
+            "text-5xl md:text-6xl font-bold leading-tighter mb-4 font-heading dark:text-white intersect-once motion-safe:md:intersect:animate-fade intersect-quarter",
+            classes?.title
+          )}
+          set:html={title}
+        />
         <p
-          class="mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8"
-        >
-          {subtitle ? subtitle : ""}
-        </p>
+          class={cn(
+            "mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8",
+            classes?.subtitle
+          )}
+          set:html={subtitle}
+        />
+        <p
+          class={cn(
+            "mb-6 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8",
+            classes?.description
+          )}
+          set:html={description}
+        />
         {
           actions && (
-            <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 lg:justify-start lg:m-0 lg:max-w-7xl intersect-once motion-safe:md:intersect:animate-fade intersect-quarter">
+            <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 lg:m-0 lg:max-w-7xl intersect-once motion-safe:md:intersect:animate-fade intersect-quarter">
               {Array.isArray(actions) ? (
                 actions.map((action) => (
                   <div class="flex w-full sm:w-auto">
@@ -77,4 +100,4 @@ const {
     >
     </div>
   </div>
-</div>
+</section>

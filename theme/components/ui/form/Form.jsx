@@ -93,7 +93,7 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = "Contact us", desc
 
       {button && (
         <div className="mt-10 grid">
-          <button class="btn-primary" type="submit">
+          <button className="btn-primary" type="submit">
             {button}
           </button>
         </div>

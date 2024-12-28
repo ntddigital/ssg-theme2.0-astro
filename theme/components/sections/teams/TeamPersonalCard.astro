@@ -1,13 +1,14 @@
 ---
 // import Highlight from '@/components/ui/highlight';
-import { cn } from '@/utils/cn';
+import { cn } from "@/utils/cn";
+import CustomImage from "@/components/common/CustomImage.astro";
 const {
-  title = await Astro.slots.render('title'),
+  title = await Astro.slots.render("title"),
   // subtitle = await Astro.slots.render('subtitle'),
-  description = await Astro.slots.render('description'),
+  description = await Astro.slots.render("description"),
   // tagline = await Astro.slots.render('tagline'),
-  introduction = await Astro.slots.render('introduction'),
-  image = await Astro.slots.render('image'),
+  introduction = await Astro.slots.render("introduction"),
+  image = await Astro.slots.render("image"),
   items = [],
 
   id,
@@ -19,10 +20,17 @@ const {
 
 <section class="lg:py-15 py-9" {...id ? { id } : {}}>
   <div class="max-w-7xl mx-auto px-[15px]">
-    <div class="grid xl:grid-cols-[520px_auto] lg:grid-cols-[500px_auto] grid-cols-1 items-start xl:gap-20 gap-10">
-      <div class={cn('')}>
+    <div
+      class="grid xl:grid-cols-[520px_auto] lg:grid-cols-[500px_auto] grid-cols-1 items-start xl:gap-20 gap-10"
+    >
+      <div class={cn("")}>
         {/* <SlideUp> */}
-        <img src={image?.src} style={{ width: '100%' }} width={486} height={630} alt={image?.alt} />
+        <CustomImage
+          src={image?.src}
+          class={cn("w-full", classes?.image)}
+          width={486}
+          alt={image?.alt}
+        />
         <div class="lg:pt-8 pt-4" set:html={introduction} />
         {/* </SlideUp> */}
         <!-- {
@@ -67,7 +75,7 @@ const {
         {/* <SlideUp> */}
         <h2
           class={cn(
-            'lg:text-5xl sm:text-4xl text-3xl lg:leading-[140%] sm:leading-[130%] leading-[120%] font-normal',
+            "lg:text-5xl sm:text-4xl text-3xl lg:leading-[140%] sm:leading-[130%] leading-[120%] font-normal",
             classes?.title
           )}
           set:html={title}
@@ -79,15 +87,26 @@ const {
 
         <div class="lg:pt-8 pt-4">
           {
-            items?.map((item: { id: number; title: string; description: string }) => (
-              <Fragment key={item.id}>
-                <h3
-                  class={cn('lg:text-3xl text-[28px] lg:leading-[140%] leading-[140%]', classes?.items?.title)}
-                  set:html={item?.title}
-                />
-                <div class={cn('lg:pt-2 pt-1 lg:pb-8 pb-4', classes?.item?.description)} set:html={item?.description} />
-              </Fragment>
-            ))
+            items?.map(
+              (item: { id: number; title: string; description: string }) => (
+                <Fragment key={item.id}>
+                  <h3
+                    class={cn(
+                      "lg:text-3xl text-[28px] lg:leading-[140%] leading-[140%]",
+                      classes?.items?.title
+                    )}
+                    set:html={item?.title}
+                  />
+                  <div
+                    class={cn(
+                      "lg:pt-2 pt-1 lg:pb-8 pb-4",
+                      classes?.item?.description
+                    )}
+                    set:html={item?.description}
+                  />
+                </Fragment>
+              )
+            )
           }
 
           {

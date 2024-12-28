@@ -1,0 +1,110 @@
+---
+// import Highlight from '@/components/ui/highlight';
+import { cn } from '@/utils/cn';
+const {
+  title = await Astro.slots.render('title'),
+  // subtitle = await Astro.slots.render('subtitle'),
+  description = await Astro.slots.render('description'),
+  // tagline = await Astro.slots.render('tagline'),
+  introduction = await Astro.slots.render('introduction'),
+  image = await Astro.slots.render('image'),
+  items = [],
+
+  id,
+  // isDark = false,
+  classes = {},
+  // bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<section class="lg:py-15 py-9" {...id ? { id } : {}}>
+  <div class="max-w-7xl mx-auto px-[15px]">
+    <div class="grid xl:grid-cols-[520px_auto] lg:grid-cols-[500px_auto] grid-cols-1 items-start xl:gap-20 gap-10">
+      <div class={cn('')}>
+        {/* <SlideUp> */}
+        <img src={image?.src} style={{ width: '100%' }} width={486} height={630} alt={image?.alt} />
+        <div class="lg:pt-8 pt-4" set:html={introduction} />
+        {/* </SlideUp> */}
+        <!-- {
+          (
+            <div class="lg:pt-[54px] pt-8">
+              <div>
+                <div>Jennifer Smith</div>
+                <p class="text-1xl font-semibold">Founder & CEO</p>
+              </div>
+              <div class="lg:pt-10 pt-5 pb-6">
+                <p class="lg:text-lg text-base">
+                  <span class="font-semibold">Email:</span>{' '}
+                  <a href='mailto:"jennifer@example.com"' class="multiline-hover">
+                    jennifer@example.com
+                  </a>
+                </p>
+                <p class="lg:text-lg text-base">
+                  <span class="font-semibold">LinkedIn:</span>{' '}
+                  <a href="https://www.linkedin.com/" class="multiline-hover">
+                    linkedin.com/in/jennifersmith
+                  </a>{' '}
+                </p>
+                <p class="lg:text-lg text-base">
+                  <span class="font-semibold">Twitter:</span>{' '}
+                  <a href="https://www.twitter.com/" class="multiline-hover">
+                    @jennifersmith
+                  </a>{' '}
+                </p>
+                <p class="lg:text-lg text-base">
+                  <span class="font-semibold">Phone:</span>{' '}
+                  <a href="tel:5551234567" class="multiline-hover">
+                    (555) 123-4567
+                  </a>{' '}
+                </p>
+              </div>
+              <SocialIcons />
+            </div>
+          )
+        } -->
+      </div>
+      <div class="lg:pt-10 pt-3">
+        {/* <SlideUp> */}
+        <h2
+          class={cn(
+            'lg:text-5xl sm:text-4xl text-3xl lg:leading-[140%] sm:leading-[130%] leading-[120%] font-normal',
+            classes?.title
+          )}
+          set:html={title}
+        />
+
+        {description && <div class="lg:pt-8 pt-4" set:html={description} />}
+
+        {/* </SlideUp> */}
+
+        <div class="lg:pt-8 pt-4">
+          {
+            items?.map((item: { id: number; title: string; description: string }) => (
+              <Fragment key={item.id}>
+                <h3
+                  class={cn('lg:text-3xl text-[28px] lg:leading-[140%] leading-[140%]', classes?.items?.title)}
+                  set:html={item?.title}
+                />
+                <div class={cn('lg:pt-2 pt-1 lg:pb-8 pb-4', classes?.item?.description)} set:html={item?.description} />
+              </Fragment>
+            ))
+          }
+
+          {
+            /* <ul class="lg:pt-10 pt-6 flex flex-col gap-4">
+                    <li class="font-semibold flex items-center gap-5">
+                      <img
+                        src={'/website/assets/images/shapes/check-icon-blue.svg'}
+                        width={20}
+                        height={20}
+                        alt="check"
+                      />
+                      <span>"Digital Marketing Innovator of the Year" by Marketing Association</span>
+                    </li>
+                  </ul> */
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

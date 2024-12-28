@@ -1,0 +1,116 @@
+---
+import PartnersSlider from '../PartnersSlider.jsx';
+import CustomImage from '@/components/common/CustomImage.astro';
+import { cn } from '@/utils/cn';
+const { title, id, tagline, description, state, image, slideData, classes = {} } = Astro.props;
+---
+
+<section
+  class="pt-20 relative after:absolute after:z-[-1] after:left-0 after:top-0 after:w-full after:h-[calc(100vh-120px)] after:bg-background-linear"
+  {...id ? { id } : {}}
+>
+  <div class="max-w-[1355px] mx-auto px-[15px]">
+    <div
+      class="grid xl:grid-cols-[auto_505px] lg:grid-cols-[auto_48%] items-center justify-between xl:gap-[82px] gap-8"
+    >
+      <div class="">
+        {tagline && <span class="mb-4 font-bold">{tagline}</span>}
+        <h1
+          class={cn(
+            'font-extrabold text-muted-foreground xl:text-7xl md:text-5xl text-4xl lg:leading-[120%] leading-[130%]',
+            classes?.title
+          )}
+        >
+          {title}
+        </h1>
+      </div>
+      <div>
+        <p class="font-semibold">{description}</p>
+        {
+          state && (
+            <div class="flex sm:flex-row flex-col sm:items-center gap-8 sm:divide-x pt-7 font-bold">
+              <div class="flex items-center gap-2">
+                <div
+                  class={cn(
+                    'lg:text-5xl sm:text-4xl text-3xl lg:leading-[140%] sm:leading-[130%] leading-[120%]',
+                    classes?.state?.number
+                  )}
+                >
+                  13
+                  {state.number}
+                  {/* <SlotCounter startValue={0} value={13} debounceDelay={5000} duration={2} animateOnVisible={{ triggerOnce: true, rootMargin: '0px 0px -100px 0px' }} /> */}
+                </div>
+                <p class="font-bold text-muted-foreground max-w-[170px]">{state.text}conversion increase</p>
+              </div>
+              <div class="flex items-center gap-2 sm:pl-8">
+                <div
+                  class={cn(
+                    'lg:text-5xl sm:text-4xl text-3xl lg:leading-[140%] sm:leading-[130%] leading-[120%] flex items-center',
+                    classes?.state?.number
+                  )}
+                >
+                  96%
+                  {/* <SlotCounter startValue={0} value={96} debounceDelay={5000} duration={2} animateOnVisible={{ triggerOnce: true, rootMargin: '0px 0px -100px 0px' }} />% */}
+                </div>
+                <p class="font-bold text-muted-foreground max-w-[170px]">Years of Track Record</p>
+              </div>
+            </div>
+          )
+        }
+        <!-- {
+          state &&
+            state.map((item: { id: number; number: number | string; text: string }) => (
+              <Fragment key={item.id}>
+                <div class="flex sm:flex-row flex-col sm:items-center gap-8 sm:divide-x pt-7.5">
+                  <div class="flex items-center gap-2">
+                    <div
+                      class={cn(
+                        'lg:text-5xl sm:text-4xl text-3xl lg:leading-[140%] sm:leading-[130%] leading-[120%]',
+                        classes?.state?.number
+                      )}
+                    >
+                      {item.number}
+                    </div>
+                    <p class="font-bold text-muted-foreground max-w-[170px]">{item.text}</p>
+                  </div>
+                </div>
+              </Fragment>
+            ))
+        } -->
+      </div>
+    </div>
+    {
+      image?.src && (
+        <>
+          <div class="lg:mt-25 mt-16 rounded-[30px] relative -z-10 flex justify-center">
+            <CustomImage
+              src={image?.src}
+              width={1320}
+              alt={image?.alt}
+              class="max-w-4xl lg:rounded-[30px] rounded-2xl min-h-[400px] w-auto object-cover"
+            />
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              <CustomImage
+                src={'/website/assets/images/shapes/play-btn1-1.png'}
+                alt="play icon"
+                width={132}
+                class="cursor-pointer lg:max-w-[116px] lg:max-h-[116px] sm:max-w-20 sm:max-h-20 max-w-16 max-h-16"
+              />
+            </div>
+          </div>
+        </>
+      )
+    }
+  </div>
+  {
+    slideData && (
+      <PartnersSlider
+        data={slideData.slice(0, 5)}
+        className={cn(
+          'shadow-[0px_4px_40px_0px_rgba(44,54,109,0.2509803922)] max-w-[1005px] mx-auto lg:-mt-14 -mt-6 z-[1] relative bg-white'
+        )}
+        client:visible
+      />
+    )
+  }
+</section>

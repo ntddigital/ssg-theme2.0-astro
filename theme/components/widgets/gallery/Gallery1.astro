@@ -1,7 +1,6 @@
 ---
 import WidgetWrapper from "@/components/ui/WidgetWrapper.astro";
 import Headline from "@/components/ui/Headline.astro";
-import CustomImage from "@/components/common/CustomImage.astro";
 // import type { Features as Props } from "@/types";
 
 const {
@@ -49,9 +48,9 @@ const {
           }) => (
             <Fragment key={person.name}>
               <li>
-                <CustomImage
+                <img
                   alt=""
-                  src={person.imageUrl || ""}
+                  src={person.imageUrl}
                   class="aspect-3/2 w-full rounded-2xl object-cover"
                 />
                 <h3 class="mt-6 text-lg/8 font-semibold text-gray-900">

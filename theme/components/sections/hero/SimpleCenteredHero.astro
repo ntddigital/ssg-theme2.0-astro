@@ -1,5 +1,6 @@
 ---
 import Button from '@/components/ui/Button/Button.astro';
+import CustomImage from '@/components/common/CustomImage.astro';
 import { cn } from '@/utils/cn';
 const {
   title = await Astro.slots.render('title'),
@@ -20,7 +21,7 @@ const {
   class={cn('relative isolate overflow-hidden pt-14 flex items-center justify-center', classes?.container)}
   {...id ? { id } : {}}
 >
-  <img src={image?.src} alt={image?.alt} class="absolute inset-0 -z-10 h-full w-full object-cover" />
+  <CustomImage src={image?.src} alt={image?.alt} class="absolute inset-0 -z-10 h-full w-full object-cover" />
   <!-- <div
     class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
     aria-hidden="true"

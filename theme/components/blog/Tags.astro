@@ -21,14 +21,14 @@ const {
 
 {
   tags && Array.isArray(tags) && (
-    <>
-      <>
+    <div>
+      <div>
         {title !== undefined && (
           <span class="align-super font-normal underline underline-offset-4 decoration-2 dark:text-white">
             {title}
           </span>
         )}
-      </>
+      </div>
       <ul class={className}>
         {tags.map((tag) => (
           <li class="bg-gray-100 dark:bg-slate-700 inline-block mr-2 rtl:mr-0 rtl:ml-2 mb-2 py-0.5 px-2 lowercase font-medium">
@@ -45,6 +45,6 @@ const {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   )
 }

@@ -1,6 +1,7 @@
 ---
 import { cn } from '@/utils/cn';
 import { Icon } from 'astro-icon/components';
+import CustomImage from '@/components/common/CustomImage.astro';
 type TestimonialsData = {
   author: { handle: string; imageUrl: string | null | undefined; name: string };
   rating: { maxStars: number; rating: number };
@@ -51,14 +52,17 @@ const getInitial = (name: string) => {
                     <p>{`“${testimonial?.body}”`}</p>
                   </blockquote>
                 )}
-                <figcaption class="mt-6 flex items-center gap-x-4">
-                  {testimonial?.author?.imageUrl ? (
-                    <img alt="" src={testimonial?.author?.imageUrl} class="size-10 rounded-full bg-gray-50" />
-                  ) : (
-                    <div class={`size-10 rounded-full flex items-center justify-center ${getRandomColor()}`}>
-                      <span class="text-white text-lg font-bold">{getInitial(testimonial?.author?.name)}</span>
-                    </div>
-                  )}
+                <div class="mt-6 flex items-center gap-x-4">
+                  {
+                    //  avatar
+                    testimonial?.author?.imageUrl ? (
+                      <CustomImage alt="" src={testimonial?.author?.imageUrl} class="size-10 rounded-full bg-gray-50" />
+                    ) : (
+                      <div class={`size-10 rounded-full flex items-center justify-center ${getRandomColor()}`}>
+                        <span class="text-white text-lg font-bold">{getInitial(testimonial?.author?.name)}</span>
+                      </div>
+                    )
+                  }
                   <div>
                     {testimonial?.author?.name && (
                       <div class="font-semibold text-gray-900">{testimonial?.author?.name}</div>
@@ -67,28 +71,27 @@ const getInitial = (name: string) => {
                       <div class="text-gray-600">{`@${testimonial?.author?.handle}`}</div>
                     )}
                     {testimonial?.rating?.rating && (
-                      <div>
-                        <div class="flex items-center">
+                      <div
+                        aria-label={` ${testimonial.rating.rating} out of ${testimonial.rating.maxStars || 5} stars`}
+                      >
+                        <div class="flex items-center mt-1">
                           {Array.from({ length: testimonial?.rating?.maxStars || 5 }, (_, index) => (
-                            <div class="mt-1">
+                            <Fragment key={index}>
                               <Icon
                                 name="tabler:star-filled"
                                 class={cn(
-                                  index < testimonial?.rating?.rating ? 'text-yellow-400' : 'text-gray-300',
+                                  index < testimonial.rating.rating ? 'text-yellow-400' : 'text-gray-300',
                                   'size-4.5 shrink-0'
                                 )}
                                 aria-hidden="true"
                               />
-                            </div>
+                            </Fragment>
                           ))}
                         </div>
-                        <p class="sr-only">
-                          {testimonial?.rating?.rating} out of {testimonial?.rating?.maxStars} stars
-                        </p>
                       </div>
                     )}
                   </div>
-                </figcaption>
+                </div>
               </figure>
             </div>
           </Fragment>

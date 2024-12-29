@@ -32,6 +32,7 @@ import HorizontalSteps from '@/components/sections/steps/HorizontalSteps.astro';
 import VerticalSteps from '@/components/sections/steps/VerticalSteps.astro';
 import OffWhiteGridTestimonial from '@/components/sections/testimonials/OffWhiteGridTestimonial.astro';
 import TeamPersonalCard from '@/components/sections/teams/TeamPersonalCard.astro';
+import ProjectArtical from '@/components/sections/ProjectArtical.astro';
 // ** Utils
 import { cn } from '@/utils/cn';
 
@@ -70,6 +71,8 @@ const { content } = Astro.props;
         return <TeamPersonalCard {...section} />;
       } else if (section?.type === 'pricingBasic') {
         return <PricingBasic {...section} />;
+      } else if (section?.type === 'projectArtical') {
+        return <ProjectArtical {...section} />;
       } else if (section?.type === 'faqs') {
         return <FAQs {...section} />;
       } else if (section?.type === 'contact') {

@@ -1,0 +1,130 @@
+---
+import { cn } from '@/utils/cn';
+import CustomImage from '@/components/common/CustomImage.astro';
+
+type Paragraph = {
+  content: {
+    title?: string;
+    sections?: Section[];
+  };
+};
+
+type Section = {
+  description?: string;
+  ul?: string[];
+};
+
+type Image = {
+  src: string;
+  alt: string;
+};
+
+type BodyItem = {
+  paragraph?: Paragraph[];
+  image?: Image;
+};
+
+const {
+  title = await Astro.slots.render('title'),
+  // subtitle = await Astro.slots.render('subtitle'),
+  // description = await Astro.slots.render('description'),
+  // tagline = await Astro.slots.render('tagline'),
+  body = await Astro.slots.render('body'),
+  asideData = await Astro.slots.render('asideData'),
+
+  // image = await Astro.slots.render('image'),
+  // items = [],
+
+  // id,
+  // isDark = false,
+  classes = {},
+  // bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<section class="lg:py-15 py-9">
+  <div class="max-w-[1350px] mx-auto px-[15px]">
+    <h2
+      class={cn(
+        'max-w-[759px] text-center mx-auto lg:text-5xl sm:text-4xl text-3xl lg:leading-[140%] sm:leading-[130%] leading-[120%]',
+        classes?.title
+      )}
+    >
+      {title}
+    </h2>
+    <div class="pt-12">
+      <div class="grid lg:grid-cols-[66%_33%] grid-cols-1 items-start gap-12 text-lg leading-relaxed">
+        <article>
+          {
+            body?.map((item: BodyItem, index: number) => (
+              <Fragment key={`body-item-${index}`}>
+                <div class="mb-6">
+                  {/* render image */}
+                  {item.image?.src && (
+                    <CustomImage
+                      src={item.image.src}
+                      alt={item.image.alt || ''}
+                      class={cn('rounded-[30px] mb-4', classes?.img)}
+                      width={872}
+                    />
+                  )}
+
+                  {/* render paragraph */}
+                  {item.paragraph?.map((paragraph: Paragraph, idx: number) => (
+                    <Fragment key={`paragraph-${index}-${idx}`}>
+                      <div class={cn('pt-4', classes?.paragraph)}>
+                        {/* render title */}
+                        {paragraph.content?.title && (
+                          <h2
+                            class="lg:text-4xl text-[28px] lg:leading-[140%] leading-[140%]"
+                            set:html={paragraph.content.title}
+                          />
+                        )}
+
+                        {/* render content's sections */}
+                        {paragraph.content?.sections?.map((section: Section, sectionIdx: number) => (
+                          <Fragment key={`section-${index}-${idx}-${sectionIdx}`}>
+                            <div class="pt-2.5">
+                              {/* render description */}
+                              {section.description && <p class="mb-2 text-gray-700" set:html={section.description} />}
+
+                              {/* render list */}
+                              {section.ul && (
+                                <ol class="flex flex-col gap-1">
+                                  {section.ul.map((liItem: string, liIdx: number) => (
+                                    <Fragment key={`list-item-${index}-${idx}-${sectionIdx}-${liIdx}`}>
+                                      <li set:html={liItem} />
+                                    </Fragment>
+                                  ))}
+                                </ol>
+                              )}
+                            </div>
+                          </Fragment>
+                        ))}
+                      </div>
+                    </Fragment>
+                  ))}
+                </div>
+              </Fragment>
+            ))
+          }
+        </article>
+
+        <aside class="rounded-[30px] p-7 border border-gray-500 sticky top-10 transition-all duration-300">
+          <ul class="flex flex-col gap-6 max-w-[360px]">
+            {
+              asideData?.map((detail: { label: string; value: string }, index: number) => (
+                <Fragment key={`detail-${index}`}>
+                  <li>
+                    <b class="text-muted-foreground" set:html={detail.label} />
+                    <p set:html={detail.value} />
+                  </li>
+                </Fragment>
+              ))
+            }
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>

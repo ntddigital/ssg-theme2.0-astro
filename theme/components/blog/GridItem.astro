@@ -1,11 +1,11 @@
 ---
-import { APP_BLOG } from "~/config/blogConfig";
-import type { Post } from "@/types";
+import { APP_BLOG } from '~/config/blogConfig';
+import type { Post } from '@/types';
 
-import CustomImage from "@/components/common/CustomImage.astro";
+import CustomImage from '@/components/common/CustomImage.astro';
 
-import { findImage } from "@/utils/images";
-import { getPermalink } from "@/utils/permalinks";
+import { findImage } from '@/utils/images';
+import { getPermalink } from '@/utils/permalinks';
 
 export interface Props {
   post: Post;
@@ -14,17 +14,11 @@ export interface Props {
 const { post } = Astro.props;
 const image = (await findImage(post.image)) as string;
 
-const link = APP_BLOG?.post?.isEnabled
-  ? getPermalink(post.permalink, "post")
-  : "";
+const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : '';
 ---
 
-<article
-  class="mb-6 transition intersect-once intersect-quarter motion-safe:md:intersect:animate-fade"
->
-  <div
-    class="relative md:h-64 bg-gray-400 dark:bg-slate-700 rounded shadow-lg mb-6"
-  >
+<article class="mb-6 transition intersect-once intersect-quarter motion-safe:md:intersect:animate-fade">
+  <div class="relative md:h-64 bg-gray-400 dark:bg-slate-700 rounded shadow-lg mb-6">
     {
       image &&
         (link ? (
@@ -47,15 +41,10 @@ const link = APP_BLOG?.post?.isEnabled
     }
   </div>
 
-  <h3
-    class="text-xl sm:text-2xl font-bold leading-tight mb-2 font-heading dark:text-white"
-  >
+  <h3 class="text-xl sm:text-2xl font-bold leading-relaxed mb-2 font-heading dark:text-white">
     {
       link ? (
-        <a
-          class="inline-block hover:text-primary dark:hover:text-gray-100 transition ease-in duration-200"
-          href={link}
-        >
+        <a class="inline-block hover:text-primary dark:hover:text-gray-100 transition ease-in duration-200" href={link}>
           {post.title}
         </a>
       ) : (

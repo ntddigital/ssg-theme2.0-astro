@@ -1,18 +1,18 @@
 ---
-import CustomImage from "@/components/common/CustomImage.astro";
-import Button from "@/components/ui/Button/Button.astro";
+import CustomImage from '@/components/common/CustomImage.astro';
+import Button from '@/components/ui/Button/Button.astro';
 // import type { Hero as Props } from "@/types";
 
 const {
-  title = await Astro.slots.render("title"),
-  subtitle = await Astro.slots.render("subtitle"),
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
   tagline,
-  content = await Astro.slots.render("content"),
-  actions = await Astro.slots.render("actions"),
-  image = await Astro.slots.render("image"),
+  content = await Astro.slots.render('content'),
+  actions = await Astro.slots.render('actions'),
+  image = await Astro.slots.render('image'),
 
   id,
-  bg = await Astro.slots.render("bg"),
+  bg = await Astro.slots.render('bg'),
 } = Astro.props;
 ---
 
@@ -37,7 +37,7 @@ const {
         {
           title && (
             <h1
-              class="text-5xl md:text-6xl font-bold leading-tighter  mb-4 font-heading dark:text-white intersect-once intersect-quarter motion-safe:md:intersect:animate-fade"
+              class="text-5xl md:text-6xl font-bold leading-relaxeder  mb-4 font-heading dark:text-white intersect-once intersect-quarter motion-safe:md:intersect:animate-fade"
               set:html={title}
             />
           )
@@ -69,13 +69,11 @@ const {
         </div>
         {content && <Fragment set:html={content} />}
       </div>
-      <div
-        class="intersect-once intercept-no-queue intersect-quarter motion-safe:md:intersect:animate-fade"
-      >
+      <div class="intersect-once intercept-no-queue intersect-quarter motion-safe:md:intersect:animate-fade">
         {
           image && (
             <div class="relative m-auto max-w-5xl">
-              {typeof image === "string" ? (
+              {typeof image === 'string' ? (
                 <Fragment set:html={image} />
               ) : (
                 <CustomImage src={image?.src} alt={image?.alt} width={1280} />

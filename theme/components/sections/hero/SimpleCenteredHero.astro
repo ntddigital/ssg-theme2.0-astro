@@ -1,14 +1,14 @@
 ---
-import Button from "@/components/ui/Button/Button.astro";
-import { cn } from "@/utils/cn";
+import Button from '@/components/ui/Button/Button.astro';
+import { cn } from '@/utils/cn';
 const {
-  title = await Astro.slots.render("title"),
-  subtitle = await Astro.slots.render("subtitle"),
-  description = await Astro.slots.render("subtitle"),
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  description = await Astro.slots.render('subtitle'),
   tagline,
 
-  actions = await Astro.slots.render("actions"),
-  image = await Astro.slots.render("image"),
+  actions = await Astro.slots.render('actions'),
+  image = await Astro.slots.render('image'),
 
   id,
   classes = {},
@@ -17,17 +17,10 @@ const {
 ---
 
 <section
-  class={cn(
-    "relative isolate overflow-hidden pt-14 flex items-center justify-center",
-    classes?.container
-  )}
+  class={cn('relative isolate overflow-hidden pt-14 flex items-center justify-center', classes?.container)}
   {...id ? { id } : {}}
 >
-  <img
-    src={image?.src}
-    alt={image?.alt}
-    class="absolute inset-0 -z-10 h-full w-full object-cover"
-  />
+  <img src={image?.src} alt={image?.alt} class="absolute inset-0 -z-10 h-full w-full object-cover" />
   <!-- <div
     class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
     aria-hidden="true"
@@ -41,35 +34,24 @@ const {
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
       <div class="hidden sm:mb-8 sm:flex sm:justify-center">
-        <div
-          class={cn(
-            "relative rounded-full px-3 py-1 text-sm/6 text-gray-400 font-bold",
-            classes?.tagling
-          )}
-        >
-          {tagline ? tagline : ""}
+        <div class={cn('relative rounded-full px-3 py-1 text-sm/6 text-gray-400 font-bold', classes?.tagling)}>
+          {tagline ? tagline : ''}
         </div>
       </div>
       <div class="text-center">
         <h1
           class={cn(
-            "text-5xl md:text-6xl font-bold leading-tighter mb-4 font-heading dark:text-white intersect-once motion-safe:md:intersect:animate-fade intersect-quarter",
+            'text-5xl md:text-6xl font-bold leading-tighter mb-4 font-heading dark:text-white intersect-once motion-safe:md:intersect:animate-fade intersect-quarter',
             classes?.title
           )}
           set:html={title}
         />
         <p
-          class={cn(
-            "mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8",
-            classes?.subtitle
-          )}
+          class={cn('mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8', classes?.subtitle)}
           set:html={subtitle}
         />
         <p
-          class={cn(
-            "mb-6 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8",
-            classes?.description
-          )}
+          class={cn('mb-6 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8', classes?.description)}
           set:html={description}
         />
         {

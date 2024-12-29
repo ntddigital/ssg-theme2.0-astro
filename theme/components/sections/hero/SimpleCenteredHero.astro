@@ -11,6 +11,7 @@ const {
   actions = await Astro.slots.render('actions'),
   image = await Astro.slots.render('image'),
 
+  isDark = await Astro.slots.render('isDark'),
   id,
   classes = {},
   // bg = await Astro.slots.render("bg"),
@@ -18,7 +19,11 @@ const {
 ---
 
 <section
-  class={cn('relative isolate overflow-hidden pt-14 flex items-center justify-center', classes?.container)}
+  class={cn(
+    'relative isolate overflow-hidden pt-14 flex items-center justify-center',
+    classes?.container,
+    isDark && 'bg-dark dark:bg-transparent dark'
+  )}
   {...id ? { id } : {}}
 >
   <CustomImage src={image?.src} alt={image?.alt} class="absolute inset-0 -z-10 h-full w-full object-cover" />

@@ -1,29 +1,27 @@
 ---
-import WidgetWrapper from "@/components/ui/WidgetWrapper.astro";
-import Headline from "@/components/ui/Headline.astro";
-import OffWhiteGridCard from "@/components/ui/ card/OffWhiteGridCard.astro";
+import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
+import Headline from '@/components/ui/Headline.astro';
+import OffWhiteGridCard from '@/components/ui/ card/OffWhiteGridCard.astro';
+import Button from '@/components/ui/Button/Button.astro';
+import { cn } from '@/utils/cn';
 // import type { Features as Props } from "@/types";
 
 const {
-  title = await Astro.slots.render("title"),
-  subtitle = await Astro.slots.render("subtitle"),
-  description = await Astro.slots.render("description"),
-  tagline = await Astro.slots.render("tagline"),
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  description = await Astro.slots.render('description'),
+  tagline = await Astro.slots.render('tagline'),
+  actions = await Astro.slots.render('actions'),
   items = [],
 
   id,
   isDark = false,
   classes = {},
-  bg = await Astro.slots.render("bg"),
+  bg = await Astro.slots.render('bg'),
 } = Astro.props;
 ---
 
-<WidgetWrapper
-  id={id}
-  isDark={isDark}
-  containerClass={`${classes?.container ?? ""}`}
-  bg={bg}
->
+<WidgetWrapper id={id} isDark={isDark} containerClass={`${classes?.container ?? ''}`} bg={bg}>
   <Headline
     title={title}
     subtitle={subtitle}
@@ -33,4 +31,24 @@ const {
   />
 
   <OffWhiteGridCard items={items} />
+  {
+    actions && (
+      <div
+        class={cn(
+          'max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 lg:m-0 lg:max-w-7xl mt-6 lg:mt-12 intersect-once motion-safe:md:intersect:animate-fade intersect-quarter',
+          classes?.actions
+        )}
+      >
+        {Array.isArray(actions) ? (
+          actions.map((action) => (
+            <div class="flex w-full sm:w-auto">
+              <Button {...(action || {})} class="w-full sm:mb-0" />
+            </div>
+          ))
+        ) : (
+          <Fragment set:html={actions} />
+        )}
+      </div>
+    )
+  }
 </WidgetWrapper>

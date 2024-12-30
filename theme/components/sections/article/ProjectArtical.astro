@@ -53,7 +53,7 @@ const {
       {title}
     </h2>
     <div class="pt-12">
-      <div class="grid lg:grid-cols-[66%_33%] grid-cols-1 items-start gap-12 text-lg leading-relaxed">
+      <div class="grid lg:grid-cols-[64%_33%] grid-cols-1 items-start gap-8 text-lg leading-relaxed">
         <article>
           {
             body?.map((item: BodyItem, index: number) => (
@@ -116,7 +116,7 @@ const {
             classes?.aside
           )}
         >
-          <ul class="flex flex-col gap-6 max-w-[360px]">
+          <ul class="flex flex-col gap-6">
             {
               asideData?.map((detail: { label: string; value: string }, index: number) => (
                 <Fragment key={`detail-${index}`}>

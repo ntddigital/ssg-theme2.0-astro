@@ -7,7 +7,12 @@ interface ItemProps {
   title?: string;
   description?: string;
   icon?: string;
-  callToAction?: Record<string, any>;
+  callToAction?: Record<
+    string,
+    {
+      [key: string]: unknown;
+    }
+  >;
   classes?: {
     panel?: string;
     icon?: string;
@@ -27,7 +32,7 @@ interface ComponentProps {
     title?: string;
     description?: string;
     icon?: string;
-    action?: string;
+    callToAction?: string;
   };
 }
 
@@ -39,7 +44,7 @@ const {
   title: titleClass = '',
   description: descriptionClass = '',
   icon: defaultIconClass = 'text-primary',
-  action: actionClass = '',
+  callToAction: actionClass = '',
 } = classes;
 ---
 

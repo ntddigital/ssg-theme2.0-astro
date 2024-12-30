@@ -43,7 +43,7 @@ const {
 ---
 
 <section class="lg:py-15 py-9">
-  <div class="max-w-[1350px] mx-auto px-[15px]">
+  <div class="max-w-7xl mx-auto px-[15px]">
     <h2
       class={cn(
         'max-w-[759px] text-center mx-auto lg:text-5xl sm:text-4xl text-3xl lg:leading-[140%] sm:leading-[130%] leading-[120%]',
@@ -110,7 +110,12 @@ const {
           }
         </article>
 
-        <aside class="rounded-[30px] p-7 border border-gray-500 sticky top-10 transition-all duration-300">
+        <aside
+          class={cn(
+            'rounded-[30px] p-7 border border-gray-500 sm:sticky top-10 transition-all duration-300',
+            classes?.aside
+          )}
+        >
           <ul class="flex flex-col gap-6 max-w-[360px]">
             {
               asideData?.map((detail: { label: string; value: string }, index: number) => (

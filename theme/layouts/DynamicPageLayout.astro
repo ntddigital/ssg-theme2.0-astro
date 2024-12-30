@@ -32,7 +32,9 @@ import HorizontalSteps from '@/components/sections/steps/HorizontalSteps.astro';
 import VerticalSteps from '@/components/sections/steps/VerticalSteps.astro';
 import OffWhiteGridTestimonial from '@/components/sections/testimonials/OffWhiteGridTestimonial.astro';
 import TeamPersonalCard from '@/components/sections/teams/TeamPersonalCard.astro';
-import ProjectArtical from '@/components/sections/ProjectArtical.astro';
+import ProjectArtical from '@/components/sections/article/ProjectArtical.astro';
+import SubscribeTwo from '@/components/sections/subscribes/SubscribeTwo.astro';
+import SubscribeOne from '@/components/sections/subscribes/subscribeOne.astro';
 // ** Utils
 import { cn } from '@/utils/cn';
 
@@ -87,6 +89,10 @@ const { content } = Astro.props;
         return <OffWhiteGridTestimonial {...section} />;
       } else if (section?.type === 'gallery1') {
         return <Gallery1 {...section} />;
+      } else if (section?.type === 'subscribeOne') {
+        return <SubscribeOne {...section} />;
+      } else if (section?.type === 'subscribeTwo') {
+        return <SubscribeTwo {...section} />;
       } else if (section?.type === 'customSection') {
         return (
           <div class={cn('mt-8 sm:mt-16 lg:mt-24 mx-auto', section.sectionWidth === 'boxed' ? 'max-w-7xl ' : '')}>

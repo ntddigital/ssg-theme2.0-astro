@@ -1,0 +1,45 @@
+---
+import CustomImage from '@/components/common/CustomImage.astro';
+import Button from '@/components/ui/Button/Button.astro';
+import { cn } from '@/utils/cn';
+const {
+  title = await Astro.slots.render('title'),
+  description = await Astro.slots.render('description'),
+  image = await Astro.slots.render('image'),
+  button = await Astro.slots.render('button'),
+  classes = {},
+} = Astro.props;
+---
+
+<section class="lg:py-15 py-9">
+  <div class="max-w-7xl mx-auto px-[15px] relative overflow-x-hidden">
+    <div
+      class={cn(
+        'rounded-[30px] bg-blue-50 lg:px-12 px-7 lg:pt-14 pt-7 lg:pb-16 pb-7 flex lg:flex-row flex-col justify-between lg:items-center',
+        classes?.container
+      )}
+    >
+      <div class="pb-6 max-w-3xl w-full relative">
+        <h2
+          class={cn('max-w-2xl lg:text-5xl sm:text-4xl text-3xl leading-relaxed font-extrabold', classes?.title)}
+          set:html={title}
+        />
+        <p class={cn('font-bold text-gray-600 mt-2 text-lg max-w-2xl', classes?.description)} set:html={description} />
+        <div class="absolute -right-20 top-1/2 -translate-y-1/2 lg:block hidden">
+          <CustomImage
+            src={image?.src}
+            width={188}
+            class={cn('dark:brightness-100 dark:invert h-[39px]', classes?.image)}
+            alt={image?.alt}
+          />
+        </div>
+      </div>
+      <Button
+        variant="primary"
+        href={button?.href}
+        icon={button?.icon}
+        class={cn('relative flex items-center justify-center', classes?.button)}>{button?.text}</Button
+      >
+    </div>
+  </div>
+</section>

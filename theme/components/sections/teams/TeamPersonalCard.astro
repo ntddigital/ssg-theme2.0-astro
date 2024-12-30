@@ -21,7 +21,7 @@ const {
 <section class="lg:py-15 py-9" {...id ? { id } : {}}>
   <div class="max-w-7xl mx-auto px-[15px]">
     <div class="grid xl:grid-cols-[520px_auto] lg:grid-cols-[500px_auto] grid-cols-1 items-start xl:gap-20 gap-10">
-      <div class={cn('')}>
+      <div class={cn('', classes?.aside)}>
         {/* <SlideUp> */}
         <CustomImage src={image?.src} class={cn('w-full', classes?.image)} width={486} alt={image?.alt} />
         <div class="lg:pt-8 pt-4" set:html={introduction} />

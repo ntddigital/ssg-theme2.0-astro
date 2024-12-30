@@ -1,0 +1,52 @@
+---
+// import Button from '@/components/ui/Button/Button.astro';
+import { Icon } from 'astro-icon/components';
+import { cn } from '@/utils/cn';
+---
+
+-
+<section class={cn(`lg:py-15 py-9 $`)}>
+  <div class="max-w-[1350px] mx-auto px-[15px] relative overflow-x-hidden">
+    <div
+      class="absolute top-0 w-[95%] md:w-full h-full object-contain bg-no-repeat bg-right rounded-[30px]"
+      style={{ backgroundImage: `url(/website/assets/images/background/services-bg1-1.png)` }}
+    >
+    </div>
+    <div
+      class="rounded-[30px] bg-primary lg:px-12 px-7 lg:pt-14 pt-7 lg:pb-16 pb-7 flex lg:flex-row flex-col justify-between lg:items-center"
+    >
+      <div class="pb-6">
+        <h2
+          class={'lg:text-5xl sm:text-4xl text-3xl font-extrabold text-white lg:leading-[140%] sm:leading-[130%] leading-[120%] max-w-[420px] text-secondary-foreground dark:text-white'}
+        >
+          Subscribe to our Newsletter
+        </h2>
+      </div>
+      <div class="relative lg:max-w-[594px] w-full">
+        <form>
+          <input
+            type="text"
+            placeholder="Enter your email"
+            class="border-[3px] border-accent rounded-full pt-7 pb-7 pl-11 max-h-[70px] w-full outline-blue-200"
+            required
+          />
+          <div class="absolute right-[3px] top-1/2 -translate-y-1/2 text-lg">
+            <button
+              class="group rounded-full sm:px-[38px] sm:py-[18px] border-2 border-primary font-bold sm:min-w-[198px] sm:max-h-[64px] h-[64px] w-[64px] bg-primary text-secondary-foreground dark:text-white flex justify-center items-center gap-2 transition-all duration-500 hover:bg-transparent hover:text-primary-foreground"
+            >
+              {' '}
+              <span class="hidden sm:block text-white">Subscribe</span>{' '}
+              <span class="-rotate-45 group-hover:rotate-0 transition-all">
+                {/* <RightArrow /> */}
+                <!-- <Button variant="primary" class="relative flex items-center justify-center">
+                  schedule a meeting
+                </Button> -->
+                <Icon name="tabler:arrow-right" class="w-5 h-5 inline-block -mt-0.5 text-white" />
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

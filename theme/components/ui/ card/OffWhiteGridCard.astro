@@ -71,9 +71,8 @@ const getInitial = (name: string) => {
                       <div class="text-gray-600">{`@${testimonial?.author?.handle}`}</div>
                     )}
                     {testimonial?.rating?.rating && (
-                      <div
-                        aria-label={` ${testimonial.rating.rating} out of ${testimonial.rating.maxStars || 5} stars`}
-                      >
+                      <div>
+                        <span class="sr-only">{` ${testimonial.rating.rating} out of ${testimonial.rating.maxStars || 5} stars`}</span>
                         <div class="flex items-center mt-1">
                           {Array.from({ length: testimonial?.rating?.maxStars || 5 }, (_, index) => (
                             <Fragment key={index}>

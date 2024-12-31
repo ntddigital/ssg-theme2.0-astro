@@ -1,4 +1,4 @@
-import { SITE } from "~/config/siteConfig";
+import { SITE } from '~/config/siteConfig';
 
 export interface SendEmailParams {
   email: string;
@@ -9,12 +9,12 @@ export interface SendEmailParams {
 
 export async function sendEmail({ email, fullname, phone, message }: SendEmailParams): Promise<any> {
   try {
-    const response = await fetch("https://wy3lyuf7d3.execute-api.us-west-2.amazonaws.com/test", {
-      method: "POST",
+    const response = await fetch('https://wy3lyuf7d3.execute-api.us-west-2.amazonaws.com/test', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      mode: "cors",
+      mode: 'cors',
       body: JSON.stringify({
         email,
         fullname,
@@ -26,12 +26,12 @@ export async function sendEmail({ email, fullname, phone, message }: SendEmailPa
     });
 
     if (!response.ok) {
-      throw new Error("Failed to send email");
+      throw new Error('Failed to send email');
     }
 
     return await response.json();
   } catch (error) {
-    console.error("Error:", error);
+    console.error('Error:', error);
     return null;
   }
 }

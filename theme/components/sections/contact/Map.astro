@@ -1,0 +1,55 @@
+---
+import Button from '@/components/ui/Button/Button.astro';
+import { SITE } from '~/config/siteConfig';
+import { cn } from '@/utils/cn';
+const { section, isChildComponent } = Astro.props;
+console.log('Astro.props123456', section);
+---
+
+<section
+  class={cn(
+    'relative',
+    isChildComponent || section?.noMarginTop ? 'mt-0' : 'mt-16 sm:mt-24 md:mt-32',
+    isChildComponent ? '' : 'scroll-mt-50 sm:scroll-mt-100'
+  )}
+  id={section?.id || ''}
+>
+  <div class="absolute top-4 right-4">
+    <div class="flex flex-col gap-4">
+      <Button
+        text={section?.getDirectionBtnInsteadText ? section?.getDirectionBtnInsteadText : `Get Direction`}
+        href={`${section?.url}`}
+        variant="primary"
+      />
+      {
+        section?.addTelBtn ? (
+          <Button
+            text={section?.telInsteadText ? section?.telInsteadText : `Tel: ${SITE?.tel}`}
+            class="bg-white font-bold"
+            href={`tel:${section?.tel || SITE?.tel}`}
+            id="mapTelBtn"
+            variant="secondary"
+          />
+        ) : (
+          ''
+        )
+      }
+      {
+        section?.addTelBtn && section?.tel2 ? (
+          <Button text={section?.tel2InsteadText} href={section?.tel2} id="mapTelBtn2" />
+        ) : (
+          ''
+        )
+      }
+    </div>
+  </div>
+  <iframe
+    src={`${section?.iframeUrl}`}
+    class="w-full"
+    aria-hidden="true"
+    allowfullscreen=""
+    loading="lazy"
+    height="500"
+    referrerpolicy="no-referrer-when-downgrade"
+    title={`Google Map for ${SITE?.name}`}></iframe>
+</section>

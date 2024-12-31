@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { sendEmail } from '@/utils/sendEmail'; 
+import { sendEmail } from '@/utils/sendEmail';
 
-const ContactForm = ({ inputs, textarea, disclaimer, button = "Contact us", description = "" }) => {
-  const [formStatus, setFormStatus] = useState({ success: false, error: "" });
+const ContactForm = ({ inputs, textarea, disclaimer, button = 'Contact us', description = '' }) => {
+  const [formStatus, setFormStatus] = useState({ success: false, error: '' });
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
@@ -21,14 +21,14 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = "Contact us", desc
     try {
       const result = await sendEmail(emailData); // Send email using the utility
       if (result) {
-        setFormStatus({ success: true, error: "" });
+        setFormStatus({ success: true, error: '' });
       } else {
-        setFormStatus({ success: false, error: "Failed to send message." });
+        setFormStatus({ success: false, error: 'Failed to send message.' });
       }
     } catch (error) {
       setFormStatus({
         success: error,
-        error: "An error occurred while sending the message.",
+        error: 'An error occurred while sending the message.',
       });
     }
   };
@@ -36,7 +36,7 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = "Contact us", desc
   return (
     <form onSubmit={handleSubmit}>
       {inputs &&
-        inputs.map(({ name = "", label = "", autocomplete = "on", placeholder = "" }) =>
+        inputs.map(({ name = '', label = '', autocomplete = 'on', placeholder = '' }) =>
           name ? (
             <div className="mb-6" key={name}>
               {label && (
@@ -73,20 +73,19 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = "Contact us", desc
 
       {disclaimer && (
         <div className="mt-3 flex items-center">
-          <div className="flex mt-0.5">
-            <input
-              id="disclaimer"
-              name="disclaimer"
-              type="checkbox"
-              className="h-6 w-6 cursor-pointer mt-1 block text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
-            />
-          </div>
-          <div className="">
-          <label
-            htmlFor="disclaimer"
-            className="cursor-pointer select-none text-sm text-gray-600 dark:text-white"
-            dangerouslySetInnerHTML={{ __html: disclaimer?.content }}
+          <input
+            id="disclaimer"
+            name="disclaimer"
+            type="checkbox"
+            className="mr-1 h-4 w-4 cursor-pointer block text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
           />
+
+          <div className="">
+            <label
+              htmlFor="disclaimer"
+              className="cursor-pointer select-none text-sm text-gray-600 dark:text-white"
+              dangerouslySetInnerHTML={{ __html: disclaimer?.content }}
+            />
           </div>
         </div>
       )}
@@ -106,18 +105,10 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = "Contact us", desc
       )}
 
       {/* Display submit result */}
-      {formStatus.success && (
-        <div className="mt-3 text-center text-green-600">
-          Message sent successfully!
-        </div>
-      )}
-      {formStatus.error && (
-        <div className="mt-3 text-center text-red-600">
-          Error: {formStatus.error}
-        </div>
-      )}
+      {formStatus.success && <div className="mt-3 text-center text-green-600">Message sent successfully!</div>}
+      {formStatus.error && <div className="mt-3 text-center text-red-600">Error: {formStatus.error}</div>}
     </form>
   );
 };
 
-export default ContactForm
+export default ContactForm;

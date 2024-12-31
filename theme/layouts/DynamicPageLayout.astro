@@ -35,6 +35,7 @@ import TeamPersonalCard from '@/components/sections/teams/TeamPersonalCard.astro
 import ProjectArtical from '@/components/sections/article/ProjectArtical.astro';
 import SubscribeTwo from '@/components/sections/subscribes/SubscribeTwo.astro';
 import SubscribeOne from '@/components/sections/subscribes/subscribeOne.astro';
+import Map from '@/components/sections/contact/Map.astro';
 // ** Utils
 import { cn } from '@/utils/cn';
 
@@ -79,6 +80,8 @@ const { content } = Astro.props;
         return <FAQs {...section} />;
       } else if (section?.type === 'contact') {
         return <Contact {...section} />;
+      } else if (section?.type === 'map') {
+        return <Map section={section} />;
       } else if (section?.type === 'privacy') {
         return <Privacy section={section} content={content} />;
       } else if (section?.type === 'terms') {

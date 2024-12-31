@@ -76,7 +76,7 @@ const {
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
               ) : (
-                <CustomImage src={image?.src} alt={image?.alt} width={1280} />
+                <CustomImage src={image?.src} alt={image?.alt} width={1280} loading="eager" />
               )}
             </div>
           )

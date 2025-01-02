@@ -4,8 +4,44 @@ import { cn } from "@/utils/cn";
 import { sendEmail } from "@/utils/sendEmail";
 import type { SendEmailParams } from "@/utils/sendEmail";
 import { SITE } from "~/config/siteConfig";
+import { simpleCenterFooterData } from '~/config/navigation';
 
-export default function Footer(props: { section: any; }){
+type Section = {
+  bgImg?: string; // Background image path
+  bgType?: "video" | "image"; // Background type
+  bgColor?: string; // Background color
+  bgOpacity?: number; // Background opacity
+  noMarginTop?: boolean; // Whether to remove margin at the top
+  isLogo?: boolean; // Whether to show a logo
+  logoSize?: number; // Logo size for desktop
+  logoSizeOnMobile?: number; // Logo size for mobile
+  textColor?: string; // Text color
+  openingHours?: string[]; // Opening hours information
+  openingHoursInsteadText?: string; // Custom text for opening hours
+  address?: { url: string; address: string }[]; // Address links
+  addressInsteadText?: string; // Custom text for address
+  menu?: { link: string; text: string }[]; // Footer menu links
+  FB?: boolean; // Whether to show Facebook link
+  FBLink?: string; // Facebook link URL
+  IG?: boolean; // Whether to show Instagram link
+  IGLink?: string; // Instagram link URL
+  X?: boolean; // Whether to show X (Twitter) link
+  XLink?: string; // X (Twitter) link URL
+  youtube?: boolean; // Whether to show YouTube link
+  youtubeLink?: string; // YouTube link URL
+  yelp?: boolean; // Whether to show Yelp link
+  yelpLink?: string; // Yelp link URL
+  doorDash?: boolean; // Whether to show DoorDash link
+  doorDashLink?: string; // DoorDash link URL
+  uberEats?: boolean; // Whether to show Uber Eats link
+  uberEatsLink?: string; // Uber Eats link URL
+  isPrivacy?: boolean; // Whether to show Privacy link
+  isTerms?: boolean; // Whether to show Terms link
+  isRefund?: boolean; // Whether to show Refund link
+  isAccessibility?: boolean; // Whether to show Accessibility link
+  isSendFeedback?: boolean; // Whether to show Send Feedback button
+};
+export default function Footer(props: { section: Section; }){
   const [isModalOpen, setIsModalOpen] = useState(false); // Controls modal visibility
   const [formStatus, setFormStatus] = useState({ success: false, error: "" });
   const [message, setMessage] = useState("");
@@ -50,7 +86,7 @@ export default function Footer(props: { section: any; }){
     } catch (error) {
       setFormStatus({
         success: false,
-        error: "An error occurred while sending the message.",
+        error: `An error occurred while sending the message. ${error}`,
       });
     }
   };
@@ -440,8 +476,52 @@ export default function Footer(props: { section: any; }){
         color:section?.textColor || '#ffffff',
       }}
     >
-      <a  href="/privacy" role="button">Privacy</a> | <a href="/terms" role="button">Terms</a> | 
-      <a href="/accessibility" role="button"> Accessibility</a> | <a id="send-feedback-btn" className="cursor-pointer" onClick={handleOpen} role="button">Send Feedback</a>
+  {
+  (
+    [
+      simpleCenterFooterData?.isPrivacy && (
+        <a href="/privacy" role="button" key="privacy">
+          Privacy
+        </a>
+      ),
+      simpleCenterFooterData?.isTerms && (
+        <a href="/terms" role="button" key="terms">
+          Terms
+        </a>
+      ),
+      simpleCenterFooterData?.isRefund && (
+        <a href="/refund" role="button" key="refund">
+          Refund
+        </a>
+      ),
+      simpleCenterFooterData?.isAccessibility && (
+        <a href="/accessibility" role="button" key="accessibility">
+          Accessibility
+        </a>
+      ),
+      simpleCenterFooterData?.isSendFeedback && (
+        <a
+          id="send-feedback-btn"
+          className="cursor-pointer"
+          onClick={handleOpen}
+          role="button"
+          key="send-feedback"
+        >
+          Send Feedback
+        </a>
+      ),
+    ]
+      .filter(Boolean) as JSX.Element[] // Explicitly cast the filtered array
+  ).reduce<JSX.Element[]>((acc, item, idx, arr) => {
+    acc.push(item);
+    if (idx < arr.length - 1) {
+      acc.push(<span key={`separator-${idx}`}> | </span>);
+    }
+    return acc;
+  }, [])
+}
+
+
     </p>
     <p
       className="mt-2 text-center text-sm leading-5"

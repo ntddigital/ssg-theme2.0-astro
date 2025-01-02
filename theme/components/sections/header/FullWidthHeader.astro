@@ -49,7 +49,7 @@ const {
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 ---
 
-<header
+<nav
   class:list={[
     {
       sticky: isSticky,
@@ -176,4 +176,4 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       </div>
     </div>
   </div>
-</header>
+</nav>

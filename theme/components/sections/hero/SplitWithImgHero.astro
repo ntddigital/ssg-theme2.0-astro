@@ -20,7 +20,7 @@ const {
 } = Astro.props;
 ---
 
-<section
+<header
   class={cn('relative md:-mt-[76px] not-prose', isDark && 'bg-dark dark:bg-transparent dark')}
   {...id ? { id } : {}}
 >
@@ -102,4 +102,4 @@ const {
       </div>
     </div>
   </div>
-</section>
+</header>

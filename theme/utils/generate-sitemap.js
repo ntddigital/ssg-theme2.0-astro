@@ -51,46 +51,50 @@ function generateSiteMap() {
       url,
       lastmod: currentDate,
     }));
+  
+    // Define excluded pages and support dynamic routes using regex
     const excludedPages = [
-      '/privacy',
-      '/terms',
-      '/accessibility',
-      '/[...blog]/[...page]',
-      '/[...blog]/[category]/[...page]',
-      '/[...blog]/[tag]/[...page]',
-      '/[...blog]',
+      /^\/privacy$/,
+      /^\/terms$/,
+      /^\/accessibility$/,
+      /^\/blog\/.+$/, // Matches any blog subpath
     ];
+  
+    // Function to check if a page URL matches any excluded pattern
+    const isExcludedPage = (url) =>
+      excludedPages.some((pattern) => new RegExp(pattern).test(url));
+  
     const videoNamespace = sitemapConfig?.videoUrl
       ? ' xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"'
       : '';
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-       xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" ${videoNamespace}>
-    ${pages
-      .filter((page) => !excludedPages.includes(page.url))
-      .map(
-        (page) => `
-      <url>
-        <loc>${sitemapConfig.site}${page.url}</loc>
-        <lastmod>${page.lastmod}</lastmod>
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"${videoNamespace}>
+      ${pages
+        .filter((page) => !isExcludedPage(page.url))
+        .map(
+          (page) => `
+        <url>
+          <loc>${sitemapConfig.site}${page.url}</loc>
+          <lastmod>${page.lastmod}</lastmod>
+               ${
+                 sitemapConfig?.videoUrl
+                   ? `<video:video>
+                <video:content_loc>${sitemapConfig?.videoUrl}</video:content_loc>
+                <video:thumbnail_loc>${sitemapConfig?.videoThumbnailUrl}</video:thumbnail_loc>
+                <video:title>${sitemapConfig?.videoTitle}</video:title>
+                <video:description>${sitemapConfig?.videoDesc}</video:description>
+              </video:video>`
+                   : ''
+               }
+        </url>`
+        )
+        .join('')}
+    </urlset>`;
   
-             ${
-               sitemapConfig?.videoUrl
-                 ? `<video:video>
-              <video:content_loc>${sitemapConfig?.videoUrl}</video:content_loc>
-              <video:thumbnail_loc>${sitemapConfig?.videoThumbnailUrl}</video:thumbnail_loc>
-              <video:title>${sitemapConfig?.videoTitle}</video:title>
-              <video:description>${sitemapConfig?.videoDesc}</video:description>
-            </video:video>`
-                 : ''
-             }
-      </url>`
-      )
-      .join('')}
-  </urlset>`;
-
     return sitemap;
   }
+  
 
   function writeSitemapToPublicFolder() {
     const sitemap = generateSitemap();

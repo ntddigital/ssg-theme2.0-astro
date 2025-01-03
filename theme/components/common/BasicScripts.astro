@@ -1,5 +1,6 @@
 ---
 import { UI } from "~/config/siteConfig";
+import { SITE } from "~/config/siteConfig";
 ---
 
 <script is:inline define:vars={{ defaultTheme: UI.theme }}>
@@ -283,3 +284,12 @@ import { UI } from "~/config/siteConfig";
     Observer.start();
   });
 </script>
+
+{
+  SITE?.isAccessibilityApp && (
+    <script
+      src="https://accessibility-app-sienna.pages.dev/dist/sienna.min.js"
+      defer
+    />
+  )
+}

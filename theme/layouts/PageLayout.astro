@@ -1,25 +1,27 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import type { Metadata } from '@/types';
-import FullWidthHeader from '@/components/sections/header/FullWidthHeader.astro';
-import { headerData } from '~/config/navigation';
-import ColumnsSimpleFooter from '@/components/sections/footer/ColumnsSimpleFooter.astro';
-import SimpleCenterFooter from '@/components/sections/footer/SimpleCenterFooter';
-export interface Props {
-  metadata?: Metadata;
-  language?: string;
-  content?: any;
-}
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import FullWidthHeader from "@/components/sections/header/FullWidthHeader.astro";
+import { headerData } from "~/config/navigation";
+import ColumnsSimpleFooter from "@/components/sections/footer/ColumnsSimpleFooter.astro";
+import SimpleCenterFooter from "@/components/sections/footer/SimpleCenterFooter";
 
-const { metadata = {}, language = 'en', content } = Astro.props;
+const { metadata = {}, language = "en", content } = Astro.props;
 ---
 
 <BaseLayout metadata={metadata} language={language}>
-  {content?.header?.type === 'fullWidthHeader' && <FullWidthHeader {...headerData} {...content?.header} />}
+  {
+    content?.header?.type === "fullWidthHeader" && (
+      <FullWidthHeader {...headerData} {...content?.header} />
+    )
+  }
 
   <main>
     <slot />
   </main>
-  {content?.footer?.type === 'columnsSimpleFooter' && <ColumnsSimpleFooter />}
-  {content?.footer?.type === 'simpleCenterFooter' && <SimpleCenterFooter client:load section={content.footer} />}
+  {content?.footer?.type === "columnsSimpleFooter" && <ColumnsSimpleFooter />}
+  {
+    content?.footer?.type === "simpleCenterFooter" && (
+      <SimpleCenterFooter client:load section={content.footer} />
+    )
+  }
 </BaseLayout>

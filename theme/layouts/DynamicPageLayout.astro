@@ -33,6 +33,9 @@ import ProjectArtical from "@/components/sections/article/ProjectArtical.astro";
 import SubscribeTwo from "@/components/sections/subscribes/SubscribeTwo.astro";
 import SubscribeOne from "@/components/sections/subscribes/subscribeOne.astro";
 import Map from "@/components/sections/contact/Map.astro";
+// import Feature4 from "@/components/sections/features/Feature4.astro";
+import Feature5 from "@/components/sections/features/Feature5.astro";
+
 // ** Utils
 import { cn } from "@/utils/cn";
 
@@ -56,11 +59,13 @@ const { content } = Astro.props;
       } else if (section?.type === "simpleCenteredHero") {
         return <SimpleCenteredHero {...section} />;
       } else if (section?.type === "features") {
-        return <Features content={content} section={section} />;
+        return <Features {...section} />;
       } else if (section?.type === "features2") {
-        return <Features2 content={content} section={section} />;
+        return <Features2 {...section} />;
       } else if (section?.type === "features3") {
-        return <Features3 content={content} section={section} />;
+        return <Features3 {...section} />;
+      } else if (section?.type === "feature5") {
+        return <Feature5 {...section} />;
       } else if (section?.type === "featuresTable") {
         return <FeaturesTable {...section} />;
       } else if (section?.type === "verticalSteps") {

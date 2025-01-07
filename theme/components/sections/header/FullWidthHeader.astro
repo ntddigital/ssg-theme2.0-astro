@@ -67,7 +67,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
   {...isSticky ? { "data-aw-sticky-header": true } : {}}
   {...id ? { id } : {}}
 >
-  <div class="absolute inset-0"></div>
+  <div class={cn("absolute inset-0", classes?.container)}></div>
   <div
     class:list={[
       "relative px-3 lg:px-6 py-1 mx-auto w-full",

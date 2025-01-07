@@ -1,0 +1,109 @@
+---
+import Button from "@/components/ui/Button/Button.astro";
+import SlideUp from "@/components/animations/slideUp";
+import FollowMouse from "@/components/animations/fellowMouse";
+import Card from "./card.astro";
+import Headline from "@/components/ui/Headline.astro";
+import WidgetWrapper from "@/components/ui/WidgetWrapper.astro";
+
+const {
+  title = await Astro.slots.render("title"),
+  subtitle = await Astro.slots.render("subtitle"),
+  description = await Astro.slots.render("description"),
+  tagline = await Astro.slots.render("tagline"),
+  icons = [],
+  // image,
+  // items = [],
+  isBeforeContent,
+  isAfterContent,
+
+  id,
+  isDark = false,
+  actions = await Astro.slots.render("actions"),
+
+  classes = { container: "text-left" },
+} = Astro.props;
+---
+
+<WidgetWrapper
+  id={id}
+  isDark={isDark}
+  containerClass={`${isBeforeContent ? "md:pb-8 lg:pb-12" : ""} ${isAfterContent ? "pt-0 md:pt-0 lg:pt-0" : ""} ${
+    classes?.container ?? ""
+  }`}
+>
+  <div class="lg:py-15 py-9">
+    <div class="max-w-[1350px] mx-auto px-[15px]">
+      <div class="grid lg:grid-cols-2 grid-cols-1 justify-between">
+        <div class="">
+          <SlideUp client:load>
+            <!-- <Button variant="secondarySmall" set:html={tagline} /> -->
+            <Headline
+              title={title}
+              subtitle={subtitle}
+              tagline={tagline}
+              description={description}
+              classes={classes?.headline}
+            />
+
+            <div class="flex md:flex-row flex-col gap-6 xl:mt-10 mt-8 pb-12.5">
+              <!-- <Card
+                bgColor={"after:bg-green"}
+                color={"text-green"}
+                title={"Seamless Connectivity"}
+              /> -->
+              {
+                icons?.map(
+                  (icon: {
+                    bgColor: unknown;
+                    color: unknown;
+                    title: unknown;
+                    iconName: unknown;
+                  }) => (
+                    <Card
+                      bgColor={icon?.bgColor}
+                      color={icon?.color}
+                      title={icon?.title}
+                      iconName={icon?.iconName}
+                    />
+                  )
+                )
+              }
+            </div>
+            {
+              actions && (
+                <div class="pt-8 max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-left gap-4 lg:m-0 lg:max-w-7xl intersect-once motion-safe:md:intersect:animate-fade intersect-quarter">
+                  {Array.isArray(actions) ? (
+                    actions.map((action) => (
+                      <div class="flex w-full sm:w-auto">
+                        <Button {...(action || {})} class="w-full sm:mb-0" />
+                      </div>
+                    ))
+                  ) : (
+                    <Fragment set:html={actions} />
+                  )}
+                </div>
+              )
+            }
+          </SlideUp>
+        </div>
+        <div class="h-full">
+          <div
+            class="w-full h-full flex justify-center items-center relative after:absolute after:left-0 after:top-0 after:w-full after:h-full after:bg-[url(/images/shapes/provide-bg1-1.png)] after:bg-contain after:bg-no-repeat after:bg-center after:z-[-1] after:dark:opacity-20"
+          >
+            <SlideUp client:load>
+              <FollowMouse client:load>
+                <img
+                  src="/images/shapes/provider-logo.png"
+                  width={571}
+                  height={498}
+                  alt="provide img"
+                />
+              </FollowMouse>
+            </SlideUp>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</WidgetWrapper>

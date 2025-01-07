@@ -1,0 +1,23 @@
+---
+const { color, bgColor, title } = Astro.props;
+import { cn } from "@/utils/cn";
+import { Icon } from "astro-icon/components";
+---
+
+<div class="flex items-center gap-2.5 group">
+  <div
+    class={cn(
+      `${color} min-w-12.5 min-h-12.5 flex items-center justify-center relative z-[1] after:absolute after:left-0 after:top-0 after:w-full after:h-full ${bgColor} after:opacity-[0.08] group-hover:after:opacity-25 hover:transition-all after:duration-500 after:rounded-full after:z-[-1]`
+    )}
+  >
+    <span class="group-hover:scale-90 transition-all duration-500">
+      <Icon
+        name="tabler:clock"
+        class="w-8 h-8 inline-block -mt-0.5 dark:text-white"
+      />
+    </span>
+  </div>
+  <p class="font-bold md:max-w-[154px] leading-[120%] text-muted-foreground">
+    {title}
+  </p>
+</div>

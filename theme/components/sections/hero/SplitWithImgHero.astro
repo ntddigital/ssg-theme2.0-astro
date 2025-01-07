@@ -1,27 +1,32 @@
 ---
-import CustomImage from '@/components/common/CustomImage.astro';
-import Button from '@/components/ui/Button/Button.astro';
-import { cn } from '@/utils/cn';
+import CustomImage from "@/components/common/CustomImage.astro";
+import Button from "@/components/ui/Button/Button.astro";
+import { cn } from "@/utils/cn";
 
 const {
-  title = await Astro.slots.render('title'),
-  subtitle = await Astro.slots.render('subtitle'),
+  title = await Astro.slots.render("title"),
+  subtitle = await Astro.slots.render("subtitle"),
   tagline,
 
-  content = await Astro.slots.render('content'),
-  actions = await Astro.slots.render('actions'),
-  image = await Astro.slots.render('image'),
+  content = await Astro.slots.render("content"),
+  actions = await Astro.slots.render("actions"),
+  image = await Astro.slots.render("image"),
   // classes = {},
 
   id,
-  bg = await Astro.slots.render('bg'),
-  isDark = await Astro.slots.render('isDark'),
-  contentBelowActions = await Astro.slots.render('contentBelowactions'),
+  bg = await Astro.slots.render("bg"),
+  isDark = await Astro.slots.render("isDark"),
+  contentBelowActions = await Astro.slots.render("contentBelowactions"),
+  classes = {},
 } = Astro.props;
 ---
 
 <header
-  class={cn('relative md:-mt-[76px] not-prose', isDark && 'bg-dark dark:bg-transparent dark')}
+  class={cn(
+    "relative md:-mt-[76px] not-prose",
+    classes?.container,
+    isDark && "bg-dark dark:bg-transparent dark"
+  )}
   {...id ? { id } : {}}
 >
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -30,15 +35,19 @@ const {
       <CustomImage
         src={bg?.src}
         alt={bg?.alt}
-        class={cn('absolute h-full object-cover object-center')}
+        class={cn("absolute h-full object-cover object-center")}
         loading="eager"
       />
     </slot>
   </div>
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
     <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
-    <div class="py-12 md:py-20 lg:py-0 lg:flex lg:items-center lg:h-[calc(100vh-100px)] xl:gap-2">
-      <div class="basis-1/2 text-center lg:text-left pb-10 md:pb-16 md:pr-4 mx-auto">
+    <div
+      class="py-12 md:py-20 lg:py-0 lg:flex lg:items-center lg:h-[calc(100vh-100px)] xl:gap-2"
+    >
+      <div
+        class="basis-1/2 text-center lg:text-left pb-10 md:pb-16 md:pr-4 mx-auto"
+      >
         {
           tagline && (
             <p
@@ -95,7 +104,13 @@ const {
         {
           image && (
             <div class="relative m-auto max-w-5xl intersect-once intercept-no-queue motion-safe:md:intersect:animate-fade intersect-quarter">
-              <CustomImage class="mx-auto w-full" width={1000} src={image?.src} alt={image?.alt} loading="eager" />
+              <CustomImage
+                class="mx-auto w-full"
+                width={1000}
+                src={image?.src}
+                alt={image?.alt}
+                loading="eager"
+              />
             </div>
           )
         }

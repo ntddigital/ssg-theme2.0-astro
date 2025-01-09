@@ -1,28 +1,28 @@
 ---
-import Button from "@/components/ui/Button/Button.astro";
-import CustomImage from "@/components/common/CustomImage.astro";
-import { cn } from "@/utils/cn";
+import Button from '@/components/ui/Button/Button.astro';
+import CustomImage from '@/components/common/CustomImage.astro';
+import { cn } from '@/utils/cn';
 const {
-  title = await Astro.slots.render("title"),
-  subtitle = await Astro.slots.render("subtitle"),
-  description = await Astro.slots.render("subtitle"),
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  description = await Astro.slots.render('description'),
   tagline,
 
-  actions = await Astro.slots.render("actions"),
-  image = await Astro.slots.render("image"),
+  actions = await Astro.slots.render('actions'),
+  image = await Astro.slots.render('image'),
 
-  isDark = await Astro.slots.render("isDark"),
+  isDark = await Astro.slots.render('isDark'),
   id,
   classes = {},
   // bg = await Astro.slots.render("bg"),
 } = Astro.props;
 ---
 
-<header
+<section
   class={cn(
-    "relative isolate overflow-hidden flex items-center justify-center",
+    'relative isolate overflow-hidden flex items-center justify-center',
     classes?.container,
-    isDark && "bg-dark dark:bg-transparent dark"
+    isDark && 'bg-dark dark:bg-transparent dark'
   )}
   {...id ? { id } : {}}
 >
@@ -37,30 +37,30 @@ const {
       <div class="flex justify-center">
         <div
           class={cn(
-            "relative rounded-full px-3 py-1 text-lg text-gray-400 font-bold dark:text-white",
-            classes?.tagling
+            'relative rounded-full px-3 py-1 text-lg text-gray-400 font-bold dark:text-white',
+            classes?.tagline
           )}
-          set:html={tagline ? tagline : ""}
+          set:html={tagline ? tagline : ''}
         />
       </div>
       <div class="text-center">
         <h1
           class={cn(
-            "text-5xl md:text-6xl font-bold leading-relaxeder mb-4 font-heading dark:text-white intersect-once motion-safe:md:intersect:animate-fade intersect-quarter",
+            'text-5xl md:text-6xl font-bold leading-relaxed mb-4 font-heading dark:text-white intersect-once motion-safe:md:intersect:animate-fade intersect-quarter',
             classes?.title
           )}
           set:html={title}
         />
         <p
           class={cn(
-            "mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8 dark:text-white",
+            'mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8 dark:text-white',
             classes?.subtitle
           )}
           set:html={subtitle}
         />
         <p
           class={cn(
-            "mb-6 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8 dark:text-white",
+            'mb-6 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8 dark:text-white',
             classes?.description
           )}
           set:html={description}
@@ -83,14 +83,4 @@ const {
       </div>
     </div>
   </div>
-  <div
-    class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-    aria-hidden="true"
-  >
-    <div
-      class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-      style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-    >
-    </div>
-  </div>
-</header>
+</section>

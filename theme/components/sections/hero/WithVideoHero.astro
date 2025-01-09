@@ -5,7 +5,7 @@ import { cn } from '@/utils/cn';
 const { title, id, tagline, description, state, image, slideData, classes = {} } = Astro.props;
 ---
 
-<header
+<section
   class="pt-20 relative after:absolute after:z-[-1] after:left-0 after:top-0 after:w-full after:h-[calc(100vh-120px)] after:bg-background-linear"
   {...id ? { id } : {}}
 >
@@ -14,10 +14,10 @@ const { title, id, tagline, description, state, image, slideData, classes = {} }
       class="grid xl:grid-cols-[auto_505px] lg:grid-cols-[auto_48%] items-center justify-between xl:gap-[82px] gap-8"
     >
       <div class="">
-        {tagline && <span class="mb-4 font-bold">{tagline}</span>}
+        {tagline && <span class="dark:text-white mb-4 font-bold">{tagline}</span>}
         <h1
           class={cn(
-            'font-extrabold text-muted-foreground xl:text-7xl md:text-5xl text-4xl lg:leading-[120%] leading-[130%]',
+            'dark:text-white font-extrabold text-muted-foreground xl:text-7xl md:text-5xl text-4xl lg:leading-[120%] leading-[130%]',
             classes?.title
           )}
         >
@@ -25,10 +25,10 @@ const { title, id, tagline, description, state, image, slideData, classes = {} }
         </h1>
       </div>
       <div>
-        <p class="font-semibold">{description}</p>
+        <p class="dark:text-white font-semibold">{description}</p>
         {
           state && (
-            <div class="flex sm:flex-row flex-col sm:items-center gap-8 sm:divide-x pt-7 font-bold">
+            <div class="dark:text-white flex sm:flex-row flex-col sm:items-center gap-8 sm:divide-x pt-7 font-bold">
               <div class="flex items-center gap-2">
                 <div
                   class={cn(
@@ -88,6 +88,7 @@ const { title, id, tagline, description, state, image, slideData, classes = {} }
               width={1320}
               alt={image?.alt}
               class="max-w-4xl lg:rounded-[30px] rounded-2xl min-h-[400px] w-auto object-cover"
+              loading="eager"
             />
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               <CustomImage
@@ -95,6 +96,7 @@ const { title, id, tagline, description, state, image, slideData, classes = {} }
                 alt="play icon"
                 width={132}
                 class="cursor-pointer lg:max-w-[116px] lg:max-h-[116px] sm:max-w-20 sm:max-h-20 max-w-16 max-h-16"
+                loading="eager"
               />
             </div>
           </div>
@@ -113,4 +115,4 @@ const { title, id, tagline, description, state, image, slideData, classes = {} }
       />
     )
   }
-</header>
+</section>

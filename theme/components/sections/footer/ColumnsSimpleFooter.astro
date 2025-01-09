@@ -25,16 +25,15 @@ export interface FooterDataTypes {
   theme?: string;
 }
 
-const {
-  socialLinks = [],
-  secondaryLinks = [],
-  links = [],
-  footNote = '',
-  theme = 'dark',
-} = footerData as FooterDataTypes;
+const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = '' } = footerData as FooterDataTypes;
 ---
 
-<footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}>
+<footer
+  class:list={[
+    { dark: theme === 'dark' },
+    'bg-gray-50 relative border-t border-gray-200 dark:border-slate-800 not-prose',
+  ]}
+>
   <div class="dark:bg-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
   <div
     class="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-white intersect-once intersect-quarter intercept-no-queue motion-safe:md:intersect:animate-fade"

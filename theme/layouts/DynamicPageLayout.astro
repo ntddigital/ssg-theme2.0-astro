@@ -1,128 +1,121 @@
 ---
 // ** Style
-import "@/style/global.css";
-import "@/style/tailwind.css";
+import '@/style/global.css';
+import '@/style/tailwind.css';
 
 // ** Layout
-import Brands1 from "@/components/sections/brands/Brands1.astro";
-import PageLayout from "./PageLayout.astro";
+import Brands1 from '@/components/sections/brands/Brands1.astro';
+import PageLayout from './PageLayout.astro';
 
 // ** Components
-import GotoTopButton from "@/components/ui/Button/GotoTopButton.astro";
-import Headline from "@/components/ui/Headline.astro";
-import ItemGrid from "@/components/ui/ItemGrid/ItemGrid.astro";
-import StepProgressBar from "@/components/ui/ProgressBars/StepProgressBar";
-import Contact from "@/components/sections/contact/Contact.astro";
-import Content1 from "@/components/sections/content/Content1.astro";
-import FAQs from "@/components/sections/faq/FAQs.astro";
-import Features from "@/components/sections/features/Features.astro";
-import Features2 from "@/components/sections/features/Features2.astro";
-import Features3 from "@/components/sections/features/Features3.astro";
-import FeaturesTable from "@/components/sections/features/FeaturesTable.astro";
-import Gallery1 from "@/components/sections/gallery/Gallery1.astro";
-import SimpleCenteredHero from "@/components/sections/hero/SimpleCenteredHero.astro";
-import SplitWithImgHero from "@/components/sections/hero/SplitWithImgHero.astro";
-import TextAboveImageHero from "@/components/sections/hero/TextAboveImageHero.astro";
-import WithVideoHero from "@/components/sections/hero/WithVideoHero.astro";
-import PricingBasic from "@/components/sections/pricing/pricingBasic.astro";
-import HorizontalSteps from "@/components/sections/steps/HorizontalSteps.astro";
-import VerticalSteps from "@/components/sections/steps/VerticalSteps.astro";
-import OffWhiteGridTestimonial from "@/components/sections/testimonials/OffWhiteGridTestimonial.astro";
-import TeamPersonalCard from "@/components/sections/teams/TeamPersonalCard.astro";
-import ProjectArtical from "@/components/sections/article/ProjectArtical.astro";
-import SubscribeTwo from "@/components/sections/subscribes/SubscribeTwo.astro";
-import SubscribeOne from "@/components/sections/subscribes/subscribeOne.astro";
-import Map from "@/components/sections/contact/Map.astro";
+import GotoTopButton from '@/components/ui/Button/GotoTopButton.astro';
+import Headline from '@/components/ui/Headline.astro';
+import ItemGrid from '@/components/ui/ItemGrid/ItemGrid.astro';
+import StepProgressBar from '@/components/ui/ProgressBars/StepProgressBar';
+import Contact from '@/components/sections/contact/Contact.astro';
+import Content1 from '@/components/sections/content/Content1.astro';
+import FAQs from '@/components/sections/faq/FAQs.astro';
+import Features from '@/components/sections/features/Features.astro';
+import Features2 from '@/components/sections/features/Features2.astro';
+import Features3 from '@/components/sections/features/Features3.astro';
+import FeaturesTable from '@/components/sections/features/FeaturesTable.astro';
+import Gallery1 from '@/components/sections/gallery/Gallery1.astro';
+import SimpleCenteredHero from '@/components/sections/hero/SimpleCenteredHero.astro';
+import SplitWithImgHero from '@/components/sections/hero/SplitWithImgHero.astro';
+import TextAboveImageHero from '@/components/sections/hero/TextAboveImageHero.astro';
+import WithVideoHero from '@/components/sections/hero/WithVideoHero.astro';
+import TextOnlyHero from '@/components/sections/hero/TextOnlyHero.astro';
+import PricingBasic from '@/components/sections/pricing/pricingBasic.astro';
+import HorizontalSteps from '@/components/sections/steps/HorizontalSteps.astro';
+import VerticalSteps from '@/components/sections/steps/VerticalSteps.astro';
+import OffWhiteGridTestimonial from '@/components/sections/testimonials/OffWhiteGridTestimonial.astro';
+import TeamPersonalCard from '@/components/sections/teams/TeamPersonalCard.astro';
+import ProjectArtical from '@/components/sections/article/ProjectArtical.astro';
+import SubscribeTwo from '@/components/sections/subscribes/SubscribeTwo.astro';
+import SubscribeOne from '@/components/sections/subscribes/subscribeOne.astro';
+import Map from '@/components/sections/contact/Map.astro';
 // import Feature4 from "@/components/sections/features/Feature4.astro";
-import Feature5 from "@/components/sections/features/Feature5.astro";
+import Feature5 from '@/components/sections/features/Feature5.astro';
+import WithImgOnRight from '@/components/sections/hero/WithImgOnRight.astro';
+import WithAngledImgOnRight from '@/components/sections/hero/WithAngledImgOnRight.astro';
 
 // ** Utils
-import { cn } from "@/utils/cn";
+import { cn } from '@/utils/cn';
 
 // ** Props
 const { content } = Astro.props;
 ---
 
-<PageLayout
-  metadata={content?.metadata || {}}
-  language={content?.language}
-  content={content}
->
+<PageLayout metadata={content?.metadata || {}} language={content?.language} content={content}>
   {
     content?.sections?.map((section: { [x: string]: string; type: string }) => {
-      if (section?.type === "textAboveImageHero") {
+      if (section?.type === 'textAboveImageHero') {
         return <TextAboveImageHero {...section} />;
-      } else if (section?.type === "splitWithImgHero") {
+      } else if (section?.type === 'splitWithImgHero') {
         return <SplitWithImgHero {...section} />;
-      } else if (section?.type === "withVideoHero") {
+      } else if (section?.type === 'textOnlyHero') {
+        return <TextOnlyHero {...section} />;
+      } else if (section?.type === 'withImgOnRight') {
+        return <WithImgOnRight {...section} />;
+      } else if (section?.type === 'withAngledImgOnRight') {
+        return <WithAngledImgOnRight {...section} />;
+      } else if (section?.type === 'withVideoHero') {
         return <WithVideoHero {...section} />;
-      } else if (section?.type === "simpleCenteredHero") {
+      } else if (section?.type === 'simpleCenteredHero') {
         return <SimpleCenteredHero {...section} />;
-      } else if (section?.type === "features") {
+      } else if (section?.type === 'features') {
         return <Features {...section} />;
-      } else if (section?.type === "features2") {
+      } else if (section?.type === 'features2') {
         return <Features2 {...section} />;
-      } else if (section?.type === "features3") {
+      } else if (section?.type === 'features3') {
         return <Features3 {...section} />;
-      } else if (section?.type === "feature5") {
+      } else if (section?.type === 'feature5') {
         return <Feature5 {...section} />;
-      } else if (section?.type === "featuresTable") {
+      } else if (section?.type === 'featuresTable') {
         return <FeaturesTable {...section} />;
-      } else if (section?.type === "verticalSteps") {
+      } else if (section?.type === 'verticalSteps') {
         return <VerticalSteps {...section} />;
-      } else if (section?.type === "horizontalSteps") {
+      } else if (section?.type === 'horizontalSteps') {
         return <HorizontalSteps {...section} />;
-      } else if (section?.type === "brands") {
+      } else if (section?.type === 'brands') {
         return <Brands1 {...section} />;
-      } else if (section?.type === "content1") {
+      } else if (section?.type === 'content1') {
         return <Content1 {...section} />;
-      } else if (section?.type === "teamPersonalCard") {
+      } else if (section?.type === 'teamPersonalCard') {
         return <TeamPersonalCard {...section} />;
-      } else if (section?.type === "pricingBasic") {
+      } else if (section?.type === 'pricingBasic') {
         return <PricingBasic {...section} />;
-      } else if (section?.type === "projectArtical") {
+      } else if (section?.type === 'projectArtical') {
         return <ProjectArtical {...section} />;
-      } else if (section?.type === "faqs") {
+      } else if (section?.type === 'faqs') {
         return <FAQs {...section} />;
-      } else if (section?.type === "contact") {
+      } else if (section?.type === 'contact') {
         return <Contact {...section} />;
-      } else if (section?.type === "map") {
+      } else if (section?.type === 'map') {
         return <Map section={section} />;
-      } else if (section?.type === "offWhiteGridTestimonial") {
+      } else if (section?.type === 'offWhiteGridTestimonial') {
         return <OffWhiteGridTestimonial {...section} />;
-      } else if (section?.type === "gallery1") {
+      } else if (section?.type === 'gallery1') {
         return <Gallery1 {...section} />;
-      } else if (section?.type === "subscribeOne") {
+      } else if (section?.type === 'subscribeOne') {
         return <SubscribeOne {...section} />;
-      } else if (section?.type === "subscribeTwo") {
+      } else if (section?.type === 'subscribeTwo') {
         return <SubscribeTwo {...section} />;
-      } else if (section?.type === "customSection") {
+      } else if (section?.type === 'customSection') {
         return (
-          <div
-            class={cn(
-              "mt-8 sm:mt-16 lg:mt-24 mx-auto",
-              section.sectionWidth === "boxed" ? "max-w-7xl " : ""
-            )}
-          >
+          <div class={cn('mt-8 sm:mt-16 lg:mt-24 mx-auto', section.sectionWidth === 'boxed' ? 'max-w-7xl ' : '')}>
             {section?.title && <Headline title={section.title} />}
             {Array.isArray(section?.rows) &&
-              section?.rows.map(
-                (row: { componentType: string; title: string[] }) => {
-                  return (
-                    <Fragment key={row.componentType}>
-                      {row?.componentType === "stepProgressBar" && (
-                        <StepProgressBar
-                          componentConfig={row}
-                          content={content}
-                        />
-                      )}
-                      {row?.componentType === "itemGrid" && (
-                        <ItemGrid {...row} content={content} />
-                      )}
-                    </Fragment>
-                  );
-                }
-              )}
+              section?.rows.map((row: { componentType: string; title: string[] }) => {
+                return (
+                  <Fragment key={row.componentType}>
+                    {row?.componentType === 'stepProgressBar' && (
+                      <StepProgressBar componentConfig={row} content={content} />
+                    )}
+                    {row?.componentType === 'itemGrid' && <ItemGrid {...row} content={content} />}
+                  </Fragment>
+                );
+              })}
           </div>
         );
       }

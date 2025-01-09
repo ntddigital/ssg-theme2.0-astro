@@ -60,7 +60,23 @@ const {
             )
           }
         </div>
-        <slot class={cn('dark:text-white', classes?.contentBelowActions)} set:html={contentBelowActions} />
+        {
+          contentBelowActions?.image?.src && (
+            <CustomImage
+              alt={contentBelowActions?.image?.alt}
+              src={contentBelowActions?.image?.src}
+              loading="eager"
+              class={cn(classes?.contentBelowActions?.image)}
+            />
+          )
+        }
+        {
+          contentBelowActions?.text?.map((t: string, index: number) => (
+            <Fragment key={index}>
+              <p set:html={t} class={cn(classes?.contentBelowActions?.text)} />
+            </Fragment>
+          ))
+        }
       </div>
     </div>
     <div class="relative lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0">

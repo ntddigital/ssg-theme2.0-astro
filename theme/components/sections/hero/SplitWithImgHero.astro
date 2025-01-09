@@ -102,7 +102,23 @@ const {
           )
         }
 
-        <slot class={cn(classes?.contentBelowActions)} set:html={contentBelowActions} />
+        {
+          contentBelowActions?.image?.src && (
+            <CustomImage
+              alt={contentBelowActions?.image?.alt}
+              src={contentBelowActions?.image?.src}
+              loading="eager"
+              class={cn(classes?.contentBelowActions?.image)}
+            />
+          )
+        }
+        {
+          contentBelowActions?.text?.map((t: string, index: number) => (
+            <Fragment key={index}>
+              <p set:html={t} class={cn(classes?.contentBelowActions?.text)} />
+            </Fragment>
+          ))
+        }
       </div>
       <div class="basis-1/2">
         {

@@ -132,3 +132,40 @@ body {
   background-color: black;
   color: snow;
 }
+
+
+.skip-links {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+}
+
+.skip-link {
+  display: inline-block;
+  position: fixed;
+  top: -100px; /* Initially hidden outside the viewport */
+  left: 10px;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold; /* Use bold font for better readability */
+  background-color: #ffffff; /* Set a soft white background */
+  color: #000000; /* High contrast text color for better visibility */
+  border-radius: 15px; /* Add slight rounded corners */
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  border: 2px solid #0078d4; /* Highlight the element with a noticeable blue border */
+  transition:
+    top 0.3s ease,
+    opacity 0.3s ease; /* Create a smooth transition effect */
+  opacity: 0; /* Default to invisible */
+  pointer-events: none; /* Disable interactions by default */
+}
+
+.skip-link:focus {
+  top: 15px; /* Move into the viewport when focused */
+  opacity: 1; /* Make the element visible when focused */
+  pointer-events: auto; /* Enable interactions when focused */
+}

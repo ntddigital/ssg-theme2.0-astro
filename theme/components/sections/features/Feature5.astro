@@ -5,12 +5,13 @@ import FollowMouse from "@/components/animations/fellowMouse";
 import Card from "./card.astro";
 import Headline from "@/components/ui/Headline.astro";
 import WidgetWrapper from "@/components/ui/WidgetWrapper.astro";
-
+import CustomImage from "@/components/common/CustomImage.astro";
 const {
   title = await Astro.slots.render("title"),
   subtitle = await Astro.slots.render("subtitle"),
   description = await Astro.slots.render("description"),
   tagline = await Astro.slots.render("tagline"),
+  image = await Astro.slots.render("image"),
   icons = [],
   // image,
   // items = [],
@@ -89,16 +90,11 @@ const {
         </div>
         <div class="h-full">
           <div
-            class="w-full h-full flex justify-center items-center relative after:absolute after:left-0 after:top-0 after:w-full after:h-full after:bg-[url(/images/shapes/provide-bg1-1.png)] after:bg-contain after:bg-no-repeat after:bg-center after:z-[-1] after:dark:opacity-20"
+            class="w-full h-full flex justify-center items-center relative after:absolute after:left-0 after:top-0 after:w-full after:h-full after:bg-[url()] after:bg-contain after:bg-no-repeat after:bg-center after:z-[-1] after:dark:opacity-20"
           >
             <SlideUp client:load>
               <FollowMouse client:load>
-                <img
-                  src="/images/shapes/provider-logo.png"
-                  width={571}
-                  height={498}
-                  alt="provide img"
-                />
+                <CustomImage src={image?.src} width={571} alt="provide img" />
               </FollowMouse>
             </SlideUp>
           </div>

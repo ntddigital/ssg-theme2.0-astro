@@ -6,6 +6,24 @@
 import SlideUp from "@/components/animations/slideUp";
 import Button from "@/components/ui/Button/Button.astro";
 import CustomImage from "@/components/common/CustomImage.astro";
+const {
+  title = await Astro.slots.render("title"),
+  subtitle = await Astro.slots.render("subtitle"),
+  description = await Astro.slots.render("description"),
+  tagline = await Astro.slots.render("tagline"),
+  image = await Astro.slots.render("image"),
+  icons = [],
+  // image,
+  // items = [],
+  isBeforeContent,
+  isAfterContent,
+
+  id,
+  isDark = false,
+  actions = await Astro.slots.render("actions"),
+
+  classes = { container: "text-left" },
+} = Astro.props;
 ---
 
 <section class="lg:py-15 py-9">
@@ -31,21 +49,13 @@ import CustomImage from "@/components/common/CustomImage.astro";
           <div class="lg:pt-[74px] pt-10">
             <div class="flex flex-wrap md:flex-nowrap xl:gap-20 gap-10">
               <div>
-                <CustomImage
-                  src={"/website/assets/images/shapes/connectivity-icon.png"}
-                  width={62}
-                  alt="connectivity"
-                />
+                <CustomImage src={image?.src} width={62} alt="connectivity" />
                 <p class="font-semibold text-1xl pt-4 lg:max-w-[255px]">
                   Seamless Connectivity with your favourite tools
                 </p>
               </div>
               <div>
-                <CustomImage
-                  src={"/website/assets/images/shapes/email-marketing-icon.png"}
-                  width={62}
-                  alt="connectivity"
-                />
+                <CustomImage src={image?.src} width={62} alt="connectivity" />
                 <p class="font-semibold text-1xl pt-4 lg:max-w-[255px]">
                   Customized Solutions to fulfill your exact need
                 </p>
@@ -68,7 +78,7 @@ import CustomImage from "@/components/common/CustomImage.astro";
           <div
             class="bg-contain bg-bottom bg-no-repeat h-full max-h-[400px] w-full absolute bottom-7 left-0"
             style={{
-              backgroundImage: `url(/images/shapes/provide-bg3-1.png)`,
+              // backgroundImage: `url(/images/shapes/provide-bg3-1.png)`,
             }}
           >
           </div>

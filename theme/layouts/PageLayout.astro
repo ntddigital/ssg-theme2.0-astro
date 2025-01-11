@@ -9,6 +9,30 @@ const { metadata = {}, language = "en", content } = Astro.props;
 ---
 
 <BaseLayout metadata={metadata} language={language}>
+  <div>
+    <div
+      class="skip-links"
+      role="region"
+      aria-label="Skip Links"
+      data-acsb="skipLinks"
+    >
+      <div>
+        <a href="#main-content" data-acsb-skip-link="content" class="skip-link"
+          >Skip to Content<div class="content" aria-hidden="true">
+            <span class="icon">↵</span>ENTER
+          </div></a
+        >
+      </div>
+
+      <div>
+        <a href="#footer" data-acsb-skip-link="footer" class="skip-link"
+          >Skip to Footer<div class="content" aria-hidden="true">
+            <span class="icon">↵</span>ENTER
+          </div></a
+        >
+      </div>
+    </div>
+  </div>
   {
     content?.header?.type === "fullWidthHeader" && (
       <FullWidthHeader {...headerData} {...content?.header} />

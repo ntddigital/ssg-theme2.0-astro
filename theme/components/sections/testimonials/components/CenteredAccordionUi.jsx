@@ -3,7 +3,6 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline'
 
 
 export default function Example(items) {
-  console.log("items",items)
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-6 py-3 sm:py-4 lg:px-8 lg:py-5">

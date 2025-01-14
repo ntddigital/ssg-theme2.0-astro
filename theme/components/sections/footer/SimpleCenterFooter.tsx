@@ -1,5 +1,5 @@
 // import PaymentMethod from "./PaymentMethod";
-import React,{ useState } from "react";
+import { useState } from "react";
 import { cn } from "@/utils/cn";
 import { sendEmail } from "@/utils/sendEmail";
 import type { SendEmailParams } from "@/utils/sendEmail";

@@ -38,7 +38,8 @@ import Map from "@/components/sections/contact/Map.astro";
 // import Feature5 from '@/components/sections/features/Feature5.astro';
 import WithImgOnRight from "@/components/sections/hero/WithImgOnRight.astro";
 import WithAngledImgOnRight from "@/components/sections/hero/WithAngledImgOnRight.astro";
-
+import WithImageGrid from "@/components/sections/features/WithImageGrid.astro";
+import CenteredAccordion from "@/components/sections/testimonials/CenteredAccordion.astro";
 // ** Utils
 import { cn } from "@/utils/cn";
 
@@ -77,6 +78,8 @@ const { content } = Astro.props;
             return <Features3 {...section} />;
           } else if (section?.type === "feature5") {
             return;
+          } else if (section?.type === "withImageGrid") {
+            return <WithImageGrid {...section} />;
           } else if (section?.type === "featuresTable") {
             return <FeaturesTable {...section} />;
           } else if (section?.type === "verticalSteps") {
@@ -101,6 +104,8 @@ const { content } = Astro.props;
             return <Map section={section} />;
           } else if (section?.type === "offWhiteGridTestimonial") {
             return <OffWhiteGridTestimonial {...section} />;
+          } else if (section?.type === "centeredAccordion") {
+            return <CenteredAccordion {...section} />;
           } else if (section?.type === "gallery1") {
             return <Gallery1 {...section} />;
           } else if (section?.type === "subscribeOne") {

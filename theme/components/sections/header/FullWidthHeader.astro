@@ -119,29 +119,70 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                   <button
                     type="button"
                     class="dark:text-white hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap"
-                    aria-haspopup={links?.length ? "true" : undefined}
-                    aria-expanded={links?.length ? "true" : "false"}
+                    aria-haspopup="true"
+                    aria-expanded="false"
                   >
-                    {text}{" "}
+                    {text}
                     <Icon
                       name="tabler:chevron-down"
                       class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden lg:inline"
                     />
                   </button>
                   <ul class="text-black dark:text-white dropdown-menu lg:backdrop-blur-md dark:lg:bg-dark rounded lg:absolute pl-4 lg:pl-0 lg:hidden font-medium lg:bg-white/90 lg:min-w-[200px] drop-shadow-xl">
-                    {links.map(({ text: text2, href: href2 }) => (
-                      <li>
-                        <a
-                          class:list={[
-                            "dark:text-white first:rounded-t last:rounded-b lg:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap",
-                            { "aw-link-active": href2 === currentPath },
-                          ]}
-                          href={href2}
-                        >
-                          {text2}
-                        </a>
-                      </li>
-                    ))}
+                    {links.map(
+                      ({ text: text2, href: href2, links: nestedLinks }) =>
+                        nestedLinks?.length ? (
+                          <li class="relative group">
+                            <a
+                              class:list={[
+                                "dark:text-white first:rounded-t last:rounded-b lg:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap",
+                                { "aw-link-active": href2 === currentPath },
+                              ]}
+                              href={href2}
+                            >
+                              {text2}
+                              <Icon
+                                name="tabler:chevron-down"
+                                class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden lg:inline"
+                              />
+                            </a>
+                            {nestedLinks.length > 0 && (
+                              <div class="lg:hidden lg:group-hover:block">
+                                <ul class=" text-black dark:text-white dropdown-menu lg:backdrop-blur-md dark:lg:bg-dark rounded lg:absolute top-0 left-full pl-4 lg:pl-0 font-medium lg:bg-white/90 lg:min-w-[200px] drop-shadow-xl">
+                                  {nestedLinks.map(
+                                    ({ text: text3, href: href3 }) => (
+                                      <li>
+                                        <a
+                                          class:list={[
+                                            "dark:text-white first:rounded-t last:rounded-b lg:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap",
+                                            {
+                                              "aw-link-active":
+                                                href3 === currentPath,
+                                            },
+                                          ]}
+                                          href={href3}
+                                        >
+                                          {text3}
+                                        </a>
+                                      </li>
+                                    )
+                                  )}
+                                </ul>
+                              </div>
+                            )}
+                          </li>
+                        ) : (
+                          <a
+                            class:list={[
+                              "dark:text-white first:rounded-t last:rounded-b lg:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap",
+                              { "aw-link-active": href2 === currentPath },
+                            ]}
+                            href={href2}
+                          >
+                            {text2}
+                          </a>
+                        )
+                    )}
                   </ul>
                 </>
               ) : (
@@ -160,6 +201,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         }
       </ul>
     </nav>
+
     <div
       class:list={[
         { "ml-auto rtl:ml-0 rtl:mr-auto": position === "left" },

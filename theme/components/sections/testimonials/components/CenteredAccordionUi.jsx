@@ -13,7 +13,10 @@ export default function Example(items) {
                   <>
                     <dt>
                       <DisclosureButton className="group flex w-full items-start justify-between text-left text-gray-900">
-                        <span className="text-base font-semibold">{item?.title}</span>
+                      <span
+  className="text-lg font-semibold"
+  dangerouslySetInnerHTML={{ __html: item?.title }}
+></span>
                         <span className="ml-6 flex h-7 items-center">
                           {/* through css to rotate arrow */}
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"  aria-hidden="true"
@@ -25,7 +28,11 @@ export default function Example(items) {
                       </DisclosureButton>
                     </dt>
                     <DisclosurePanel as="dd" className="mt-2 pr-12">
-                      <p className="text-base text-gray-600">{item.description}</p>
+                    <p
+  className="text-lg text-gray-600"
+  dangerouslySetInnerHTML={{ __html: item.description }}
+></p>
+
                     </DisclosurePanel>
                   </>
                 )}

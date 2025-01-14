@@ -1,6 +1,4 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/24/outline'
-
 
 export default function Example(items) {
   return (
@@ -18,12 +16,11 @@ export default function Example(items) {
                         <span className="text-base font-semibold">{item?.title}</span>
                         <span className="ml-6 flex h-7 items-center">
                           {/* through css to rotate arrow */}
-                          <ChevronDownIcon
-                            aria-hidden="true"
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"  aria-hidden="true"
                             className={`h-6 w-6 transform transition-transform duration-300 ${
                               open ? 'rotate-180' : ''
-                            }`}
-                          />
+                            }`}> <path d="M6 9l6 6l6 -6"></path> </svg> 
+                     
                         </span>
                       </DisclosureButton>
                     </dt>

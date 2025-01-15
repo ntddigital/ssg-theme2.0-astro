@@ -1,49 +1,34 @@
 ---
-import WidgetWrapper from "@/components/ui/WidgetWrapper.astro";
-import HorizontalTimeline from "@/components/ui/timeline/HorizontalTimeline.astro";
-import Headline from "@/components/ui/Headline.astro";
-import CustomImage from "@/components/common/CustomImage.astro";
-import ItemGrid2 from "@/components/ui/ItemGrid/ItemGrid2.astro";
+import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
+import HorizontalTimeline from '@/components/ui/timeline/HorizontalTimeline.astro';
+import Headline from '@/components/ui/Headline.astro';
+import CustomImage from '@/components/common/CustomImage.astro';
+import ItemGrid2 from '@/components/ui/ItemGrid/ItemGrid2.astro';
 // import type { Steps as Props } from "@/types";
 
 const {
-  title = await Astro.slots.render("title"),
-  subtitle = await Astro.slots.render("subtitle"),
-  tagline = await Astro.slots.render("tagline"),
-  description = await Astro.slots.render("description"),
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline = await Astro.slots.render('tagline'),
+  description = await Astro.slots.render('description'),
   steps = [],
   items = [],
-  columns = await Astro.slots.render("columns"),
-  defaultIcon = await Astro.slots.render("defaultIcon"),
-  image = await Astro.slots.render("image"),
+  columns = await Astro.slots.render('columns'),
+  defaultIcon = await Astro.slots.render('defaultIcon'),
+  image = await Astro.slots.render('image'),
   isReversed = false,
 
   id,
   isDark = false,
   classes = {},
-  bg = await Astro.slots.render("bg"),
+  bg = await Astro.slots.render('bg'),
 } = Astro.props;
+console.log('classes.tagline', classes?.headline);
 ---
 
-<WidgetWrapper
-  id={id}
-  isDark={isDark}
-  containerClass={` ${classes?.container ?? ""}`}
-  bg={bg}
->
-  <div
-    class:list={[
-      "flex flex-col gap-8 md:gap-12",
-      { "md:flex-row-reverse": isReversed },
-    ]}
-  >
-    <div
-      class:list={[
-        "md:py-4 md:self-center",
-        { "md:basis-1/2": image },
-        { "w-full": !image },
-      ]}
-    >
+<WidgetWrapper id={id} isDark={isDark} containerClass={` ${classes?.container ?? ''}`} bg={bg}>
+  <div class:list={['flex flex-col gap-8 md:gap-12', { 'md:flex-row-reverse': isReversed }]}>
+    <div class:list={['md:py-4 md:self-center', { 'md:basis-1/2': image }, { 'w-full': !image }]}>
       <Headline
         title={title}
         subtitle={subtitle}
@@ -62,13 +47,10 @@ const {
         columns={columns}
         defaultIcon={defaultIcon}
         classes={{
-          container: "gap-4 md:gap-6 mt-12",
+          container: 'gap-4 md:gap-6 mt-12',
           panel:
-            // "dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)]　 dark:bg-slate-900",
-            // "rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)]  backdrop-blur border border-[#ffffff29] bg-white p-6",
-            // panel:
-            "text-center bg-page items-center md:text-left rtl:md:text-right md:items-start p-6 p-6 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-800",
-          icon: "w-12 h-12 mb-6 text-primary",
+            'text-center bg-page items-center md:text-left rtl:md:text-right md:items-start p-6 p-6 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-800',
+          icon: 'w-12 h-12 mb-6 text-primary',
           ...((classes?.items as Record<string, never>) ?? {}),
         }}
       />
@@ -76,14 +58,14 @@ const {
     {
       image && (
         <div class="relative md:basis-1/2">
-          {typeof image === "string" ? (
+          {typeof image === 'string' ? (
             <Fragment set:html={image} />
           ) : (
             <CustomImage
               class="inset-0 object-cover object-top w-full rounded-md shadow-lg md:absolute md:h-full bg-gray-400 dark:bg-slate-700"
               width={432}
               src={image?.src}
-              alt={image?.alt || ""}
+              alt={image?.alt || ''}
             />
           )}
         </div>

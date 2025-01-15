@@ -1,17 +1,17 @@
 ---
-import Button from "@/components/ui/Button/Button.astro";
-import SlideUp from "@/components/animations/slideUp";
-import FollowMouse from "@/components/animations/fellowMouse";
-import Card from "./card.astro";
-import Headline from "@/components/ui/Headline.astro";
-import WidgetWrapper from "@/components/ui/WidgetWrapper.astro";
-import CustomImage from "@/components/common/CustomImage.astro";
+import Button from '@/components/ui/Button/Button.astro';
+import SlideUp from '@/components/animations/slideUp';
+import FollowMouse from '@/components/animations/fellowMouse';
+import Card from './Card.astro';
+import Headline from '@/components/ui/Headline.astro';
+import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
+import CustomImage from '@/components/common/CustomImage.astro';
 const {
-  title = await Astro.slots.render("title"),
-  subtitle = await Astro.slots.render("subtitle"),
-  description = await Astro.slots.render("description"),
-  tagline = await Astro.slots.render("tagline"),
-  image = await Astro.slots.render("image"),
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  description = await Astro.slots.render('description'),
+  tagline = await Astro.slots.render('tagline'),
+  image = await Astro.slots.render('image'),
   icons = [],
   // image,
   // items = [],
@@ -20,17 +20,17 @@ const {
 
   id,
   isDark = false,
-  actions = await Astro.slots.render("actions"),
+  actions = await Astro.slots.render('actions'),
 
-  classes = { container: "text-left" },
+  classes = { container: 'text-left' },
 } = Astro.props;
 ---
 
 <WidgetWrapper
   id={id}
   isDark={isDark}
-  containerClass={`${isBeforeContent ? "md:pb-8 lg:pb-12" : ""} ${isAfterContent ? "pt-0 md:pt-0 lg:pt-0" : ""} ${
-    classes?.container ?? ""
+  containerClass={`${isBeforeContent ? 'md:pb-8 lg:pb-12' : ''} ${isAfterContent ? 'pt-0 md:pt-0 lg:pt-0' : ''} ${
+    classes?.container ?? ''
   }`}
 >
   <div class="lg:py-15 py-9">
@@ -54,21 +54,9 @@ const {
                 title={"Seamless Connectivity"}
               /> -->
               {
-                icons?.map(
-                  (icon: {
-                    bgColor: unknown;
-                    color: unknown;
-                    title: unknown;
-                    iconName: unknown;
-                  }) => (
-                    <Card
-                      bgColor={icon?.bgColor}
-                      color={icon?.color}
-                      title={icon?.title}
-                      iconName={icon?.iconName}
-                    />
-                  )
-                )
+                icons?.map((icon: { bgColor: unknown; color: unknown; title: unknown; iconName: unknown }) => (
+                  <Card bgColor={icon?.bgColor} color={icon?.color} title={icon?.title} iconName={icon?.iconName} />
+                ))
               }
             </div>
             {

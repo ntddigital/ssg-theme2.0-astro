@@ -40,7 +40,8 @@ import WithImgOnRight from '@/components/sections/hero/WithImgOnRight.astro';
 import WithAngledImgOnRight from '@/components/sections/hero/WithAngledImgOnRight.astro';
 import WithImageGrid from '@/components/sections/features/WithImageGrid.astro';
 import CenteredAccordion from '@/components/sections/testimonials/CenteredAccordion.astro';
-import TwoRow4BlockBentoGrid from '@/components/sections/features/TwoRow4BlockBentoGrid.astro';
+import TwoRow4BlockGrid from '@/components/sections/features/TwoRow4BlockGrid.astro';
+import TwoRow5BlockGrid from '@/components/sections/features/TwoRow5BlockGrid.astro';
 // ** Utils
 import { cn } from '@/utils/cn';
 
@@ -80,8 +81,10 @@ const { content } = Astro.props;
           return <FeaturesTable {...section} />;
         } else if (section?.type === 'verticalSteps') {
           return <VerticalSteps {...section} />;
-        } else if (section?.type === 'twoRow4BlockBentoGrid') {
-          return <TwoRow4BlockBentoGrid {...section} />;
+        } else if (section?.type === 'twoRow4BlockGrid') {
+          return <TwoRow4BlockGrid {...section} />;
+        } else if (section?.type === 'twoRow5BlockGrid') {
+          return <TwoRow5BlockGrid {...section} />;
         } else if (section?.type === 'horizontalSteps') {
           return <HorizontalSteps {...section} />;
         } else if (section?.type === 'brands') {

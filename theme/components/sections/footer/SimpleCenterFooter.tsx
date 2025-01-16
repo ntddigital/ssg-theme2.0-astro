@@ -40,6 +40,11 @@ type Section = {
   isRefund?: boolean; // Whether to show Refund link
   isAccessibility?: boolean; // Whether to show Accessibility link
   isSendFeedback?: boolean; // Whether to show Send Feedback button
+  classes?:{
+    bg?:string
+    container?:string
+  }
+ 
 };
 export default function Footer(props: { section: Section; }){
   const [isModalOpen, setIsModalOpen] = useState(false); // Controls modal visibility
@@ -175,10 +180,14 @@ export default function Footer(props: { section: Section; }){
 <footer
   className={cn(
     "relative scroll-mt-100 sm:scroll-mt-150",
-   section?.noMarginTop ? "mt-0" : "mt-16 sm:mt-24 md:mt-32"
+   section?.noMarginTop ? "mt-0" : "mt-16 sm:mt-24 md:mt-32",
+   section?.classes?.bg
   )}
   id="footer"
 >
+  <div className={cn(
+   section?.classes?.container
+  )}>
   {
    section?.bgImg ? (
       <img
@@ -532,6 +541,7 @@ export default function Footer(props: { section: Section; }){
       &copy; {currentYear}{" "}
       {SITE?.name} All Rights Reserved. 
     </p>
+  </div>
   </div>
 </footer>
 </>)

@@ -1,0 +1,122 @@
+---
+import Headline from '@/components/ui/Headline.astro';
+import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
+import CustomImage from '@/components/common/CustomImage.astro';
+// import { cn } from '@/utils/cn';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  description = await Astro.slots.render('description'),
+  tagline = await Astro.slots.render('tagline'),
+  items = [],
+  isBeforeContent,
+  isAfterContent,
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+console.log('items', items[0]?.image?.src);
+---
+
+<WidgetWrapper
+  id={id}
+  isDark={isDark}
+  containerClass={`${isBeforeContent ? 'md:pb-8 lg:pb-12' : ''} ${isAfterContent ? 'pt-0 md:pt-0 lg:pt-0' : ''} ${
+    classes?.container ?? ''
+  }`}
+  bg={bg}
+>
+  <Headline
+    title={title}
+    subtitle={subtitle}
+    tagline={tagline}
+    description={description}
+    classes={classes?.headline as Record<string, string>}
+  />
+
+  <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+    <div class="relative lg:col-span-3">
+      <div class="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]"></div>
+      <div
+        class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]"
+      >
+        <CustomImage alt={items[0]?.image?.alt} src={items[0]?.image?.src} class="h-80 object-cover object-center" />
+        <div class="p-10 pt-4">
+          <p class="text-lg/4 font-semibold text-indigo-600" set:html={items[0]?.tagline} />
+          <h3 class="mt-2 text-xl font-medium tracking-tight text-gray-950" set:html={items[0]?.title} />
+          <p class="mt-2 max-w-lg text-lg/6 text-gray-600" set:html={items[0]?.description} />
+        </div>
+      </div>
+      <div
+        class="pointer-events-none absolute inset-px rounded-lg ring-1 shadow-sm ring-black/5 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]"
+      >
+      </div>
+    </div>
+    <div class="relative lg:col-span-3">
+      <div class="absolute inset-px rounded-lg bg-white lg:rounded-tr-[2rem]"></div>
+      <div
+        class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]"
+      >
+        <CustomImage
+          alt={items[1]?.image?.alt}
+          src={items[1]?.image?.src}
+          class="h-80 object-cover object-center lg:object-right"
+        />
+        <div class="p-10 pt-4">
+          <p class="text-lg/4 font-semibold text-indigo-600" set:html={items[1]?.tagline} />
+          <h3 class="mt-2 text-xl font-medium tracking-tight text-gray-950" set:html={items[1]?.title} />
+          <p class="mt-2 max-w-lg text-lg/6 text-gray-600" set:html={items[1]?.description} />
+        </div>
+      </div>
+      <div class="pointer-events-none absolute inset-px rounded-lg ring-1 shadow-sm ring-black/5 lg:rounded-tr-[2rem]">
+      </div>
+    </div>
+    <div class="relative lg:col-span-2">
+      <div class="absolute inset-px rounded-lg bg-white lg:rounded-bl-[2rem]"></div>
+      <div
+        class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-bl-[calc(2rem+1px)]"
+      >
+        <CustomImage alt={items[2]?.image?.alt} src={items[2]?.image?.src} class="h-80 object-cover object-center" />
+        <div class="p-10 pt-4">
+          <p class="text-lg/4 font-semibold text-indigo-600" set:html={items[2]?.tagline} />
+          <h3 class="mt-2 text-xl font-medium tracking-tight text-gray-950" set:html={items[2]?.title} />
+          <p class="mt-2 max-w-lg text-lg/6 text-gray-600" set:html={items[2]?.description} />
+        </div>
+      </div>
+      <div class="pointer-events-none absolute inset-px rounded-lg ring-1 shadow-sm ring-black/5 lg:rounded-bl-[2rem]">
+      </div>
+    </div>
+    <div class="relative lg:col-span-2">
+      <div class="absolute inset-px rounded-lg bg-white"></div>
+      <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
+        <CustomImage alt={items[3]?.image?.alt} src={items[3]?.image?.src} class="h-80 object-cover" />
+        <div class="p-10 pt-4">
+          <p class="text-lg/4 font-semibold text-indigo-600" set:html={items[3]?.tagline} />
+          <h3 class="mt-2 text-xl font-medium tracking-tight text-gray-950" set:html={items[3]?.title} />
+          <p class="mt-2 max-w-lg text-lg/6 text-gray-600" set:html={items[3]?.description} />
+        </div>
+      </div>
+      <div class="pointer-events-none absolute inset-px rounded-lg ring-1 shadow-sm ring-black/5"></div>
+    </div>
+    <div class="relative lg:col-span-2">
+      <div class="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]"></div>
+      <div
+        class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]"
+      >
+        <CustomImage alt={items[4]?.image?.alt} src={items[4]?.image?.src} class="h-80 object-cover" />
+        <div class="p-10 pt-4">
+          <p class="text-lg/4 font-semibold text-indigo-600" set:html={items[4]?.tagline} />
+          <h3 class="mt-2 text-xl font-medium tracking-tight text-gray-950" set:html={items[4]?.title} />
+          <p class="mt-2 max-w-lg text-lg/6 text-gray-600" set:html={items[4]?.description} />
+        </div>
+      </div>
+      <div
+        class="pointer-events-none absolute inset-px rounded-lg ring-1 shadow-sm ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]"
+      >
+      </div>
+    </div>
+  </div>
+</WidgetWrapper>

@@ -1,24 +1,22 @@
 ---
-import PageLayout from "@/layouts/PageLayout.astro";
+import PageLayout from '@/layouts/PageLayout.astro';
 
-import Terms from "@/components/common/legal/Terms.astro";
+import Terms from '@/components/common/legal/Terms.astro';
 
 const { content } = Astro.props;
 ---
 
-<PageLayout metadata={{}} language={content?.language} content={content}>
+<PageLayout metadata={content?.metadata || {}} language={content?.language} content={content}>
   <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
-    <h1 class="font-bold font-heading text-4xl md:text-5xl leading-relaxeder">
+    <h1 class="font-bold font-heading text-4xl md:text-5xl leading-relaxed">
       {content.title}
     </h1>
     {
-      content?.sections?.map(
-        (section: { [x: string]: string; type: string }) => {
-          if (section?.type === "terms") {
-            return <Terms {...content} />;
-          }
+      content?.sections?.map((section: { [x: string]: string; type: string }) => {
+        if (section?.type === 'terms') {
+          return <Terms {...content} />;
         }
-      )
+      })
     }
 
     <div

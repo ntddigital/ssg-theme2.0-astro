@@ -23,7 +23,6 @@ const {
   classes = {},
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
-console.log('classes.tagline', classes?.headline);
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={` ${classes?.container ?? ''}`} bg={bg}>

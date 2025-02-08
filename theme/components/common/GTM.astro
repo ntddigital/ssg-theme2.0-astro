@@ -2,7 +2,7 @@
 import { SITE } from "~/config/siteConfig";
 const gtmId = SITE?.gtmId
 ---
-{gtmId && "<!-- Google Tag Manager -->"} 
+
 {gtmId &&
     <script is:inline define:vars={{ gtmId }}>
       (function (w, d, s, l, i) {
@@ -16,4 +16,4 @@ const gtmId = SITE?.gtmId
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", gtmId);
     </script>}
-{gtmId && "<!-- End Google Tag Manager -->"} 
+

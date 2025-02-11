@@ -1,30 +1,38 @@
 ---
-import { cn } from '../../utils/cn';
+import { cn } from "../../utils/cn";
 
 const { title, subtitle, tagline, description, classes = {} } = Astro.props;
 
 const {
   container: containerClass,
-  title: titleClass = 'text-4xl md:text-6x',
-  subtitle: subtitleClass = 'text-xl',
-  description: descriptionClass = 'text-lg',
+  title: titleClass = "text-4xl md:text-6x",
+  subtitle: subtitleClass = "text-xl",
+  description: descriptionClass = "text-lg",
   tagline: taglineClass,
 } = classes;
 ---
 
 {
   (title || subtitle || tagline || description) && (
-    <div class={cn('mb-2 md:mx-auto md:mb-4 text-center max-w-3xl', containerClass)}>
+    <div
+      class={cn(
+        "mb-2 md:mx-auto md:mb-4 text-center max-w-3xl",
+        containerClass
+      )}
+    >
       {tagline && (
         <p
-          class={cn('text-base text-primary dark:text-white font-bold tracking-wide uppercase', taglineClass)}
+          class={cn(
+            "text-base text-primary dark:text-white font-bold tracking-wide uppercase",
+            taglineClass
+          )}
           set:html={tagline}
         />
       )}
       {title && (
         <h2
           class={cn(
-            'font-bold leading-relaxed font-heading text-heading text-3xl lg:text-5xl dark:text-white',
+            "font-bold leading-relaxed font-heading text-heading text-3xl lg:text-5xl dark:text-white",
             titleClass
           )}
           set:html={title}
@@ -32,9 +40,18 @@ const {
       )}
 
       {subtitle && (
-        <p role="heading" class={cn('mt-4 text-muted dark:text-white', subtitleClass)} set:html={subtitle} />
+        <p
+          role="heading"
+          class={cn("mt-4 text-muted dark:text-white", subtitleClass)}
+          set:html={subtitle}
+        />
       )}
-      {description && <p class={cn('mt-4 text-muted dark:text-white', descriptionClass)} set:html={description} />}
+      {description && (
+        <p
+          class={cn("mt-4 text-muted dark:text-white", descriptionClass)}
+          set:html={description}
+        />
+      )}
     </div>
   )
 }

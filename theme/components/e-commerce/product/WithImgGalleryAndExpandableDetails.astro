@@ -1,0 +1,150 @@
+---
+import Headline from "@/components/ui/Headline.astro";
+import CenteredAccordionUi from "../../ui/CenteredAccordionUi.jsx";
+import TabGroup1 from "./components/TabGroup1.jsx";
+// import { cn } from "@/utils/cn";
+import Button from "@/components/ui/Button/Button.astro";
+import WidgetWrapper from "@/components/ui/WidgetWrapper.astro";
+import CustomImage from "@/components/common/CustomImage.astro";
+import { cn } from "@/utils/cn";
+
+const {
+  title = await Astro.slots.render("title"),
+  subtitle = await Astro.slots.render("subtitle"),
+  description = await Astro.slots.render("description"),
+  tagline = await Astro.slots.render("tagline"),
+  image = await Astro.slots.render("image"),
+  details = await Astro.slots.render("details"),
+  colors = await Astro.slots.render("colors"),
+
+  id,
+  isDark = false,
+  actions = await Astro.slots.render("actions"),
+  bg = await Astro.slots.render("bg"),
+
+  classes = {},
+} = Astro.props;
+classes.headline = classes.headline || {};
+classes.headline.container = classes.headline.container || "text-left";
+---
+
+<WidgetWrapper
+  id={id}
+  isDark={isDark}
+  containerClass={`${classes?.container ?? ""}`}
+  bg={bg}
+>
+  <div
+    class="mx-auto max-w-2xl px-4 pb-8 sm:px-6 sm:pb-16 lg:max-w-7xl lg:px-8"
+  >
+    <diTabGroup1v class="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
+      {/* Image gallery */}
+      <TabGroup1 images={image} client:load>
+        {
+          (
+            <>
+              <div class="mx-auto mt-6 w-full max-w-2xl sm:block lg:max-w-none">
+                <div class="grid grid-cols-4 gap-6">
+                  {image.map(
+                    (image: { id: number; name: string; src: string }) => (
+                      <button class="tab-button group relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium text-gray-900 uppercase hover:bg-gray-50 focus:ring-3 focus:ring-indigo-500/50 focus:ring-offset-4 focus:outline-hidden">
+                        <span class="sr-only">{image.name}</span>
+                        <span class="absolute inset-0 overflow-hidden rounded-md">
+                          <CustomImage
+                            alt={image.name}
+                            src={image.src}
+                            class={cn("size-full object-cover")}
+                          />
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          class="pointer-events-none absolute inset-0 rounded-md ring-2 ring-transparent ring-offset-2 group-focus:ring-indigo-500"
+                        />
+                      </button>
+                    )
+                  )}
+                </div>
+              </div>
+
+              <div class="mt-6">
+                {image.map(
+                  (image: { id: number; alt: string; src: string;classes:{image:string} }) => (
+                    <div class="tab-panel hidden">
+                      <CustomImage
+                        alt={image.alt}
+                        src={image.src}
+                        class={cn("aspect-square w-full object-cover sm:rounded-lg",image?.classes?.image)}
+                       
+                      />
+                    </div>
+                  )
+                )}
+              </div>
+            </>
+          )
+        }
+      </TabGroup1>
+
+      {/* Product info */}
+      <div class="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+        <Headline
+          title={title}
+          subtitle={subtitle}
+          tagline={tagline}
+          description={description}
+          classes={classes?.headline as Record<string, string>}
+        />
+
+        <form class="mt-6">
+         
+
+          {
+            /* Colors */
+            colors?.length && (
+            <p class="mb-2 font-bold text-lg">colors:</p>
+              <div class="flex items-center gap-x-3">
+                {colors.map((color: { name: string; bgColor: string }) => (
+                  <Fragment key={color?.name}>
+                    <span
+                      aria-hidden="true"
+                      class={cn(
+                        `h-8 w-8 rounded-full border border-black/10`,
+                        color?.bgColor
+                      )}
+                    />
+                  </Fragment>
+                ))}
+              </div>
+            )
+          }
+
+          <div class="mt-10 flex">
+            {
+              actions && (
+                <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 lg:m-0 lg:max-w-7xl intersect-once motion-safe:md:intersect:animate-fade intersect-quarter">
+                  {Array.isArray(actions) ? (
+                    actions.map((action) => (
+                      <div class="flex w-full sm:w-auto">
+                        <Button {...(action || {})} class="w-full sm:mb-0" />
+                      </div>
+                    ))
+                  ) : (
+                    <Fragment set:html={actions} />
+                  )}
+                </div>
+              )
+            }
+          </div>
+        </form>
+
+        <section aria-labelledby="details-heading" class="mt-12">
+          <h2 id="details-heading" class="sr-only">Additional details</h2>
+
+          <div class="divide-y divide-gray-200 border-t">
+            <CenteredAccordionUi items={details} client:load />
+          </div>
+        </section>
+      </div>
+    </diTabGroup1v>
+  </div>
+</WidgetWrapper>

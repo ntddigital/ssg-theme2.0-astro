@@ -1,25 +1,30 @@
 ---
-import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
-import Headline from '@/components/ui/Headline.astro';
-import CustomImage from '@/components/common/CustomImage.astro';
-import Button from '@/components/ui/Button/Button.astro';
-import { cn } from '@/utils/cn';
+import WidgetWrapper from "@/components/ui/WidgetWrapper.astro";
+import Headline from "@/components/ui/Headline.astro";
+import CustomImage from "@/components/common/CustomImage.astro";
+import Button from "@/components/ui/Button/Button.astro";
+import { cn } from "@/utils/cn";
 // import type { Features as Props } from "@/types";
 
 const {
-  title = await Astro.slots.render('title'),
-  subtitle = await Astro.slots.render('subtitle'),
-  description = await Astro.slots.render('description'),
-  tagline = await Astro.slots.render('tagline'),
+  title = await Astro.slots.render("title"),
+  subtitle = await Astro.slots.render("subtitle"),
+  description = await Astro.slots.render("description"),
+  tagline = await Astro.slots.render("tagline"),
   items = [],
   id,
   isDark = false,
   classes = {},
-  bg = await Astro.slots.render('bg'),
+  bg = await Astro.slots.render("bg"),
 } = Astro.props;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`${classes?.container ?? ''}`} bg={bg}>
+<WidgetWrapper
+  id={id}
+  isDark={isDark}
+  containerClass={`${classes?.container ?? ""}`}
+  bg={bg}
+>
   <Headline
     title={title}
     subtitle={subtitle}
@@ -27,55 +32,78 @@ const {
     description={description}
     classes={classes?.headline as Record<string, string>}
   />
-  <div class="mx-auto grid max-w-7xl grid-cols-1 gap-20 px-6 lg:px-8 xl:grid-cols-4">
-    <ul
-      role="list"
-      class={cn(
-        'mx-auto grid max-w-2xl grid-cols-1 gap-x-6 gap-y-20 sm:grid-cols-2 xl:grid-cols-4 lg:mx-0 lg:max-w-none lg:gap-x-8 xl:col-span-4',
-        classes?.ul
-      )}
-    >
-      {
-        items.map(
-          (item: {
+  <ul
+    role="list"
+    class={cn(
+      "mx-auto grid max-w-2xl grid-cols-1 gap-x-6 gap-y-20 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:mx-0 lg:max-w-none lg:gap-x-8 xl:col-span-4",
+      classes?.ul
+    )}
+  >
+    {
+      items.map(
+        (item: {
+          title: string;
+          subtitle: string;
+          description: string;
+          image: { src: string; alt: string };
+          classes: {
+            image: string;
+            icon: string;
             title: string;
-            subtitle: string;
             description: string;
-            image: { src: string; alt: string };
-            actions: { variant: string; target: '_blank'; text: string; href: string };
-            xUrl: string | URL | null | undefined;
-            linkedinUrl: string | URL | null | undefined;
-          }) => (
-            <Fragment key={item?.title}>
-              <li>
-                <CustomImage
-                  alt={item?.image?.alt}
-                  src={item?.image?.src || ''}
-                  class="aspect-3/2 w-full rounded-2xl object-cover"
-                />
-                <h3 class={cn('text-lg/8 font-semibold text-gray-900 text-center mt-6')}>{item?.title}</h3>
-                <p class="text-base/7 text-gray-600 text-center">{item?.subtitle}</p>
-                <p class="mt-4 text-base/7 text-gray-600 text-center">{item?.description}</p>
-                {item?.actions && (
-                  <div
-                    class={cn(
-                      'max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 lg:m-0 lg:max-w-7xl mt-2 lg:mt-4 intersect-once motion-safe:md:intersect:animate-fade intersect-quarter',
-                      classes?.item?.actions
-                    )}
-                  >
-                    {Array.isArray(item?.actions) ? (
-                      item?.actions.map((action) => (
-                        <div class="flex w-full sm:w-auto">
-                          <Button {...(action || {})} class="w-full sm:mb-0" />
-                        </div>
-                      ))
-                    ) : (
-                      <Fragment set:html={item?.actions} />
-                    )}
-                  </div>
+          };
+          actions: {
+            variant: string;
+            target: "_blank";
+            text: string;
+            href: string;
+          };
+          xUrl: string | URL | null | undefined;
+          linkedinUrl: string | URL | null | undefined;
+        }) => (
+          <Fragment key={item?.title}>
+            <li>
+              <CustomImage
+                alt={item?.image?.alt}
+                src={item?.image?.src || ""}
+                class={cn(
+                  "aspect-3/2 w-full rounded-2xl object-cover",
+                  item?.classes?.image
                 )}
-                {/* <ul role="list" class="mt-6 flex gap-x-6"> */}
-                {/* <li>
+              />
+              <h3
+                class={cn(
+                  "text-lg/8 font-semibold text-gray-900 text-center mt-6"
+                )}
+              >
+                {item?.title}
+              </h3>
+              <p class="text-base/7 text-gray-600 text-center">
+                {item?.subtitle}
+              </p>
+              <p class="mt-4 text-base/7 text-gray-600 text-center">
+                {item?.description}
+              </p>
+              {item?.actions && (
+                <div
+                  class={cn(
+                    "max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 lg:m-0 lg:max-w-7xl mt-2 lg:mt-4 intersect-once motion-safe:md:intersect:animate-fade intersect-quarter",
+                    classes?.item?.actions
+                  )}
+                >
+                  {Array.isArray(item?.actions) ? (
+                    item?.actions.map((action) => (
+                      <div class="flex w-full sm:w-auto">
+                        <Button {...(action || {})} class="w-full sm:mb-0" />
+                      </div>
+                    ))
+                  ) : (
+                    <Fragment set:html={item?.actions} />
+                  )}
+                </div>
+              )}
+              {/* <ul role="list" class="mt-6 flex gap-x-6"> */}
+              {/* <li>
                     <a
                       href={item.xUrl}
                       class="text-gray-400 hover:text-gray-500"
@@ -91,7 +119,7 @@ const {
                       </svg>
                     </a>
                   </li> */}
-                {/* <li>
+              {/* <li>
                     <a
                       href={item.linkedinUrl}
                       class="text-gray-400 hover:text-gray-500"
@@ -111,12 +139,11 @@ const {
                       </svg>
                     </a>
                   </li> */}
-                {/* </ul> */}
-              </li>
-            </Fragment>
-          )
+              {/* </ul> */}
+            </li>
+          </Fragment>
         )
-      }
-    </ul>
-  </div>
+      )
+    }
+  </ul>
 </WidgetWrapper>

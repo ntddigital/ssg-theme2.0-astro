@@ -75,15 +75,16 @@ const {
                 class={cn(
                   "text-lg/8 font-semibold text-gray-900 text-center mt-6"
                 )}
-              >
-                {item?.title}
-              </h3>
-              <p class="text-base/7 text-gray-600 text-center">
-                {item?.subtitle}
-              </p>
-              <p class="mt-4 text-base/7 text-gray-600 text-center">
-                {item?.description}
-              </p>
+                set:html={item?.title}
+              />
+              <p
+                class="text-base/7 text-gray-600 text-center"
+                set:html={item?.subtitle}
+              />
+              <p
+                class="mt-4 text-base/7 text-gray-600 text-center"
+                set:html={item?.description}
+              />
               {item?.actions && (
                 <div
                   class={cn(

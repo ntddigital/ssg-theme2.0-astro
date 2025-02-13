@@ -1,0 +1,122 @@
+---
+const { items = await Astro.slots.render("items") } = Astro.props;
+import CustomImage from "@/components/common/CustomImage.astro";
+---
+
+<div class="bg-white">
+  <div class="mx-auto max-w-7xl py-3 sm:py-4 lg:py-5">
+    <div class="mx-auto max-w-4xl divide-y divide-gray-900/10">
+      <dl class="mt-10 space-y-6 divide-y divide-gray-900/10">
+        {
+          items.map(
+            (
+              item: {
+                title: string | string[];
+                description:
+                  | string
+                  | string[]
+                  | (
+                      | { text: string }
+                      | { image: { src: string; alt: string } }
+                    )[];
+              },
+              index: number
+            ) => (
+              <Fragment key={index}>
+                <div class="pt-6">
+                  <dt>
+                    <button class="group flex w-full items-start justify-between text-left text-gray-900 disclosure-button">
+                      <span
+                        class="text-lg font-semibold"
+                        set:html={item.title}
+                      />
+                      <span class="ml-6 flex h-7 items-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          width="24"
+                          height="24"
+                          stroke-width="2"
+                          aria-hidden="true"
+                          class="h-6 w-6 transform transition-transform duration-300"
+                        >
+                          <path d="M6 9l6 6 6-6" />
+                        </svg>
+                      </span>
+                    </button>
+                  </dt>
+                  <dd class="mt-2 pr-12 hidden disclosure-panel">
+                    {typeof item.description === "string" ? (
+                      // Render description if it's a string
+                      <p
+                        class="text-lg text-gray-600"
+                        set:html={item.description}
+                      />
+                    ) : Array.isArray(item.description) ? (
+                      // If description is an array, map through each object and render accordingly
+                      item.description.map((descItem, index) => (
+                        <Fragment key={index}>
+                          <div>
+                            {typeof descItem === "object" &&
+                            "image" in descItem ? (
+                              // Render image if the item contains an image object
+                              <>
+                                <CustomImage
+                                  src={descItem.image.src}
+                                  alt={descItem.image.alt}
+                                />
+                              </>
+                            ) : typeof descItem === "object" &&
+                              "text" in descItem ? (
+                              // Render text if the item contains a text object
+                              <p
+                                class="text-lg text-gray-600"
+                                set:html={descItem.text}
+                              />
+                            ) : null}
+                          </div>
+                        </Fragment>
+                      ))
+                    ) : null}
+                  </dd>
+                </div>
+              </Fragment>
+            )
+          )
+        }
+      </dl>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll(".disclosure-button");
+    const panels = document.querySelectorAll(".disclosure-panel");
+
+    buttons.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        // Toggle the open class for clicked button
+        const isOpen = button.classList.contains("open");
+        buttons.forEach((b) => b.classList.remove("open"));
+        panels.forEach((p) => p.classList.add("hidden"));
+
+        if (!isOpen) {
+          button.classList.add("open");
+          panels[index].classList.remove("hidden");
+        }
+      });
+    });
+
+    return () => {
+      // Clean up event listeners (if necessary)
+      buttons.forEach((button) => {
+        button.removeEventListener("click", () => {});
+      });
+    };
+  });
+</script>

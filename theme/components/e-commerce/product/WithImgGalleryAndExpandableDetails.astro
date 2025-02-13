@@ -1,7 +1,7 @@
 ---
 import Headline from "@/components/ui/Headline.astro";
-import CenteredAccordionUi from "../../ui/CenteredAccordionUi.jsx";
 import TabGroup1 from "./components/TabGroup1.jsx";
+import Accordion1 from "./components/Accordion1.astro";
 // import { cn } from "@/utils/cn";
 import Button from "@/components/ui/Button/Button.astro";
 import WidgetWrapper from "@/components/ui/WidgetWrapper.astro";
@@ -141,7 +141,9 @@ classes.headline.container = classes.headline.container || "text-left";
           <h2 id="details-heading" class="sr-only">Additional details</h2>
 
           <div class="divide-y divide-gray-200 border-t">
-            <CenteredAccordionUi items={details} client:load />
+            <!-- <Accordion items={details} client:load /> -->
+            <Accordion1 items={details}/>
+            <!-- end of accordion -->
           </div>
         </section>
       </div>

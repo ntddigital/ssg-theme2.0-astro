@@ -1,6 +1,7 @@
 ---
-const { items = await Astro.slots.render("items") } = Astro.props;
 import CustomImage from "@/components/common/CustomImage.astro";
+
+const { items = await Astro.slots.render("items") } = Astro.props;
 ---
 
 <div class="bg-white">

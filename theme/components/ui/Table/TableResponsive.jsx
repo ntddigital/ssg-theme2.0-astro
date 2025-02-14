@@ -1,6 +1,4 @@
 import { Fragment } from "react";
-// import { CheckIcon, MinusIcon } from "@heroicons/react/16/solid";
-
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 // const items = [
@@ -32,81 +30,11 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 //       ],
 //     },
 //   },
-//   {
-//     title: 'Plan B',
-//     link: '#',
-//     columns: {
-//       column1: [
-//         { itemTitle: 'Feature 1', itemStatus: true },
-//         { itemTitle: 'Feature 2', itemStatus: '1' },
-//         { itemTitle: 'Feature 3', itemStatus: '3' },
-//         { itemTitle: 'Feature 4', itemStatus: false },
-//       ],
-//       column2: [
-//         { itemTitle: 'Feature A', itemStatus: true },
-//         { itemTitle: 'Feature B', itemStatus: false },
-//         { itemTitle: 'Feature C', itemStatus: false },
-//         { itemTitle: 'Feature D', itemStatus: false },
-//       ],
-//       column3: [
-//         { itemTitle: 'Feature X', itemStatus: true },
-//         { itemTitle: 'Feature Y', itemStatus: false },
-//         { itemTitle: 'Feature Z', itemStatus: false },
-//         { itemTitle: 'Feature W', itemStatus: false },
-//       ],
-//     },
-//   },
-//   {
-//     title: 'Plan C',
-//     link: '#',
-//     columns: {
-//       column1: [
-//         { itemTitle: 'Feature 1', itemStatus: true },
-//         { itemTitle: 'Feature 2', itemStatus: '2' },
-//         { itemTitle: 'Feature 3', itemStatus: '10' },
-//         { itemTitle: 'Feature 4', itemStatus: false },
-//       ],
-//       column2: [
-//         { itemTitle: 'Feature A', itemStatus: true },
-//         { itemTitle: 'Feature B', itemStatus: true },
-//         { itemTitle: 'Feature C', itemStatus: false },
-//         { itemTitle: 'Feature D', itemStatus: false },
-//       ],
-//       column3: [
-//         { itemTitle: 'Feature X', itemStatus: true },
-//         { itemTitle: 'Feature Y', itemStatus: true },
-//         { itemTitle: 'Feature Z', itemStatus: false },
-//         { itemTitle: 'Feature W', itemStatus: false },
-//       ],
-//     },
-//   },
-//   {
-//     title: 'Plan D',
-//     link: '#',
-//     columns: {
-//       column1: [
-//         { itemTitle: 'Feature 1', itemStatus: true },
-//         { itemTitle: 'Feature 2', itemStatus: 'Unlimited' },
-//         { itemTitle: 'Feature 3', itemStatus: 'Unlimited' },
-//         { itemTitle: 'Feature 4', itemStatus: true },
-//       ],
-//       column2: [
-//         { itemTitle: 'Feature A', itemStatus: true },
-//         { itemTitle: 'Feature B', itemStatus: true },
-//         { itemTitle: 'Feature C', itemStatus: true },
-//         { itemTitle: 'Feature D', itemStatus: true },
-//       ],
-//       column3: [
-//         { itemTitle: 'Feature X', itemStatus: true },
-//         { itemTitle: 'Feature Y', itemStatus: true },
-//         { itemTitle: 'Feature Z', itemStatus: true },
-//         { itemTitle: 'Feature W', itemStatus: true },
-//       ],
-//     },
+// more ...
 //   },
 // ];
 
-export default function ResponsiveTabTable(props) {
+export default function TableResponsive(props) {
   const { items } = props;
   // Calculate the number of columns (arrays) dynamically
   const columnCount = items.length;

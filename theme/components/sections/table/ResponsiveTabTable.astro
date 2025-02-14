@@ -1,0 +1,39 @@
+---
+import Headline from '@/components/ui/Headline.astro';
+import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
+import TabResponsiveTable from '@/components/ui/Table/TabResponsiveTable.jsx';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  description = await Astro.slots.render('description'),
+  tagline = await Astro.slots.render('tagline'),
+  items = await Astro.slots.render('items'),
+
+  isBeforeContent,
+  isAfterContent,
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper
+  id={id}
+  isDark={isDark}
+  containerClass={`${isBeforeContent ? 'md:pb-8 lg:pb-12' : ''} ${isAfterContent ? 'pt-0 md:pt-0 lg:pt-0' : ''} ${
+    classes?.container ?? ''
+  }`}
+  bg={bg}
+>
+  <Headline
+    title={title}
+    subtitle={subtitle}
+    tagline={tagline}
+    description={description}
+    classes={classes?.headline as Record<string, string>}
+  />
+  <TabResponsiveTable items={items} client:load />
+</WidgetWrapper>

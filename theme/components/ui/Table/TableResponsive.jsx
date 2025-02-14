@@ -1,6 +1,6 @@
 import { Fragment } from "react";
-import { CheckIcon, MinusIcon } from "@heroicons/react/16/solid";
-import { Icon } from "astro-icon/components";
+// import { CheckIcon, MinusIcon } from "@heroicons/react/16/solid";
+
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 // const items = [
@@ -176,6 +176,7 @@ export default function ResponsiveTabTable(props) {
                           true ? (
                             // <CheckIcon aria-hidden="true" className="inline-block size-4 fill-green-600" />
                             // <Icon name="tabler:check" class="w-4 h-4 inline-block  fill-green-600" />
+                            // check icon
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 24 24"
@@ -192,6 +193,7 @@ export default function ResponsiveTabTable(props) {
                             </svg>
                           ) : (
                             // <MinusIcon aria-hidden="true" className="inline-block size-4 fill-gray-400" />
+                            // minus icon
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 24 24"
@@ -271,15 +273,37 @@ export default function ResponsiveTabTable(props) {
                           ) : (
                             <>
                               {feature.itemStatus === true ? (
-                                <CheckIcon
-                                  aria-hidden="true"
-                                  className="inline-block size-4 fill-green-600"
-                                />
+                                // check icon
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  width="24"
+                                  height="24"
+                                  stroke-width="2"
+                                  class="w-4 h-4 inline-block  text-green-600"
+                                >
+                                  <path d="M5 12l5 5l10 -10"></path>{" "}
+                                </svg>
                               ) : (
-                                <MinusIcon
-                                  aria-hidden="true"
-                                  className="inline-block size-4 fill-gray-400"
-                                />
+                                // minus icon
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  width="24"
+                                  height="24"
+                                  stroke-width="2"
+                                  class="w-4 h-4 inline-block  text-gray-600"
+                                >
+                                  <path d="M5 12l14 0"></path>{" "}
+                                </svg>
                               )}
                               <span
                                 className="sr-only"

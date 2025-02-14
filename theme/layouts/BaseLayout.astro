@@ -33,13 +33,15 @@ const { textDirection } = I18N;
 <!doctype html>
 <html lang={language} dir={textDirection} class="2xl:text-[20px]">
   <head>
+    <GTM />
+    <Analytics />
+    <SiteVerification />
+
     <CommonMeta />
     <Favicons />
     <ApplyColorMode />
     {metadata && <Metadata {...metadata} />}
-    <SiteVerification />
-    <GTM />
-    <Analytics />
+
     <Schema {...metadata} />
 
     <!-- Comment the line below to disable View Transitions -->

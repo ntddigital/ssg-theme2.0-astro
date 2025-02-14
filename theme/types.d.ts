@@ -228,7 +228,7 @@ export interface Stats extends Omit<Headline, 'classes'>, Widget {
 export interface Pricing extends Omit<Headline, 'classes'>, Widget {
   prices?: Array<Price>;
   columns?: number
-  tableItems: any
+  tableItems?: any[]
 }
 
 export interface Testimonials extends Omit<Headline, 'classes'>, Widget {

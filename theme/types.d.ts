@@ -143,6 +143,7 @@ export interface Price {
   subtitle?: string;
   description?: string;
   price?: number | string;
+  comparePrice?: number | string;
   period?: string;
   items?: Array<Item>;
   callToAction?: CallToAction;
@@ -227,6 +228,7 @@ export interface Stats extends Omit<Headline, 'classes'>, Widget {
 export interface Pricing extends Omit<Headline, 'classes'>, Widget {
   prices?: Array<Price>;
   columns?: number
+  tableItems: any
 }
 
 export interface Testimonials extends Omit<Headline, 'classes'>, Widget {

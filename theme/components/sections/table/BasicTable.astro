@@ -1,0 +1,131 @@
+---
+import Headline from '@/components/ui/Headline.astro';
+import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
+import TableBasic from '@/components/ui/Table/TableBasic.astro';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  description = await Astro.slots.render('description'),
+  tagline = await Astro.slots.render('tagline'),
+  tableData1 = [],
+  tableData2 = [],
+  tableData3 = [],
+  tableData4 = [],
+  tableData5 = [],
+  isBeforeContent,
+  isAfterContent,
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper
+  id={id}
+  isDark={isDark}
+  containerClass={`${isBeforeContent ? 'md:pb-8 lg:pb-12' : ''} ${isAfterContent ? 'pt-0 md:pt-0 lg:pt-0' : ''} ${
+    classes?.container ?? ''
+  }`}
+  bg={bg}
+>
+  <Headline
+    title={title}
+    subtitle={subtitle}
+    tagline={tagline}
+    description={description}
+    classes={classes?.headline as Record<string, string>}
+  />
+  {
+    tableData1 && (
+      <TableBasic
+        data={tableData1}
+        classes={{
+          container: '',
+          table: 'min-w-full border border-gray-300',
+          headerRow: 'bg-orange-600',
+          headerCell: 'px-3 py-3.5 text-left text-sm font-semibold text-white',
+          firstColumnCell: 'font-bold text-blue-500',
+          body: 'bg-white',
+          row: 'border-t border-gray-200',
+          cell: 'whitespace-nowrap px-3 py-4 text-sm text-gray-500',
+          ...((classes as object) ?? {}),
+        }}
+      />
+    )
+  }
+  {
+    tableData2 && (
+      <TableBasic
+        data={tableData2}
+        classes={{
+          container: '',
+          table: 'min-w-full border border-gray-300',
+          headerRow: 'bg-orange-600',
+          headerCell: 'px-3 py-3.5 text-left text-sm font-semibold text-white',
+          firstColumnCell: 'font-bold text-blue-500',
+          body: 'bg-white',
+          row: 'border-t border-gray-200',
+          cell: 'whitespace-nowrap px-3 py-4 text-sm text-gray-500',
+          ...((classes as object) ?? {}),
+        }}
+      />
+    )
+  }
+  {
+    tableData3 && (
+      <TableBasic
+        data={tableData3}
+        classes={{
+          container: '',
+          table: 'min-w-full border border-gray-300',
+          headerRow: 'bg-orange-600',
+          headerCell: 'px-3 py-3.5 text-left text-sm font-semibold text-white',
+          firstColumnCell: 'font-bold text-blue-500',
+          body: 'bg-white',
+          row: 'border-t border-gray-200',
+          cell: 'whitespace-nowrap px-3 py-4 text-sm text-gray-500',
+          ...((classes as object) ?? {}),
+        }}
+      />
+    )
+  }
+  {
+    tableData4 && (
+      <TableBasic
+        data={tableData4}
+        classes={{
+          container: '',
+          table: 'min-w-full border border-gray-300',
+          headerRow: 'bg-orange-600',
+          headerCell: 'px-3 py-3.5 text-left text-sm font-semibold text-white',
+          firstColumnCell: 'font-bold text-blue-500',
+          body: 'bg-white',
+          row: 'border-t border-gray-200',
+          cell: 'whitespace-nowrap px-3 py-4 text-sm text-gray-500',
+          ...((classes as object) ?? {}),
+        }}
+      />
+    )
+  }
+  {
+    tableData5 && (
+      <TableBasic
+        data={tableData5}
+        classes={{
+          container: '',
+          table: 'min-w-full border border-gray-300',
+          headerRow: 'bg-orange-600',
+          headerCell: 'px-3 py-3.5 text-left text-sm font-semibold text-white',
+          firstColumnCell: 'font-bold text-blue-500',
+          body: 'bg-white',
+          row: 'border-t border-gray-200',
+          cell: 'whitespace-nowrap px-3 py-4 text-sm text-gray-500',
+          ...((classes as object) ?? {}),
+        }}
+      />
+    )
+  }
+</WidgetWrapper>

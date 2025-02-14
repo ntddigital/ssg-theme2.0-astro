@@ -64,9 +64,7 @@ const tag = SITE?.gtmId
   </head>
 
   <body class="antialiased text-default bg-page">
-    <slot />
-    <BasicScripts />
-   <!-- Google Tag Manager (noscript) -->
+     <!-- Google Tag Manager (noscript) -->
    {tag?
     <noscript
       ><iframe
@@ -75,7 +73,9 @@ const tag = SITE?.gtmId
         width="0"
         style="display:none;visibility:hidden"></iframe></noscript>
         :null}
-
     <!-- End Google Tag Manager (noscript) -->
+
+    <slot />
+    <BasicScripts />
   </body>
 </html>

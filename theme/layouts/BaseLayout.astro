@@ -28,12 +28,27 @@ export interface Props {
 
 const { metadata, language } = Astro.props;
 const { textDirection } = I18N;
+const tag = SITE?.gtmId
 ---
 
 <!doctype html>
 <html lang={language} dir={textDirection} class="2xl:text-[20px]">
   <head>
-    <GTM />
+          <!-- Google Tag Manager -->
+     {tag?
+      <script is:inline define:vars={{ tag }}>
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != "dataLayer" ? "&l=" + l : "";
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, "script", "dataLayer", tag);
+      </script>:null}
+      <!-- End Google Tag Manager -->
     <Analytics />
     <SiteVerification />
 
@@ -51,14 +66,16 @@ const { textDirection } = I18N;
   <body class="antialiased text-default bg-page">
     <slot />
     <BasicScripts />
-    <!-- Google Tag Manager (noscript) -->
+   <!-- Google Tag Manager (noscript) -->
+   {tag?
     <noscript
       ><iframe
-        src=`https://www.googletagmanager.com/ns.html?id=${SITE?.gtmId}`
+        src={`https://www.googletagmanager.com/ns.html?id=${tag}`}
         height="0"
         width="0"
-        style="display:none;visibility:hidden"></iframe></noscript
-    >
+        style="display:none;visibility:hidden"></iframe></noscript>
+        :null}
+
     <!-- End Google Tag Manager (noscript) -->
   </body>
 </html>

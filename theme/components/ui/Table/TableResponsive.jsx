@@ -1,6 +1,7 @@
-import { Fragment } from 'react';
-import { CheckIcon, MinusIcon } from '@heroicons/react/16/solid';
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
+import { Fragment } from "react";
+import { CheckIcon, MinusIcon } from "@heroicons/react/16/solid";
+import { Icon } from "astro-icon/components";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 // const items = [
 //   {
@@ -110,7 +111,6 @@ export default function ResponsiveTabTable(props) {
   // Calculate the number of columns (arrays) dynamically
   const columnCount = items.length;
   const columnWidth = 100 / (columnCount + 1);
-  console.log(items);
   return (
     <>
       <table className="w-full text-center mt-8 max-sm:hidden sm:mt-16">
@@ -126,7 +126,10 @@ export default function ResponsiveTabTable(props) {
             <td className="p-0" />
             {items.map((tier) => (
               <th key={tier.title} scope="col" className="p-0">
-                <div className="text-xl font-semibold" dangerouslySetInnerHTML={{ __html: tier.title }}></div>
+                <div
+                  className="text-xl font-semibold"
+                  dangerouslySetInnerHTML={{ __html: tier.title }}
+                ></div>
               </th>
             ))}
           </tr>
@@ -135,7 +138,11 @@ export default function ResponsiveTabTable(props) {
           {Object.keys(items[0].columns).map((columnKey) => (
             <Fragment key={columnKey}>
               <tr>
-                <th scope="colgroup" colSpan={items.length + 1} className="px-0 pt-10 pb-0 group-first-of-type:pt-5">
+                <th
+                  scope="colgroup"
+                  colSpan={items.length + 1}
+                  className="px-0 pt-10 pb-0 group-first-of-type:pt-5"
+                >
                   <div
                     className="rounded-lg bg-gray-50 px-4 py-3 text-xl/6 text-left font-semibold text-gray-950"
                     dangerouslySetInnerHTML={{ __html: columnKey }}
@@ -143,7 +150,10 @@ export default function ResponsiveTabTable(props) {
                 </th>
               </tr>
               {items[0].columns[columnKey].map((feature, featureIndex) => (
-                <tr key={featureIndex} className="border-b border-gray-100 last:border-none">
+                <tr
+                  key={featureIndex}
+                  className="border-b border-gray-100 last:border-none"
+                >
                   <th
                     scope="row"
                     className="py-4 px-2 text-lg text-left font-normal text-gray-900"
@@ -151,22 +161,59 @@ export default function ResponsiveTabTable(props) {
                   ></th>
                   {items.map((tier, tierIndex) => (
                     <td key={tierIndex} className="p-4 max-sm:text-center">
-                      {typeof tier.columns[columnKey][featureIndex]?.itemStatus === 'string' ? (
+                      {typeof tier.columns[columnKey][featureIndex]
+                        ?.itemStatus === "string" ? (
                         <span
                           className="text-lg text-700-950"
-                          dangerouslySetInnerHTML={{ __html: tier.columns[columnKey][featureIndex].itemStatus }}
+                          dangerouslySetInnerHTML={{
+                            __html:
+                              tier.columns[columnKey][featureIndex].itemStatus,
+                          }}
                         ></span>
                       ) : (
                         <>
-                          {tier.columns[columnKey][featureIndex]?.itemStatus === true ? (
-                            <CheckIcon aria-hidden="true" className="inline-block size-4 fill-green-600" />
+                          {tier.columns[columnKey][featureIndex]?.itemStatus ===
+                          true ? (
+                            // <CheckIcon aria-hidden="true" className="inline-block size-4 fill-green-600" />
+                            // <Icon name="tabler:check" class="w-4 h-4 inline-block  fill-green-600" />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              width="24"
+                              height="24"
+                              stroke-width="2"
+                              class="w-4 h-4 inline-block  text-green-600"
+                            >
+                              <path d="M5 12l5 5l10 -10"></path>{" "}
+                            </svg>
                           ) : (
-                            <MinusIcon aria-hidden="true" className="inline-block size-4 fill-gray-400" />
+                            // <MinusIcon aria-hidden="true" className="inline-block size-4 fill-gray-400" />
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              width="24"
+                              height="24"
+                              stroke-width="2"
+                              class="w-4 h-4 inline-block  text-gray-600"
+                            >
+                              <path d="M5 12l14 0"></path>{" "}
+                            </svg>
                           )}
                           <span
                             className="sr-only"
                             dangerouslySetInnerHTML={{
-                              __html: tier.columns[columnKey][featureIndex]?.itemStatus ? 'Yes' : 'No',
+                              __html: tier.columns[columnKey][featureIndex]
+                                ?.itemStatus
+                                ? "Yes"
+                                : "No",
                             }}
                           ></span>
                         </>
@@ -209,24 +256,36 @@ export default function ResponsiveTabTable(props) {
                         <dt
                           className="text-xl/6 font-normal text-gray-600"
                           // dangerouslySetInnerHTML={{ __html: columnKey }}
-                          dangerouslySetInnerHTML={{ __html: feature.itemTitle }}
+                          dangerouslySetInnerHTML={{
+                            __html: feature.itemTitle,
+                          }}
                         ></dt>
                         <dd className="text-center">
-                          {typeof feature.itemStatus === 'string' ? (
+                          {typeof feature.itemStatus === "string" ? (
                             <span
                               className="text-lg text-gray-700"
-                              dangerouslySetInnerHTML={{ __html: feature.itemStatus }}
+                              dangerouslySetInnerHTML={{
+                                __html: feature.itemStatus,
+                              }}
                             ></span>
                           ) : (
                             <>
                               {feature.itemStatus === true ? (
-                                <CheckIcon aria-hidden="true" className="inline-block size-4 fill-green-600" />
+                                <CheckIcon
+                                  aria-hidden="true"
+                                  className="inline-block size-4 fill-green-600"
+                                />
                               ) : (
-                                <MinusIcon aria-hidden="true" className="inline-block size-4 fill-gray-400" />
+                                <MinusIcon
+                                  aria-hidden="true"
+                                  className="inline-block size-4 fill-gray-400"
+                                />
                               )}
                               <span
                                 className="sr-only"
-                                dangerouslySetInnerHTML={{ __html: feature.itemStatus ? 'Yes' : 'No' }}
+                                dangerouslySetInnerHTML={{
+                                  __html: feature.itemStatus ? "Yes" : "No",
+                                }}
                               ></span>
                             </>
                           )}

@@ -36,7 +36,7 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = 'Contact us', desc
   return (
     <form onSubmit={handleSubmit}>
       {inputs &&
-        inputs.map(({ name = '', label = '', autocomplete = 'on', placeholder = '' }) =>
+        inputs.map(({ name = '', label = '', autocomplete = 'on', placeholder = '', isRequired = false }) =>
           name ? (
             <div className="mb-6" key={name}>
               {label && (
@@ -51,6 +51,7 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = 'Contact us', desc
                 autoComplete={autocomplete}
                 placeholder={placeholder}
                 className="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+                required={isRequired}
               />
             </div>
           ) : null
@@ -67,6 +68,7 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = 'Contact us', desc
             rows={textarea.rows || 4}
             placeholder={textarea.placeholder}
             className="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+            required={textarea?.isRequired}
           />
         </div>
       )}
@@ -78,6 +80,7 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = 'Contact us', desc
             name="disclaimer"
             type="checkbox"
             className="mr-1 h-4 w-4 cursor-pointer block text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+            isRequired
           />
 
           <div className="">

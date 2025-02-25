@@ -53,10 +53,7 @@ const { items = await Astro.slots.render("items") } = Astro.props;
                   <dd class="mt-2 pr-12 hidden disclosure-panel">
                     {typeof item.description === "string" ? (
                       // Render description if it's a string
-                      <p
-                        class="text-lg text-gray-600"
-                        set:html={item.description}
-                      />
+                      <p class="" set:html={item.description} />
                     ) : Array.isArray(item.description) ? (
                       // If description is an array, map through each object and render accordingly
                       item.description.map((descItem, index) => (
@@ -74,10 +71,7 @@ const { items = await Astro.slots.render("items") } = Astro.props;
                             ) : typeof descItem === "object" &&
                               "text" in descItem ? (
                               // Render text if the item contains a text object
-                              <p
-                                class="text-lg text-gray-600"
-                                set:html={descItem.text}
-                              />
+                              <p class="" set:html={descItem.text} />
                             ) : null}
                           </div>
                         </Fragment>

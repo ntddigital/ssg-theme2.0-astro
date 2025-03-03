@@ -32,11 +32,11 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = 'Contact us', desc
       });
     }
   };
-
+  console.log('inputs', inputs);
   return (
     <form onSubmit={handleSubmit}>
       {inputs &&
-        inputs.map(({ name = '', label = '', autocomplete = 'on', placeholder = '', isRequired = false }) =>
+        inputs.map(({ type = '', name = '', label = '', autocomplete = 'on', placeholder = '', isRequired = false }) =>
           name ? (
             <div className="mb-6" key={name}>
               {label && (
@@ -45,7 +45,7 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = 'Contact us', desc
                 </label>
               )}
               <input
-                type="text"
+                type={type}
                 name={name}
                 id={name}
                 autoComplete={autocomplete}
@@ -80,7 +80,7 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = 'Contact us', desc
             name="disclaimer"
             type="checkbox"
             className="mr-1 h-4 w-4 cursor-pointer block text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
-            isRequired
+            required
           />
 
           <div className="">

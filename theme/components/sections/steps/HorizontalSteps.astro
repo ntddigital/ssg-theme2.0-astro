@@ -4,6 +4,7 @@ import HorizontalTimeline from '@/components/ui/timeline/HorizontalTimeline.astr
 import Headline from '@/components/ui/Headline.astro';
 import CustomImage from '@/components/common/CustomImage.astro';
 import ItemGrid2 from '@/components/ui/ItemGrid/ItemGrid2.astro';
+import { cn } from '@/utils/cn';
 // import type { Steps as Props } from "@/types";
 
 const {
@@ -46,9 +47,9 @@ const {
         columns={columns}
         defaultIcon={defaultIcon}
         classes={{
-          container: 'gap-4 md:gap-6 mt-12',
+          container: 'gap-6 sm:mt-6 lg:mt-12',
           panel:
-            'text-center bg-page items-center md:text-left rtl:md:text-right md:items-start p-6 p-6 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-800',
+            'text-center bg-page md:text-left rtl:md:text-right md:items-start sm:p-6 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-800',
           icon: 'w-12 h-12 mb-6 text-primary',
           ...((classes?.items as Record<string, never>) ?? {}),
         }}
@@ -60,12 +61,7 @@ const {
           {typeof image === 'string' ? (
             <Fragment set:html={image} />
           ) : (
-            <CustomImage
-              class="inset-0 object-cover object-top w-full rounded-md shadow-lg md:absolute md:h-full bg-gray-400 dark:bg-slate-700"
-              width={432}
-              src={image?.src}
-              alt={image?.alt || ''}
-            />
+            <CustomImage class={cn(classes?.image)} width={432} src={image?.src} alt={image?.alt || ''} />
           )}
         </div>
       )

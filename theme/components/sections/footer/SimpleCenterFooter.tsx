@@ -43,6 +43,7 @@ type Section = {
   classes?:{
     bg?:string
     container?:string
+    nav?:string
   }
  
 };
@@ -297,10 +298,10 @@ export default function Footer(props: { section: Section; }){
          section?.menu?.map(
             (item: { link: string; text: string }, index: number) => (
             
-                <div className="pb-6 font-semibold" key={index}>
+                <div className={cn("pb-6 font-semibold text-lg leading-6 text-white hover:text-gray-300",section?.classes?.nav)} key={index}>
                   <a
                     href={item?.link}
-                    className="text-lg leading-6 text-white hover:text-gray-300"
+                    className="l"
                     style={{
                       color:section?.textColor || '#ffffff',
                     }}

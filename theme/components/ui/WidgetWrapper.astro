@@ -3,6 +3,7 @@ import type { HTMLTag } from "astro/types";
 import type { Widget } from "@/types";
 import { cn } from "@/utils/cn";
 import Background from "./Background.astro";
+import CustomImage from "../common/CustomImage.astro";
 
 export interface Props extends Widget {
   containerClass?: string;
@@ -23,8 +24,22 @@ const WrapperTag = as;
 <WrapperTag class="relative not-prose scroll-mt-[72px]" {...id ? { id } : {}}>
   <div class="absolute inset-0 pointer-events-none -z-[1]" aria-hidden="true">
     <slot name="bg">
-      {bg ? <Fragment set:html={bg} /> : <Background isDark={isDark} />}
+      <Background isDark={isDark}/>
+      {bg ? 
+        <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <slot name="bg">
+            <!-- {bg ? <Fragment set:html={bg} /> : null} -->
+            <CustomImage
+              src={bg?.src}
+              alt={bg?.alt}
+              class={cn('absolute h-full object-cover object-center')}
+              loading="eager"
+            />
+          </slot>
+        </div> : null}
+       
     </slot>
+    
   </div>
   <div
     class:list={[

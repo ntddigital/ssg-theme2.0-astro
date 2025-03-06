@@ -3,6 +3,7 @@ import type { ItemGrid as Props } from '@/types';
 import { Icon } from 'astro-icon/components';
 import { cn } from '@/utils/cn';
 import Button from '../Button/Button.astro';
+import CustomImage from '@/components/common/CustomImage.astro';
 
 const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props;
 
@@ -22,39 +23,50 @@ const {
       class={cn(
         `grid gap-8 gap-x-12 sm:gap-y-8 ${
           columns === 4
-            ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'
+            ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1'
             : columns === 3
-              ? 'lg:grid-cols-3 sm:grid-cols-2'
+              ? 'lg:grid-cols-3 sm:grid-cols-2 grid-cols-1'
               : columns === 2
-                ? 'sm:grid-cols-2 '
-                : ''
+                ? 'sm:grid-cols-2 grid-cols-1'
+                : columns === 1
+                  ? 'grid-cols-1 '
+                  : ''
         }`,
         containerClass
       )}
     >
-      {items.map(({ title, description, icon, callToAction, classes: itemClasses = {} }) => (
+      {items.map(({ title, description, icon, image, callToAction, classes: itemClasses = {} }) => (
         <div
           class={cn(
-            'relative flex flex-col intersect-once intersect-quarter intercept-no-queue motion-safe:md:intersect:animate-fade',
+            'relative flex',
             panelClass,
-            itemClasses?.panel
+            itemClasses?.panel,
+            columns === 1 ? 'flex-col sm:flex-row' : 'flex-col'
           )}
         >
-          {(icon || defaultIcon) && (
-            <Icon
-              name={icon || defaultIcon}
-              class={cn('mb-2 w-10 h-10 dark:text-white', defaultIconClass, itemClasses?.icon)}
-            />
-          )}
-          <div class={cn('text-xl dark:text-white', titleClass, itemClasses?.title)}>{title}</div>
-          {description && (
-            <p class={cn('dark:text-white mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
-          )}
-          {callToAction && (
-            <div class="mt-2 dark:text-white">
-              <Button {...callToAction} />
-            </div>
-          )}
+          <div class="max-w-[600px]">
+            {(icon || defaultIcon) && (
+              <Icon
+                name={icon || defaultIcon}
+                class={cn('mb-2 w-10 h-10 dark:text-white', defaultIconClass, itemClasses?.icon)}
+              />
+            )}
+            <div class={cn('text-xl dark:text-white', titleClass, itemClasses?.title)}>{title}</div>
+            {description && (
+              <p
+                class={cn('dark:text-white mt-2', descriptionClass, itemClasses?.description)}
+                set:html={description}
+              />
+            )}
+            {callToAction && (
+              <div class="mt-2 dark:text-white">
+                <Button {...callToAction} />
+              </div>
+            )}
+          </div>
+          <div class="mx-auto">
+            {image && <CustomImage src={image?.src} class={cn(itemClasses?.image)} width={800} alt={image?.src} />}
+          </div>
         </div>
       ))}
     </div>

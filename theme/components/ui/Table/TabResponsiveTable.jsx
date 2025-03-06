@@ -41,7 +41,7 @@ export default function TableResponsive(props) {
   const columnWidth = 100 / (columnCount + 1);
   return (
     <>
-      <table className="w-full text-center mt-8 p-8 max-sm:hidden sm:mt-16 bg-white rounded-lg">
+      <table className="w-full text-center mt-8 p-8 max-sm:hidden sm:mt-16 rounded-lg">
         <caption className="sr-only">Table</caption>
         <colgroup>
           <col className={`w-[${columnWidth}%]`} />
@@ -54,7 +54,10 @@ export default function TableResponsive(props) {
             <td className="p-0" />
             {items.map((tier) => (
               <th key={tier.title} scope="col" className="p-0">
-                <div className="text-xl font-semibold" dangerouslySetInnerHTML={{ __html: tier.title }}></div>
+                <div
+                  className="text-xl font-semibold dark:text-white"
+                  dangerouslySetInnerHTML={{ __html: tier.title }}
+                ></div>
               </th>
             ))}
           </tr>
@@ -65,7 +68,7 @@ export default function TableResponsive(props) {
               <tr>
                 <th scope="colgroup" colSpan={items.length + 1} className="px-0 pt-10 pb-0 group-first-of-type:pt-5">
                   <div
-                    className="rounded-lg bg-gray-50 px-4 py-3 text-xl/6 text-left font-semibold text-gray-950"
+                    className="rounded-lg bg-gray-50 px-4 py-3 text-xl/6 text-left font-semibold text-gray-950 "
                     dangerouslySetInnerHTML={{ __html: columnKey }}
                   ></div>
                 </th>
@@ -74,14 +77,14 @@ export default function TableResponsive(props) {
                 <tr key={featureIndex} className="border-b border-gray-100 last:border-none">
                   <th
                     scope="row"
-                    className="py-4 px-2 text-lg text-left font-normal text-gray-900"
+                    className="py-4 px-2 text-lg text-left font-normal text-gray-900 dark:text-white"
                     dangerouslySetInnerHTML={{ __html: feature.itemTitle }}
                   ></th>
                   {items.map((tier, tierIndex) => (
                     <td key={tierIndex} className="p-4 max-sm:text-center">
                       {typeof tier.columns[columnKey][featureIndex]?.itemStatus === 'string' ? (
                         <span
-                          className="text-lg text-700-950"
+                          className="text-lg text-700-950 dark:text-white"
                           dangerouslySetInnerHTML={{
                             __html: tier.columns[columnKey][featureIndex].itemStatus,
                           }}
@@ -119,7 +122,7 @@ export default function TableResponsive(props) {
                               width="24"
                               height="24"
                               strokeWidth="2"
-                              class="w-4 h-4 inline-block  text-gray-600"
+                              class="w-4 h-4 inline-block text-gray-600 dark:text-white"
                             >
                               <path d="M5 12l14 0"></path>{' '}
                             </svg>
@@ -142,14 +145,14 @@ export default function TableResponsive(props) {
       </table>
 
       {/* Mobile Tabs */}
-      <TabGroup className="sm:hidden rounded-lg bg-white mt-8 p-8">
+      <TabGroup className="sm:hidden rounded-lg p-4">
         {items.some((tier) => tier?.title) && (
           <TabList className="flex flex-wrap justify-between gap-2">
             {items.map((tier) =>
               tier?.title ? (
                 <Tab
                   key={tier.title}
-                  className="ring-1 shadow-xs ring-gray-300 ring-inset rounded-full py-2 font-medium flex-grow"
+                  className="ring-1 shadow-xs ring-gray-300 ring-inset rounded-full dark:text-white py-2 font-medium flex-grow"
                   dangerouslySetInnerHTML={{ __html: tier.title }}
                 />
               ) : null
@@ -163,7 +166,7 @@ export default function TableResponsive(props) {
               {Object.keys(tier.columns).map((columnKey) => (
                 <Fragment key={columnKey}>
                   <div
-                    className="-mx-6 mt-10 rounded-lg bg-gray-50 px-6 py-3 text-xl/6 font-semibold text-gray-950 group-first-of-type:mt-5"
+                    className="-mx-6 mt-10 rounded-lg bg-gray-50 px-6 py-3 text-xl/6 font-semibold text-gray-950 dark:text-black group-first-of-type:mt-5"
                     dangerouslySetInnerHTML={{ __html: columnKey }}
                   ></div>
                   <dl>
@@ -173,7 +176,7 @@ export default function TableResponsive(props) {
                         className="grid grid-cols-2 border-b border-gray-100 py-4 last:border-none"
                       >
                         <dt
-                          className="text-xl/6 font-normal text-gray-600"
+                          className="text-xl/6 font-normal text-gray-600 dark:text-white"
                           // dangerouslySetInnerHTML={{ __html: columnKey }}
                           dangerouslySetInnerHTML={{
                             __html: feature.itemTitle,
@@ -182,7 +185,7 @@ export default function TableResponsive(props) {
                         <dd className="text-center">
                           {typeof feature.itemStatus === 'string' ? (
                             <span
-                              className="text-lg text-gray-700 whitespace-normal"
+                              className="text-lg text-gray-700 dark:text-white whitespace-normal"
                               dangerouslySetInnerHTML={{
                                 __html: feature.itemStatus,
                               }}
@@ -217,7 +220,7 @@ export default function TableResponsive(props) {
                                   width="24"
                                   height="24"
                                   stroke-width="2"
-                                  class="w-4 h-4 inline-block  text-gray-600"
+                                  class="w-4 h-4 inline-block  text-gray-600 dark:text-white"
                                 >
                                   <path d="M5 12l14 0"></path>{' '}
                                 </svg>

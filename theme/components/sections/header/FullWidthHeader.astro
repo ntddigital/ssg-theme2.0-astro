@@ -101,7 +101,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       aria-label="Main navigation"
     >
       <ul
-        class="flex flex-col lg:flex-row lg:self-center w-full lg:w-auto text-xl lg:text-lg tracking-[0.01rem] font-bold lg:justify-center lg:py-2"
+        class={cn(
+          'flex flex-col lg:flex-row lg:self-center w-full lg:w-auto text-xl lg:text-lg tracking-[0.01rem] font-bold lg:justify-center lg:py-2',
+          classes?.ul
+        )}
       >
         {
           links.map(({ text, href, links }) => (

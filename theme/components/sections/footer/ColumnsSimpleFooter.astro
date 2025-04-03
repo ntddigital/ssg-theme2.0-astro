@@ -56,13 +56,13 @@ const {
             >{SITE?.name}</a
           >
         </div>
-        <div class="text-lg text-muted flex gap-1">
+        <div class="text-lg flex gap-1">
           {
             secondaryLinks.map(({ text, href }, index) => (
               <>
                 {index !== 0 ? " · " : ""}
                 <a
-                  class="text-muted hover:text-gray-700 dark:text-white hover:underline transition duration-150 ease-in-out"
+                  class="hover:text-gray-700 dark:text-white hover:underline transition duration-150 ease-in-out"
                   href={href}
                   set:html={text}
                 />
@@ -81,7 +81,7 @@ const {
                   <li class="mb-2">
                     {href ? (
                       <a
-                        class="text-muted hover:text-gray-700 hover:underline dark:text-white transition duration-150 ease-in-out"
+                        class="hover:text-gray-700 hover:underline dark:text-white transition duration-150 ease-in-out"
                         href={href}
                         aria-label={ariaLabel}
                         set:html={text}

@@ -42,6 +42,7 @@ export interface Post {
 
   /**  */
   readingTime?: number;
+  language: string | undefined
 }
 
 export interface Taxonomy {
@@ -149,8 +150,6 @@ export interface Price {
   callToAction?: CallToAction;
   hasRibbon?: boolean;
   ribbonTitle?: string;
-  actions?:string | CallToAction[];
-  classes?: Record<string, string>;
 }
 
 export interface Testimonial {
@@ -231,7 +230,6 @@ export interface Pricing extends Omit<Headline, 'classes'>, Widget {
   prices?: Array<Price>;
   columns?: number
   tableItems?: any[]
-  actions?: string | CallToAction[];
 }
 
 export interface Testimonials extends Omit<Headline, 'classes'>, Widget {

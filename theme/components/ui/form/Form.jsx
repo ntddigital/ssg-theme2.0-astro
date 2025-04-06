@@ -1,8 +1,14 @@
-import { useState } from 'react';
-import { sendEmail } from '@/utils/sendEmail';
+import { useState } from "react";
+import { sendEmail } from "@/utils/sendEmail";
 
-const ContactForm = ({ inputs, textarea, disclaimer, button = 'Contact us', description = '' }) => {
-  const [formStatus, setFormStatus] = useState({ success: false, error: '' });
+const ContactForm = ({
+  inputs,
+  textarea,
+  disclaimer,
+  button = "Contact us",
+  description = "",
+}) => {
+  const [formStatus, setFormStatus] = useState({ success: false, error: "" });
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
@@ -12,49 +18,56 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = 'Contact us', desc
 
     // Prepare the email data
     const emailData = {
-      email: formData.get('email'),
-      fullname: formData.get('name'),
-      phone: formData.get('phone') || '',
-      message: formData.get('message'),
+      email: formData.get("email"),
+      fullname: formData.get("name"),
+      phone: formData.get("phone") || "",
+      message: formData.get("message"),
     };
 
     try {
       const result = await sendEmail(emailData); // Send email using the utility
       if (result) {
-        setFormStatus({ success: true, error: '' });
+        setFormStatus({ success: true, error: "" });
       } else {
-        setFormStatus({ success: false, error: 'Failed to send message.' });
+        setFormStatus({ success: false, error: "Failed to send message." });
       }
     } catch (error) {
       setFormStatus({
         success: error,
-        error: 'An error occurred while sending the message.',
+        error: "An error occurred while sending the message.",
       });
     }
   };
-  console.log('inputs', inputs);
   return (
     <form onSubmit={handleSubmit}>
       {inputs &&
-        inputs.map(({ type = '', name = '', label = '', autocomplete = 'on', placeholder = '', isRequired = false }) =>
-          name ? (
-            <div className="mb-6" key={name}>
-              {label && (
-                <label htmlFor={name} className="block text-sm font-medium">
-                  {label}
-                </label>
-              )}
-              <input
-                type={type}
-                name={name}
-                id={name}
-                autoComplete={autocomplete}
-                placeholder={placeholder}
-                className="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
-                required={isRequired}
-              />
-            </div>
-          ) : null
+        inputs.map(
+          ({
+            type = "",
+            name = "",
+            label = "",
+            autocomplete = "on",
+            placeholder = "",
+            isRequired = false,
+          }) =>
+            name ? (
+              <div className="mb-6" key={name}>
+                {label && (
+                  <label htmlFor={name} className="block text-sm font-medium">
+                    {label}
+                  </label>
+                )}
+                <input
+                  type={type}
+                  name={name}
+                  id={name}
+                  autoComplete={autocomplete}
+                  placeholder={placeholder}
+                  className="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+                  required={isRequired}
+                />
+              </div>
+            ) : null
         )}
 
       {textarea && (
@@ -64,7 +77,7 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = 'Contact us', desc
           </label>
           <textarea
             id="textarea"
-            name={textarea.name || 'message'}
+            name={textarea.name || "message"}
             rows={textarea.rows || 4}
             placeholder={textarea.placeholder}
             className="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
@@ -108,8 +121,16 @@ const ContactForm = ({ inputs, textarea, disclaimer, button = 'Contact us', desc
       )}
 
       {/* Display submit result */}
-      {formStatus.success && <div className="mt-3 text-center text-green-600">Message sent successfully!</div>}
-      {formStatus.error && <div className="mt-3 text-center text-red-600">Error: {formStatus.error}</div>}
+      {formStatus.success && (
+        <div className="mt-3 text-center text-green-600">
+          Message sent successfully!
+        </div>
+      )}
+      {formStatus.error && (
+        <div className="mt-3 text-center text-red-600">
+          Error: {formStatus.error}
+        </div>
+      )}
     </form>
   );
 };

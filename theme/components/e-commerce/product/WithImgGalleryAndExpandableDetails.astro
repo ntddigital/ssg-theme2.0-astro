@@ -87,8 +87,17 @@ classes.headline.container = classes.headline.container || "text-left";
 
       {/* Product info */}
       <div class="mt-10 sm:mt-16 lg:mt-0">
+        {title && (
+          <h1
+            class={cn(
+              "font-bold leading-relaxed font-heading text-heading text-3xl lg:text-5xl dark:text-white",
+              classes?.headline?.title
+            )}
+            set:html={title}
+          />
+        )}
         <Headline
-          title={title}
+       
           subtitle={subtitle}
           tagline={tagline}
           description={description}

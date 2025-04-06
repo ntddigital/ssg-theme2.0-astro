@@ -56,13 +56,12 @@ const {
             >{SITE?.name}</a
           >
         </div>
-        <div class="text-lg flex gap-1">
+        <div class="text-lg flex flex-col gap-1">
           {
-            secondaryLinks.map(({ text, href }, index) => (
+            secondaryLinks.map(({ text, href }) => (
               <>
-                {index !== 0 ? " · " : ""}
                 <a
-                  class="hover:text-gray-700 dark:text-white hover:underline transition duration-150 ease-in-out"
+                  class="hover:text-gray-700 dark:text-white hover:cursor-pointer transition duration-150 ease-in-out"
                   href={href}
                   set:html={text}
                 />

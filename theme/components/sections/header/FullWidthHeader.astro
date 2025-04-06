@@ -71,9 +71,9 @@ console.log("banner", banner);
 {
   banner ? (
     <div
-      id="headBanner"
-      class="z-[9999999999] relative isolate flex items-center justify-center gap-x-6 overflow-hidden px-6 py-2.5 sm:px-3.5"
-      style={`background-color: ${banner?.bgColor};color:${banner.textColor};text-align:center`}
+      id="head-banner"
+      class="z-[9999999999] relative isolate text-center px-6 py-2.5 sm:px-3.5 "
+      style={`background-color: ${banner?.bgColor};color:${banner.textColor};`}
     >
       {banner?.text?.map((item) => {
         return (
